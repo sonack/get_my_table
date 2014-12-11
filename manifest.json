@@ -3,7 +3,7 @@
 
     "name": "Get_My_Table",
 
-    "version": "1.0.0",
+    "version": "0.6.0",
 
     "description": "选择网页中的表格，创建账号并存储到云端，并可在云端修改属于自己的表格！",
 
