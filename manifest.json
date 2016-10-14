@@ -1,0 +1,36 @@
+{
+    "manifest_version": 2,
+
+    "name": "Get_My_Table",
+
+    "version": "0.0.1",
+
+    "description": "选择网页中的表格，创建账号并存储到云端，并可在云端修改属于自己的表格！",
+
+    "icons": {
+        "16": "images/icons/icon16.png",
+        "48": "images/icons/icon48.png",
+        "128": "images/icons/icon128.png"
+    },
+
+    "permissions": [
+        "contextMenus",
+        "clipboardWrite"
+    ],
+
+    "homepage_url": "https://github.com/sonack/get_my_table",
+
+    "background": {
+        "page": "background.html",
+        "persistent": true
+    },
+
+    "content_scripts": [
+        {
+            "matches": ["*://*/*","file://*/*"],
+            "js": ["js/content.js"],
+            "css": ["css/content.css"]
+        }
+    ]
+
+}
