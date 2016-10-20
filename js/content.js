@@ -370,7 +370,7 @@
             }
         });
 
-        var styles = [], props = Object.keys(defaultStatus);
+        var styles = [], props = Object.keys(defaultStyle);
         walk(table,function(el){
             var d = window.getComputedStyle(el), s = [];
             props.forEach(function(p){
@@ -388,6 +388,7 @@
         fdoc.body.appendChild(fdoc.importNode(table,true));
         var ftable = fdoc.body.firstChild;
 
+        // 拷贝样式
         walk(ftable, function(t){
             t.style.cssText = styles.shift();
         });
@@ -415,6 +416,346 @@
 
         html = "<base href=" + document.location + ">\n" + html;
         return html;
+    };
+
+    // Scrolling
+
+    var scrollTimer = 0;
+    var scrollWatch = function(){
+        if(!selection)
+        {
+            return;
+        }
+        if(selection.scrollBase)  // 如果有滚动基点
+        {
+            var sx = selection.scrollBase.scrollLeft,
+                sy = selection.scrollBase.scrollTop;
+            var w = selection.scrollBase.clientWidth,
+                h = selection.scrollBase.clientHeight;
+            var b = bounds(selection.scrollBase);
+            var cx = lastEvent.clientX - b[0];
+            var cy = lastEvent.clientY - b[1];
+
+            if(cx < scrollAmount) sx -= scrollAmount;
+            if(cx > w - scrollAmount) sx += scrollAmount;
+            if(cy < scrollAmount) sy -= scrollAmount;
+            if(cy > h - scrollAmount) sy += scrollAmount;
+
+            selection.scrollBase.scrollLeft = sx;
+            selection.scrollBase.scrollTop = sy;
+        }
+        else
+        {
+            // 相对于window滚动
+            var sx = window.scrollX, sy = window.scrollY;
+            var w = window.innerWidth, h = window.innerHeight;
+            var cx = lastEvent.clientX;
+            var cy = lastEvent.clientY;
+
+
+            if(cx < scrollAmount) sx -= scrollAmount;
+            if(cx > w - scrollAmount) sx += scrollAmount;
+            if(cy < scrollAmount) sy -= scrollAmount;
+            if(cy > h - scrollAmount) sy += scrollAmount;
+
+            if(sx != window.scrollX || sy != window.scrollY) {
+                window.scrollTo(sx, sy);
+            }
+        }
+
+        selection.scrollSpeed *= scrollAcceleration;
+        if(selection.scrollSpeed > scrollMaxSpeed)
+            selection.scrollSpeed = scrollMaxSpeed;
+        scrollTimer = setTimeout(scrollWatch, 1000 / selection.scrollSpeed);
+    };
+
+    var scrollReset = function() {
+        if(!selection) {
+            return;
+        }
+        selection.scrollSpeed = scrollMinSpeed;
+    };
+
+    // selection tools
+
+    var selectionInit = function(e)
+    {
+        if(!e || closest(e.target, "A INPUT BUTTON"))   // 找到最近的a、input或者button
+            return false;
+
+        var td = closest(e.target, "TH TD"),
+            table = closest(e.target, "TABLE");
+
+        if(!table)
+        {
+            return false;
+        }
+
+        // 取消选择
+        window.getSelection().removeAllRanges();
+
+        if(selection && selection.table != table)
+        {
+            selectionReset();
+        }
+
+        // Press Shift On The Same Time
+        if(!e.shiftKey)
+        {
+            selection = null;
+        }
+
+        scrollReset();
+
+        if(selection)
+        {
+            selection.anchor = td;
+            return true;
+        }
+
+        selection = {
+            anchor: td,
+            table: table,
+            x: e.clientX,
+            y: e.clientY
+        };
+
+        var t = closestScrollable(selection.anchor.parentNode);
+
+        if(t)
+        {
+            selection.scrollBase = t;
+            selection.x += selection.scrollBase.scrollLeft;
+            selection.y += selection.scrollBase.scrollTop;
+        }
+        else
+        {
+            selection.scrollBase = null;
+            selection.x += window.scrollX;
+            selection.y += window.scrollY;
+        }
+
+        return true;
+    };
+
+   var selectionUpdate = function(e) {
+        var cx = e.clientX;
+        var cy = e.clientY;
+
+        var ax = selection.x;
+        var ay = selection.y;
+
+        if(selection.scrollBase) {
+            ax -= selection.scrollBase.scrollLeft;
+            ay -= selection.scrollBase.scrollTop;
+        } else {
+            ax -= window.scrollX;
+            ay -= window.scrollY;
+
+        }
+
+        var rect = [
+            Math.min(cx, ax),
+            Math.min(cy, ay),
+            Math.max(cx, ax),
+            Math.max(cy, ay)
+        ];
+
+        $C(clsDragover, selection.table).forEach(function(td) {
+            removeClass(td, clsDragover);
+        });
+
+        each("TD TH", selection.table, function(td) {
+            if(intersect(bounds(td), rect))
+                addClass(td, clsDragover);
+        });
+
+        if(!selection.selectAnchor) {
+            removeClass(selection.anchor, clsDragover);
+        }
+    };
+
+    var selectionReset = function() {
+        $C(clsSelected).forEach(function(td) { removeClass(td, clsSelected) });
+        $C(clsDragover).forEach(function(td) { removeClass(td, clsDragover) });
+
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mouseup", onMouseUp);
+
+        selection = null;
+    };
+
+
+    //  command helpers
+
+    var selectRowCol = function(command, toggle) {
+        var tds = [], sel = bounds(selection.anchor);
+
+        each("TD TH", selection.table, function(td) {
+            var b = bounds(td), ok = false;
+            switch(command) {
+                case "row":    ok = sel[1] == b[1]; break;
+                case "column": ok = sel[0] == b[0]; break;
+                case "table":  ok = true; break;
+            }
+            if(ok)
+                tds.push(td);
+        });
+
+        var isSelected = tds.every(function(td) { return hasClass(td, clsSelected) });
+
+        if(toggle && isSelected) {
+            tds.forEach(function(td) { removeClass(td, clsSelected) });
+        } else {
+            tds.forEach(function(td) { addClass(td, clsSelected) });
+        }
+    };
+
+    var doCopy = function(mode) {
+        if(!selection)
+            return;
+
+        var anySelected = $$("TD TH", selection.table).some(function(td) {
+            return isSelected(td);
+        }), s = "";
+
+        switch(mode) {
+            case "rich":
+                s = selectedHTML(selection.table, !anySelected);
+                chrome.runtime.sendMessage({command:"copyRich",content:s});
+                break;
+            case "text":
+                s = selectedText(selection.table, !anySelected);
+                chrome.runtime.sendMessage({command:"copyText",content:s});
+                break;
+            case "html":
+                s = selectedHTML(selection.table, !anySelected);
+                chrome.runtime.sendMessage({command:"copyText",content:s});
+                break;
+        };            
+    };
+
+    // Event Handler
+    chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+        if(!selectionInit(lastEvent)) {
+            selectionReset();
+            return;
+        }
+        switch(message.menuCommand) {
+            case "selectRow":    selectRowCol("row", true);    break;
+            case "selectColumn": selectRowCol("column", true); break;
+            case "selectTable":  selectRowCol("table", true);  break;
+
+            case "copyRich": doCopy("rich"); break;
+            case "copyText": doCopy("text"); break;
+            case "copyHTML": doCopy("html"); break;
+        }
+        sendResponse({});
+    });
+
+    
+    // `mouseDown` - init selection.
+    var onMouseDown = function(e) {
+        lastEvent = e;
+
+        if(e.which != 1) {
+            return;
+        }
+        if(!e.ctrlKey) {
+            selectionReset();
+            return;
+        }
+
+        if(!selectionInit(e)) {
+            selectionReset();
+            return;
+        }
+
+        selection.selectAnchor = true;
+        if(hasClass(selection.anchor, clsSelected)) {
+            removeClass(selection.anchor, clsSelected);
+            selection.selectAnchor = false;
+        }
+        document.addEventListener("mousemove", onMouseMove);
+        document.addEventListener("mouseup", onMouseUp);
+        scrollWatch();
+        selectionUpdate(e);
+        e.preventDefault();
+        e.stopPropagation();
+    };
+
+    // `mouseMove` - update selection.
+    var onMouseMove = function(e) {
+        lastEvent = e;
+
+        if(!e.ctrlKey || e.which != 1 || !selection) {
+            return;
+        }
+        selection.scrollSpeed = scrollMinSpeed;
+        selectionUpdate(e);
+        e.preventDefault();
+        e.stopPropagation();
+    };
+
+    // `mouseUp` - stop selecting.
+    var onMouseUp = function(e) {
+        clearTimeout(scrollTimer);
+
+        if(selection)
+            $C(clsDragover, selection.table).forEach(function(td) {
+                removeClass(td, clsDragover);
+                addClass(td, clsSelected);
+            });
+
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mouseup", onMouseUp);
+    };
+
+    // `doubleClick` - select columns and rows.
+    var onDblClick = function(e) {
+        if(!selection) {
+            return;
+        }
+        var ctrl = (navigator.userAgent.indexOf("Macintosh") > 0) ? e.metaKey : e.ctrlKey;
+        selectRowCol(ctrl ? "row" : "column", true);
+        e.preventDefault();
+        e.stopPropagation();
+    };
+
+    // `copy` - copy selection as rich text.
+    var onCopy = function(e) {
+        if(!selection) {
+            return;
+        }
+        doCopy("rich");
+        e.preventDefault();
+        e.stopPropagation();
+    };
+
+    // `contextMenu` - enable/disable extension-specific commands.
+    var onContextMenu = function(e) {
+        lastEvent = e;
+        var td = closest(e.target, "th td");
+        var table = closest(td, "table");
+
+        if(!table) {
+            chrome.runtime.sendMessage({command:"updateMenu", enabled:false});
+            return;
+        }
+        chrome.runtime.sendMessage({command:"updateMenu", enabled:true});
+    };
+
+    // main()
+    // ---------------------------
+
+    if($$("table").length) {
+        document.body.addEventListener("mousedown", onMouseDown, true);
+        document.body.addEventListener("dblclick", onDblClick);
+        document.body.addEventListener("copy", onCopy);
+        document.body.addEventListener("contextmenu", onContextMenu);
     }
+
+
+
 
 })();
