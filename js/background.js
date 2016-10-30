@@ -1,18 +1,23 @@
-var cm = chrome.contextMenus.create;
+var createMenu = chrome.contextMenus.create;
+var ctx = ["page", "selection", "link", "editable"];
 
-var menus = [cm({"title": "表格数据抽取...","contexts": ["all"]})];
-
-// console.log(menus);
 
 // 上下文菜单
-
-menus.push(cm({"title": "选择整行", "parentId": menus[0], "enabled": true, "contexts": ["all"], "onclick": function() {menuClick("selectRow")} }));
-menus.push(cm({"title": "选择整列", "parentId": menus[0], "enabled": false, "contexts": ["all"], "onclick": function() {menuClick("selectColumn")} }));
-menus.push(cm({"title": "选择整个表格", "parentId": menus[0], "enabled": false, "contexts": ["all"], "onclick": function() {menuClick("selectTable")} }));
-menus.push(cm({"type": "separator", "parentId": menus[0], "enabled": false, "contexts": ["all"] }));
-menus.push(cm({"title": "复制为富文本", "parentId": menus[0], "enabled": false, "contexts": ["all"], "onclick": function() {menuClick("copyRich")} }));
-menus.push(cm({"title": "复制为纯文本", "parentId": menus[0], "enabled": false, "contexts": ["all"], "onclick": function() {menuClick("copyText")} }));
-menus.push(cm({"title": "复制为HTML", "parentId": menus[0], "enabled": false, "contexts": ["all"], "onclick": function() {menuClick("copyHTML")} }));
+var menus = {};
+menu.root = createMenu({"title": "表格数据抽取", "enabled": false, "contexts": ctx});
+menu.selectRow     = createMenu({ "title": "选择一行",    "parentId": menu.root, "enabled": false, "contexts": ctx, "onclick": function() { menuClick("selectRow")    }});
+menu.selectColumn  = createMenu({ "title": "Select Column", "parentId": menu.root, "enabled": false, "contexts": ctx, "onclick": function() { menuClick("selectColumn") }});
+menu.selectTable   = createMenu({ "title": "Select Table",  "parentId": menu.root, "enabled": false, "contexts": ctx, "onclick": function() { menuClick("selectTable")  }});
+menu.break1        = createMenu({ "type": "separator",      "parentId": menu.root, "enabled": false, "contexts": ctx });
+menu.findPrevTable = createMenu({ "title": "Previous Table","parentId": menu.root, "enabled": false, "contexts": ctx, "onclick": function() { menuClick("findPrevTable")  }});
+menu.findNextTable = createMenu({ "title": "Next Table",    "parentId": menu.root, "enabled": false, "contexts": ctx, "onclick": function() { menuClick("findNextTable")  }});
+menu.break2        = createMenu({ "type": "separator",      "parentId": menu.root, "enabled": false, "contexts": ctx });
+menu.copyRich      = createMenu({ "title": "Copy",          "parentId": menu.root, "enabled": false, "contexts": ctx, "onclick": function() { menuClick("copyRich")     }});
+menu.copy          = createMenu({ "title": "Copy as...",    "parentId": menu.root, "enabled": false, "contexts": ctx });
+menu.copyHTML      = createMenu({ "title": "HTML",          "parentId": menu.copy, "enabled": false, "contexts": ctx, "onclick": function() { menuClick("copyHTML")     }});
+menu.copyStyled    = createMenu({ "title": "Styled HTML",   "parentId": menu.copy, "enabled": false, "contexts": ctx, "onclick": function() { menuClick("copyStyled")  }});
+menu.copyCSV       = createMenu({ "title": "CSV",           "parentId": menu.copy, "enabled": false, "contexts": ctx, "onclick": function() { menuClick("copyCSV")      }});
+menu.copyText      = createMenu({ "title": "Text-Only",     "parentId": menu.copy, "enabled": false, "contexts": ctx, "onclick": function() { menuClick("copyText")     }});
 
 
 // var db;

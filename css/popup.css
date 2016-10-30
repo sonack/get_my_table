@@ -1,0 +1,48 @@
+body
+{
+  width: 600px;
+  height: 380px;
+  background: url(../images/background.jpg) fixed;
+  overflow: auto;
+}
+.topBar
+{
+  height: 37px;
+  margin-bottom: 10px;
+}
+
+.float_left
+{
+  float: left;
+}
+
+.float_right
+{
+  float: right;
+}
+
+.topBar .topItem
+{
+  margin-right: 5px;
+}
+
+.welcome
+{
+  line-height: 40px;
+  margin-left: 20px;
+  margin-bottom: 0px;
+}
+
+.currentTable
+{
+  height: 280px;
+  margin: 10px;
+  border: 1px solid black;
+}
+
+.currentTable .prompt
+{
+  line-height: 280px;
+  text-align: center;
+}
+
