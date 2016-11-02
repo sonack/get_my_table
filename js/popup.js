@@ -23,7 +23,7 @@
          <i class="add square icon"></i>
          <div class="content">用户注册<div class="sub header">注册后，您就可以将表格保存到云端！</div></div>
        </h3>
-      
+      <div class="ui divider"></div>
        <form class="ui form" style="width: 300px; margin: auto;">
            
            <div class="required field">
@@ -55,7 +55,7 @@
          <i class="home icon"></i>
          <div class="content">用户登录<div class="sub header">还没有账号？请先注册用户</div></div>
        </h3>
-
+        <div class="ui divider"></div>
        <form class="ui form" style="width: 300px; margin: auto;">
            
            <div class="required field">

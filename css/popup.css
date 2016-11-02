@@ -1,9 +1,9 @@
-body
+html,body
 {
-  width: 620px;
-  height: 380px;
+  width: 680px;
+  height: 420px;
   background: url(../images/background.jpg) fixed;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .topBar
@@ -36,14 +36,89 @@ body
 
 .currentTable
 {
-  height: 280px;
+  height: 300px;
   margin: 10px;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
+  overflow: auto;
 }
 
 .currentTable .prompt
 {
   line-height: 280px;
   text-align: center;
+}
+
+
+
+/*Scroll Bar Style*/
+#scrollbar::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+#scrollbar::-webkit-scrollbar
+{
+  width: 12px;
+  background-color: #F5F5F5;
+}
+
+#scrollbar::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: rgba(0,0,122,0.5);
+}
+
+
+/* Table Style */
+
+.table {
+  margin: 0 0 0 0;
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: table;
+}
+@media screen and (max-width: 580px) {
+  .table {
+    display: block;
+  }
+}
+
+.row {
+  display: table-row;
+  background: #f6f6f6;
+}
+.row:nth-of-type(odd) {
+  background: #e9e9e9;
+}
+.row.header {
+  font-weight: 900;
+  color: #ffffff;
+  background: #ea6153;
+}
+.row.green {
+  background: #27ae60;
+}
+.row.blue {
+  background: #2980b9;
+}
+@media screen and (max-width: 580px) {
+  .row {
+    padding: 8px 0;
+    display: block;
+  }
+}
+
+.cell {
+  padding: 6px 12px;
+  display: table-cell;
+}
+@media screen and (max-width: 580px) {
+  .cell {
+    padding: 2px 12px;
+    display: block;
+  }
 }
 
