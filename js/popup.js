@@ -1,4 +1,3 @@
- 
 // UI相关
  (function($)
  {
@@ -12,7 +11,7 @@
          </div>
        </h3>
          <div class="currentTable">
-           <h3 class="prompt">当前未选中表格</h3>
+            <h3 class="prompt" style="color:#2185D0"> <i class="info big circle icon blue"></i>当前未选中表格</h3>  
          </div>
    </div>`,
 
@@ -102,11 +101,6 @@
         });
     };
 
-    function main_switch()
-    {
-
-    }
-
 
 
     
@@ -115,4 +109,45 @@
     $(function(){
         init();
     });
- })(jQuery)
+ })(jQuery);
+
+
+// 与background通信
+(function communicate($)
+{
+  // Send a command to the content.
+  function sendCommand(cmd, broadcast, fn) {
+    var qry = broadcast ? {} : {active: true, currentWindow: true}; 
+    chrome.tabs.query(qry, function(tabs) {
+      tabs.forEach(function(tab) {
+        chrome.tabs.sendMessage(tab.id, {command: cmd}, fn || function(r) {});
+      });
+    });
+  }
+
+  var init = function(state) {
+
+    document.addEventListener("click", function(e) {
+        
+        var cmd = e.target.getAttribute("cmd");
+        if(!cmd)
+            return;
+        alert(cmd);
+        sendCommand("updateOptions", true);
+
+        sendCommand(cmd, false, function(state) {
+        });
+    
+    });
+
+    // if(navigator.userAgent.indexOf("Macintosh") > 0) {
+    //     $("modKey0").innerHTML = "&#8997;";
+    //     $("modKey1").innerHTML = "&#8984;";
+    // }
+
+  }
+
+  $(function(){
+    sendCommand("openPopup", false, init)
+  })
+})(jQuery);

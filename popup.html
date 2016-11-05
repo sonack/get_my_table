@@ -1,389 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  
+  <head>
     <meta charset="UTF-8">
     <title>PopUp页面</title>
     <!-- 样式表 -->
     <link rel="stylesheet" type="text/css" href="css/vendor/reset.css">
     <link rel="stylesheet" type="text/css" href="semantic_ui/semantic.min.css">
-    <link rel="stylesheet" type="text/css" href="css/popup.css">
-</head>
-
-<body>
+    <link rel="stylesheet" type="text/css" href="css/popup.css"></head>
+  
+  <body>
+    <!-- 顶部工具栏 开始 -->
     <div class="topBar">
-        <div class="topItem float_left">
-          <div class="ui buttons">
-            <button class="ui orange button icon animated" tabindex="0">
-              <div class="visible content">上一张</div>
-              <div class="hidden content">
-                <i class="left arrow icon"></i>
+    <!-- 左浮动 表格上下定位  -->
+      
+      <div class="topItem float_left">
+        <div class="ui buttons">
+          <button class="ui orange button icon animated" tabindex="0">
+            <div class="visible content">上一张</div>
+            <div class="hidden content">
+              <i class="left arrow icon"></i>
             </div>
-        </button>
-        <div class="or" data-text="或"></div>
-        <button class="ui positive button icon animated" tabindex="0">
-          <div class="visible content">下一张</div>
-          <div class="hidden content">
-            <i class="right arrow icon"></i>
+          </button>
+          <div class="or" data-text="或"></div>
+          <button class="ui positive button icon animated" tabindex="0">
+            <div class="visible content">下一张</div>
+            <div class="hidden content">
+              <i class="right arrow icon"></i>
+            </div>
+          </button>
         </div>
-    </button>
-</div>
-</div>
-
-<div class="topItem float_left">
-  <div class="ui teal buttons">
-    <div class="ui button animated">
-      <div class="visible content">拷贝</div>
-      <div class="hidden content">
-        <i class="paint brush icon"></i>
-    </div>
-</div>
-<div class="ui floating dropdown icon button">
-  <i class="dropdown icon"></i>
-  <div class="menu">
-    <div class="header">
-      <i class="tags icon"></i>文本</div>
-      <div class="item">
-          <i class="file text outline icon"></i>纯文本</div>
-          <div class="item">
-              <i class="file word outline icon"></i>富文本</div>
+      </div>
+      
+      <!-- 左浮动 拷贝下拉菜单 -->
+      <div class="topItem float_left">
+        <div class="ui teal buttons">
+          <div class="ui button animated">
+            <div class="visible content">拷贝</div>
+            <div class="hidden content">
+              <i class="paint brush icon"></i>
+            </div>
+          </div>
+          <div class="ui floating dropdown icon button">
+            <i class="dropdown icon"></i>
+            <div class="menu">
               <div class="header">
-                  <i class="tags icon"></i>HTML</div>
-                  <div class="item">
-                      <i class="html5 icon"></i>简单HTML</div>
-                      <div class="item">
-                          <i class="css3 icon"></i>HTML+CSS</div>
-                          <div class="header">
-                              <i class="tags icon"></i>其他格式</div>
-                              <div class="item">
-                                  <i class="table icon"></i>CSV</div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="topItem float_left">
-                    <div class="item ui floating labeled icon dropdown button blue">
-                      <i class="settings icon"></i>
-                      <span class="text">设置</span>
-                      <div class="menu">
-                        <div class="header">
-                          <i class="tags icon"></i>热键</div>
-                          <div class="item">Ctrl</div>
-                          <div class="item">Alt</div>
-                      </div>
-                  </div>
-              </div>
-
-    <div class="topItem ui button blue" id="home_button" tabindex="0">
-        <i class="home icon"></i>主页
-    </div>
-    
-    <div class="topItem float_right">
-      <div class="ui buttons">
-        <button id="login_button" class="ui red button icon animated" tabindex="0">
-          <div class="visible content">登录</div>
-          <div class="hidden content">
-            <i class="user icon"></i>
+                <i class="tags icon"></i>文本</div>
+              <div class="item" cmd="copyText">
+                <i class="file text outline icon"></i>纯文本</div>
+              <div class="item">
+                <i class="file word outline icon"></i>富文本</div>
+              <div class="header">
+                <i class="tags icon"></i>HTML</div>
+              <div class="item">
+                <i class="html5 icon"></i>简单HTML</div>
+              <div class="item">
+                <i class="css3 icon"></i>HTML+CSS</div>
+              <div class="header">
+                <i class="tags icon"></i>其他格式</div>
+              <div class="item">
+                <i class="table icon"></i>CSV</div>
+            </div>
+          </div>
         </div>
-    </button>
-    <div class="or" data-text="或"></div>
-    <button id="signup_button" class="ui violet button icon animated" tabindex="0">
-      <div class="visible content">注册</div>
-      <div class="hidden content">
-          <i class="sign in icon"></i>
       </div>
-  </button>
-</div>
-</div>
-</div>
+      
+      <!-- 左浮动 设置按钮 -->
+      <div class="topItem float_left">
+        <div class="item ui floating labeled icon dropdown button blue">
+          <i class="settings icon"></i>
+          <span class="text">设置</span>
+          <div class="menu">
+            <div class="header">
+              <i class="tags icon"></i>热键</div>
+            <div class="item">Ctrl</div>
+            <div class="item">Alt</div></div>
+        </div>
+      </div>
+      
+      <!-- 左浮动 主页按钮 -->
+      <div class="topItem float_left ui button blue" id="home_button" tabindex="0">
+        <i class="home icon"></i>主页
+      </div>
 
-<div class="ui divider"></div>
-<!-- main 开始 -->
-<div id="main">
-    <div id="home_div">
-       <h3 class="ui teal header">
-         <i class="warning circle icon"></i>
-         <div class="content">请登录以便在云端同步您的表格数据!
-         </div>
-     </h3>
-     <div class="currentTable scrollbar" id="scrollbar">
-         <div class="table">
-    
-    <div class="row header">
-      <div class="cell">
-        Name
-      </div>
-      <div class="cell">
-        Age
-      </div>
-      <div class="cell">
-        Occupation
-      </div>
-      <div class="cell">
-        Location
+      <!-- 右浮动 登录/注册按钮 -->
+      <div class="topItem float_right">
+        <div class="ui buttons">
+          <button id="login_button" class="ui red button icon animated" tabindex="0">
+            <div class="visible content">登录</div>
+            <div class="hidden content">
+              <i class="user icon"></i>
+            </div>
+          </button>
+          <div class="or" data-text="或"></div>
+          <button id="signup_button" class="ui violet button icon animated" tabindex="0">
+            <div class="visible content">注册</div>
+            <div class="hidden content">
+              <i class="sign in icon"></i>
+            </div>
+          </button>
+        </div>
       </div>
     </div>
-    
-    <div class="row">
-      <div class="cell">
-        Luke Peters
-      </div>
-      <div class="cell">
-        25
-      </div>
-      <div class="cell">
-        Freelance Web Developer
-      </div>
-      <div class="cell">
-        Brookline, MA
-      </div>
-    </div>
-    
-    <div class="row">
-      <div class="cell">
-        Joseph Smith
-      </div>
-      <div class="cell">
-        27
-      </div>
-      <div class="cell">
-        Project Manager
-      </div>
-      <div class="cell">
-        Somerville, MA
-      </div>
-    </div>
-    
-    <div class="row">
-      <div class="cell">
-        Maxwell Johnson
-      </div>
-      <div class="cell">
-        26
-      </div>
-      <div class="cell">
-        UX Architect &amp; Designer
-      </div>
-      <div class="cell">
-        Arlington, MA
-      </div>
-    </div>
-    
-    <div class="row">
-      <div class="cell">
-        Harry Harrison
-      </div>
-      <div class="cell">
-        25
-      </div>
-      <div class="cell">
-        Front-End Developer
-      </div>
-      <div class="cell">
-        Boston, MA
-      </div>
-    </div>
-     <div class="row">
-      <div class="cell">
-        Harry Harrison
-      </div>
-      <div class="cell">
-        25
-      </div>
-      <div class="cell">
-        Front-End Developer
-      </div>
-      <div class="cell">
-        Boston, MA
-      </div>
-    </div>
-     <div class="row">
-      <div class="cell">
-        Harry Harrison
-      </div>
-      <div class="cell">
-        25
-      </div>
-      <div class="cell">
-        Front-End Developer
-      </div>
-      <div class="cell">
-        Boston, MA
-      </div>
-    </div>
-     <div class="row">
-      <div class="cell">
-        Harry Harrison
-      </div>
-      <div class="cell">
-        25
-      </div>
-      <div class="cell">
-        Front-End Developer
-      </div>
-      <div class="cell">
-        Boston, MA
-      </div>
-    </div>
-     <div class="row">
-      <div class="cell">
-        Harry Harrison
-      </div>
-      <div class="cell">
-        25
-      </div>
-      <div class="cell">
-        Front-End Developer
-      </div>
-      <div class="cell">
-        Boston, MA
-      </div>
-    </div>
-     <div class="row">
-      <div class="cell">
-        Harry Harrison
-      </div>
-      <div class="cell">
-        25
-      </div>
-      <div class="cell">
-        Front-End Developer
-      </div>
-      <div class="cell">
-        Boston, MA
-      </div>
-    </div>
-     <div class="row">
-      <div class="cell">
-        Harry Harrison
-      </div>
-      <div class="cell">
-        25
-      </div>
-      <div class="cell">
-        Front-End Developer
-      </div>
-      <div class="cell">
-        Boston, MA
-      </div>
-    </div>
-     <div class="row">
-      <div class="cell">
-        Harry Harrison
-      </div>
-      <div class="cell">
-        25
-      </div>
-      <div class="cell">
-        Front-End Developer
-      </div>
-      <div class="cell">
-        Boston, MA
-      </div>
-    </div>
-     <div class="row">
-      <div class="cell">
-        Harry Harrison
-      </div>
-      <div class="cell">
-        25
-      </div>
-      <div class="cell">
-        Front-End Developer
-      </div>
-      <div class="cell">
-        Boston, MA
-      </div>
-    </div>
-     <div class="row">
-      <div class="cell">
-        Harry Harrison
-      </div>
-      <div class="cell">
-        25
-      </div>
-      <div class="cell">
-        Front-End Developer
-      </div>
-      <div class="cell">
-        Boston, MA
-      </div>
-    </div>
-     <div class="row">
-      <div class="cell">
-        Harry Harrison
-      </div>
-      <div class="cell">
-        25
-      </div>
-      <div class="cell">
-        Front-End Developer
-      </div>
-      <div class="cell">
-        Boston, MA
-      </div>
-    </div>
-     <div class="row">
-      <div class="cell">
-        Harry Harrison
-      </div>
-      <div class="cell">
-        25
-      </div>
-      <div class="cell">
-        Front-End Developer
-      </div>
-      <div class="cell">
-        Boston, MA
-      </div>
-    </div>
-     <div class="row">
-      <div class="cell">
-        Harry Harrison
-      </div>
-      <div class="cell">
-        25
-      </div>
-      <div class="cell">
-        Front-End Developer
-      </div>
-      <div class="cell">
-        Boston, MA
-      </div>
-    </div>
-     <div class="row">
-      <div class="cell">
-        Harry Harrison
-      </div>
-      <div class="cell">
-        25
-      </div>
-      <div class="cell">
-        Front-End Developer
-      </div>
-      <div class="cell">
-        Boston, MA
-      </div>
-    </div>
+    <div class="ui divider"></div>
+    <!-- main 开始 -->
+    <div id="main">
+      <div id="home_div">
+        <h3 class="ui teal header">
+          <i class="warning circle icon"></i>
+          <div class="content">请登录以便在云端同步您的表格数据!</div></h3>
+        <div class="currentTable scrollbar" id="scrollbar">
+          <h3 class="prompt" style="color:#2185D0">
+            <i class="info big circle icon blue"></i>当前未选中表格</h3>
+        </div>
+      </div>
+      <!-- main 结束 --></div>
+    <!-- js脚本 -->
+    <script type="text/javascript" src="js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="semantic_ui/semantic.min.js"></script>
+    <script type="text/javascript" src="js/popup.js"></script>
+  </body>
 
-    
-  </div>
-    
-    </div>
-  </div>
-    
-
-
-<!-- main 结束 -->
-</div>
-
-
-
-
-<!-- js脚本 -->
-<script type="text/javascript" src="js/vendor/jquery.min.js"></script>
-<script type="text/javascript" src="semantic_ui/semantic.min.js"></script>
-<script type="text/javascript" src="js/popup.js"></script>
-</body>
 </html>
