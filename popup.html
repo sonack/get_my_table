@@ -15,18 +15,18 @@
     <!-- 左浮动 表格上下定位  -->
       
       <div class="topItem float_left">
-        <div class="ui buttons">
-          <button class="ui orange button icon animated" tabindex="0">
-            <div class="visible content">上一张</div>
-            <div class="hidden content">
-              <i class="left arrow icon"></i>
+        <div id="mFind" class="ui buttons">
+          <button class="ui orange button icon animated" tabindex="0" cmd="findPrevTable">
+            <div class="visible content" cmd="findPrevTable">上一张</div>
+            <div class="hidden content" cmd="findPrevTable">
+              <i class="left arrow icon" cmd="findPrevTable"></i>
             </div>
           </button>
           <div class="or" data-text="或"></div>
-          <button class="ui positive button icon animated" tabindex="0">
-            <div class="visible content">下一张</div>
-            <div class="hidden content">
-              <i class="right arrow icon"></i>
+          <button class="ui positive button icon animated" tabindex="0" cmd="findNextTable">
+            <div class="visible content" cmd="findNextTable">下一张</div>
+            <div class="hidden content" cmd="findNextTable">
+              <i class="right arrow icon" cmd="findNextTable"></i>
             </div>
           </button>
         </div>
@@ -35,30 +35,30 @@
       <!-- 左浮动 拷贝下拉菜单 -->
       <div class="topItem float_left">
         <div class="ui teal buttons">
-          <div class="ui button animated">
-            <div class="visible content">拷贝</div>
-            <div class="hidden content">
-              <i class="paint brush icon"></i>
+          <div class="ui button animated mCopy" cmd="copyRich">
+            <div class="visible content" cmd="copyRich">拷贝</div>
+            <div class="hidden content" cmd="copyRich">
+              <i class="paint brush icon" cmd="copyRich"></i>
             </div>
           </div>
-          <div class="ui floating dropdown icon button">
+          <div class="ui floating dropdown icon button mCopy">
             <i class="dropdown icon"></i>
             <div class="menu">
               <div class="header">
                 <i class="tags icon"></i>文本</div>
               <div class="item" cmd="copyText">
                 <i class="file text outline icon"></i>纯文本</div>
-              <div class="item">
+              <div class="item" cmd="copyRich">
                 <i class="file word outline icon"></i>富文本</div>
               <div class="header">
                 <i class="tags icon"></i>HTML</div>
-              <div class="item">
+              <div class="item" cmd="copyHTML">
                 <i class="html5 icon"></i>简单HTML</div>
-              <div class="item">
+              <div class="item" cmd="copyStyled">
                 <i class="css3 icon"></i>HTML+CSS</div>
               <div class="header">
                 <i class="tags icon"></i>其他格式</div>
-              <div class="item">
+              <div class="item" cmd="copyCSV">
                 <i class="table icon"></i>CSV</div>
             </div>
           </div>
@@ -73,8 +73,8 @@
           <div class="menu">
             <div class="header">
               <i class="tags icon"></i>热键</div>
-            <div class="item">Ctrl</div>
-            <div class="item">Alt</div></div>
+            <div class="item" id="modKey0" cmd="setModKey0">Ctrl</div>
+            <div class="item" id="modKey1" cmd="setModKey1">Alt</div></div>
         </div>
       </div>
       
