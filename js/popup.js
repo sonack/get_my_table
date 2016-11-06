@@ -126,7 +126,7 @@
   // Update buttons state.
   var updateState = function(state) {
     // alert("UpdateState Called!");
-    console.log(state);
+    // console.log(state);
     if(state.modKey == 0)
     {
         $("#modKey0").addClass("active");
