@@ -186,5 +186,12 @@ $(function(){
 
 var updateTablePreview = function(tableContent)
 {
-    $(".currentTable").html(tableContent);
+    $(".table_content").html(tableContent);
+}
+
+var makeTableEditable = function()
+{
+    var tbl = document.getElementsByTagName("table");
+    if(tbl) 
+        tbl[0].contentEditable = true;
 }

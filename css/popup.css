@@ -39,12 +39,22 @@ html,body
   height: 300px;
   margin: 10px;
   /*border: 1px solid black;*/
+}
+
+.table_content
+{
+  height: 250px;
   overflow: auto;
 }
 
-.currentTable .prompt
+#main_header
 {
-  line-height: 280px;
+  height: 25px;
+  margin-bottom: 30px;
+}
+.table_content .prompt
+{
+  line-height: 230px;
   text-align: center;
 }
 
@@ -125,9 +135,22 @@ html,body
 /*table element*/
 th,td
 {
-  border: 3px solid #ccc;
+  border: 3px solid #2185D0;
 }
 table
 {
   margin: auto;
+  vertical-align: middle;
+}
+
+.table_content
+{
+  vertical-align: middle !important;
+}
+
+
+#table_button
+{
+  margin-left: 230px;
+  margin-top: 5px;
 }
