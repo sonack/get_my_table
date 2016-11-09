@@ -179,5 +179,12 @@ var init = function(state) {
 
 $(function(){
     sendCommand("openPopup", false, init)
-})
+    sendCommand("anySelection",false);
+}
+)
 })(jQuery);
+
+var updateTablePreview = function(tableContent)
+{
+    $(".currentTable").html(tableContent);
+}

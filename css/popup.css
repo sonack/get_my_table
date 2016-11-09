@@ -74,7 +74,7 @@ html,body
 
 /* Table Style */
 
-.table {
+/*.table {
   margin: 0 0 0 0;
   width: 100%;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
@@ -120,5 +120,14 @@ html,body
     padding: 2px 12px;
     display: block;
   }
-}
+}*/
 
+/*table element*/
+th,td
+{
+  border: 3px solid #ccc;
+}
+table
+{
+  margin: auto;
+}

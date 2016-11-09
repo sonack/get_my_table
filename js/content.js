@@ -593,6 +593,11 @@
     // 选择工具
     // ---------------------------
 
+
+    var selectFinished = function(){
+        chrome.runtime.sendMessage({popup_cmd:"hasSelected", content:contentForCopy("copyHTML")});  
+    }
+
     // 检查元素el是否可以选择，即el包含在table中，且el不包含在a\input\button中
     var canSelect = function(el) {
         return !!(el &&  closest(el, "TABLE") && !closest(el, "A INPUT BUTTON"));
@@ -639,7 +644,6 @@
             selection.x += window.scrollX;
             selection.y += window.scrollY;
         }
-
         return true;
     };
 
@@ -712,6 +716,8 @@
             tds.forEach(function(td) { removeClass(td, clsSelected) });
         else
             tds.forEach(function(td) { addClass(td, clsSelected) });
+
+        selectFinished();
     };
 
     // 命令处理工具
@@ -796,6 +802,12 @@
     // 监听处理来自后台background的事件
     chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
         switch(message.command) {
+            case "anySelection":
+                if(selection)
+                {
+                    selectFinished();
+                }
+                break;
             case "openPopup":
                 break;
             case "selectRow":
@@ -912,7 +924,7 @@
                 addClass(td, clsSelected);
             });
         }
-
+        selectFinished();
         document.removeEventListener("mousemove", onMouseMove);
         document.removeEventListener("mouseup", onMouseUp);
     };

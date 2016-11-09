@@ -91,3 +91,21 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     }
 });
 
+
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+    switch(message.popup_cmd) {
+        case "hasSelected":
+            
+            var popupPage = chrome.extension.getViews({
+                type: "popup"
+            });
+            if(popupPage)
+            {
+                popupPage = popupPage[0];
+                popupPage.updateTablePreview(message.content);
+            }
+
+            break;
+    }
+});
+
