@@ -384,6 +384,18 @@
     });
          
          $("#home_button").click(function(){
+            $.ajax({type:"get",url:"http://0.0.0.0:5000/index",success:function(result)
+            {
+                res = JSON.parse(result);
+                if(res.status === 'success')
+                {
+                    alert("在线中...");
+                }
+                else
+                {
+                 alert("离线中...");
+                }
+            }});
             changeTo(home_div);
         });
      };
