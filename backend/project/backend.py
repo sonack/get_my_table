@@ -53,6 +53,29 @@ def register():
     else:
         return '{"status": "failed"}'
 
+def exist_user(un,pw):
+    db = DBTools('root','liubixue','GetMyTable')
+    db.connect()
+    cursor = db.get_cursor()
+    res = cursor.execute('select count(*) from User where username = %s and password = %s',(un,pw))
+    res = cursor.fetchall()
+    print("数据库查询结果:" + str(res[0][0]))
+    print(type(res[0][0]))
+    if res[0][0] > 0:
+        return True;
+    return False;
+
+@app.route("/login",methods=["POST"])
+def login():
+    un = request.form['username']
+    pw = request.form['password']
+    if exist_user(un,pw):
+        return '{"status": "success"}'
+    else:
+        return '{"status": "failed"}'
+
+
+
 @app.route("/is_name_valid",methods=["POST"])
 def is_name_valid():
     un = request.form['username']
@@ -73,6 +96,7 @@ def is_email_valid():
 
 
 if __name__ == '__main__':
+    app.debug = True
     app.run(host="0.0.0.0")
 
 

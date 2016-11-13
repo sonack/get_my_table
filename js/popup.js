@@ -15,6 +15,10 @@
     </div>
     </div>`,
 
+
+    // 注册页面
+
+
     signup_div = `
     <!-- 注册页面 开始-->
     <div id="signup_div">
@@ -47,6 +51,11 @@
     <!-- 注册页面 结束 -->
     `,
 
+
+
+    // 登录页面
+
+
     login_div = `
     <!-- 登录页面 开始-->
     <div id="login_div">
@@ -55,16 +64,16 @@
     <div class="content">用户登录<div class="sub header">还没有账号？请先注册用户</div></div>
     </h3>
     <div class="ui divider"></div>
-    <form class="ui form" style="width: 300px; margin: auto;">
-
+    <form class="ui form" style="width: 300px; margin: auto;" id="login_form">
+    
     <div class="required field">
-    <label>用户名：</label>
+    <label>用户名：<span id="username_errormsg" style='float:right'></span></label>
     <input type="text" name="username" placeholder="请输入用户名" id="username_input">
     </div>
 
     <div class="required field">
-    <label>密码：</label>
-    <input type="password" name="password" placeholder="请输入密码">
+    <label>密码：<span id="password_errormsg" style='float:right'></span></label>
+    <input type="password" name="password" placeholder="请输入密码" id="password_input">
     </div>
 
     <button class="ui red button" id="login_submit_button" style="margin-left:100px; margin-top: 25px;">登录</button>
@@ -94,9 +103,12 @@
 
         // 注册页面
         $("#signup_button").click(function(){
-         changeTo(signup_div);
+           changeTo(signup_div);
 
-         var state = true;
+           var state1 = true,
+           state2 = true,
+           state3 = true;
+
          // 用户名验证
          var validate_username = function()
          {
@@ -105,76 +117,76 @@
             {
                 $("#username_errormsg").css("color","red");
                 $("#username_errormsg").text("请输入用户名!");
-                return false;
+                state1 = false;
             }
             else if(!(/^\w{3,20}$/.test(username_input.val())))
             {
 
                 $("#username_errormsg").css("color","red");
                 $("#username_errormsg").text("用户名只能由3到20位的字母数字组成！");
-                return false;
+                state1 = false;
             }
             else
             {
                 $.ajax({type:"post", data:{username:username_input.val()},url:remoteHost+"/is_name_valid",success:function(result)
                 {
-                res = JSON.parse(result)
-                if(res.status === 'success')
-                {
-                    $("#username_errormsg").css("color","green");
-                    $("#username_errormsg").text("用户名合法")
-                    return true;
-                }
-                else
-                {
-                    $("#username_errormsg").css("color","red");
-                    $("#username_errormsg").text("用户名已注册!")
-                    return false;
-                }
+                    res = JSON.parse(result)
+                    if(res.status === 'success')
+                    {
+                        $("#username_errormsg").css("color","green");
+                        $("#username_errormsg").text("用户名合法")
+                        state1 = true;
+                    }
+                    else
+                    {
+                        $("#username_errormsg").css("color","red");
+                        $("#username_errormsg").text("用户名已注册!")
+                        state1 = false;
+                    }
                 }
             });
 
             }
-         };
+        };
 
          // 绑定失去焦点事件
          (function()
          {
             $("#username_input").blur(validate_username);
-         })();
-    
+        })();
+        
 
 
         // 密码验证
         var validate_password = function()
-         {
+        {
             var password_input = $("#password_input");
             if(password_input.val().length === 0)
             {
                 $("#password_errormsg").css("color","red");
                 $("#password_errormsg").text("请输入密码!");
-                return false;
+                state2 = false;
             }
             else if(!(/^\w{6,}$/.test(password_input.val())))
             {
 
                 $("#password_errormsg").css("color","red");
                 $("#password_errormsg").text("密码至少6位!");
-                return false;
+                state2 = false;
             }
             else
             {
                 $("#password_errormsg").css("color","green");
                 $("#password_errormsg").text("密码格式合法");
-                return true;
+                state2 = true;
             }
-         };
+        };
         
         // 绑定失去焦点事件
         (function ()
-         {
+        {
             $("#password_input").blur(validate_password);
-         }
+        }
         )();
 
 
@@ -182,91 +194,205 @@
         // 电子邮箱验证
 
         var validate_email = function()
-         {
+        {
             var email_input = $("#email_input");
             if(email_input.val().length === 0)
             {
                 $("#email_errormsg").css("color","red");
                 $("#email_errormsg").text("请输入电子邮箱");
-                return false;
+                state3 = false;
             }
             else if(!(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ .test(email_input.val())))
             {
 
                 $("#email_errormsg").css("color","red");
                 $("#email_errormsg").text("邮箱格式不合法!");
-                return false;
+                state3 = false;
             }
             else
             {
                 $.ajax({type:"post", data:{email:email_input.val()},url:remoteHost+"/is_email_valid",success:function(result)
                 {
-                res = JSON.parse(result)
-                if(res.status === 'success')
-                {
-                    $("#email_errormsg").css("color","green");
-                    $("#email_errormsg").text("该邮箱可以注册");
-                    return true;
-                }
-                else
-                {
-                    $("#email_errormsg").css("color","red");
-                    $("#email_errormsg").text("该邮箱已注册!");
-                    return false;
-                }
+                    res = JSON.parse(result)
+                    if(res.status === 'success')
+                    {
+                        $("#email_errormsg").css("color","green");
+                        $("#email_errormsg").text("该邮箱可以注册");
+                        state3 = true;
+                    }
+                    else
+                    {
+                        $("#email_errormsg").css("color","red");
+                        $("#email_errormsg").text("该邮箱已注册!");
+                        state3 = false;
+                    }
                 }
             });
 
             }
-         };
+        };
 
          // 绑定失去焦点事件
          (function()
          {
             $("#email_input").blur(validate_email);
-         })();
+        })();
 
         // 注册
-         $("#register_button").click(function(){
-            $.ajax({type:"post", data:$('#register_form').serialize(),url:"http://0.0.0.0:5000/register",success:function(result)
+        $("#register_button").click(function(){
+            $("#username_input").blur();
+            $("#password_input").blur();
+            $("#email_input").blur();
+
+            if(!state1 || !state2 || !state3)
             {
-                res = JSON.parse(result);
-                if(res.status === 'success')
+                alert("请检查输入是否有误!");
+            }
+            else
+            {
+                $.ajax({type:"post", data:$('#register_form').serialize(),url:"http://0.0.0.0:5000/register",success:function(result)
                 {
-                    alert("注册成功,请登录!");
-                    var username = $("#username_input").val();
-                    $("#login_button").click();
-                    $("#username_input").val(username);
-                }
-                else
-                {
-                   alert("注册失败!");
-                }
-            }});
+                    res = JSON.parse(result);
+                    if(res.status === 'success')
+                    {
+                        alert("注册成功,请登录!");
+                        var username = $("#username_input").val();
+                        $("#login_button").click();
+                        $("#username_input").val(username);
+                    }
+                    else
+                    {
+                     alert("注册失败!");
+                 }
+             }});
+            }
             return false;
-         });
-     });
+        });
+    });
 
 
 
          // 登录界面
-        $("#login_button").click(function(){
+         $("#login_button").click(function(){
             changeTo(login_div);
-            $("#login_submit_button").click(function(){
-                return false;
-            })
-        });
-        
-        $("#home_button").click(function(){
+
+            var state1 = true,
+            state2 = true;
+
+            var validate_username = function()
+            {
+                var username_input = $("#username_input");
+                if(username_input.val().length === 0)
+                {
+                    $("#username_errormsg").css("color","red");
+                    $("#username_errormsg").text("请输入用户名!");
+                    state1 = false;
+                }
+                else if(!(/^\w{3,20}$/.test(username_input.val())))
+                {
+
+                    $("#username_errormsg").css("color","red");
+                    $("#username_errormsg").text("用户名只能由3到20位的字母数字组成！");
+                    state1 = false;
+                }
+                else
+                {
+                    $.ajax({type:"post", data:{username:username_input.val()},url:remoteHost+"/is_name_valid",success:function(result)
+                    {
+                        res = JSON.parse(result)
+                        if(res.status === 'success')
+                        {
+                            $("#username_errormsg").css("color","green");
+                            $("#username_errormsg").text("用户不存在!")
+                            state1 = false;
+                        }
+                        else
+                        {
+                            $("#username_errormsg").text("")
+                            state1 = true;
+                        }
+                    }
+                });
+
+                }
+            };
+
+            (function()
+            {
+                $("#username_input").blur(validate_username);
+            })();
+
+
+
+            var validate_password = function()
+            {
+                var password_input = $("#password_input");
+                if(password_input.val().length === 0)
+                {
+                    $("#password_errormsg").css("color","red");
+                    $("#password_errormsg").text("请输入密码!");
+                    state2 = false;
+                }
+                else if(!(/^\w{6,}$/.test(password_input.val())))
+                {
+
+                    $("#password_errormsg").css("color","red");
+                    $("#password_errormsg").text("密码至少6位!");
+                    state2 = false;
+                }
+                else
+                {
+                    $("#password_errormsg").text("");
+                    state2 = true;
+                }
+            };
+            
+        // 绑定失去焦点事件
+        (function ()
+        {
+
+            $("#password_input").blur(validate_password);
+        }
+        )();
+
+
+        $("#login_submit_button").click(function(){
+            $("#username_input").blur();
+            $("username_input").blur();
+
+            if(!state1 || !state2)
+            {
+               alert("请检查输入是否有误!");
+           }
+           else
+           {
+            $.ajax({type:"post", data:$('#login_form').serialize(),url:"http://0.0.0.0:5000/login",success:function(result)
+            {
+                res = JSON.parse(result);
+                if(res.status === 'success')
+                {
+                    alert("登录成功!");
+                }
+                else
+                {
+                 alert("用户名或密码错误!");
+             }
+         }});
+        }
+        return false;
+    })
+    });
+         
+         $("#home_button").click(function(){
             changeTo(home_div);
         });
-    };
+     };
 
 
-    $(function(){
+     $(function(){
         init();
     });
-})(jQuery);
+ })(jQuery);
 
 
 // 与background通信
@@ -306,7 +432,7 @@
 
     if(!state.hasTables)
         $(".mFind").addClass("disabled");
-     else
+    else
         $(".mFind").removeClass("disabled");
 }
 
