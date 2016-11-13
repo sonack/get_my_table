@@ -1,0 +1,78 @@
+# !/usr/bin/env python3
+
+from flask import Flask,request
+from dbtools import DBTools
+app = Flask(__name__)
+
+
+
+def valid_username(un):
+    db = DBTools('root','liubixue','GetMyTable')
+    db.connect()
+    cursor = db.get_cursor()
+    res = cursor.execute('select count(*) from User where username = %s',(un,))
+    res = cursor.fetchall()
+    print("数据库查询结果:" + str(res[0][0]))
+    print(type(res[0][0]))
+    if res[0][0] > 0:
+        return False;
+    return True;
+
+def valid_email(em):
+    db = DBTools('root','liubixue','GetMyTable')
+    db.connect()
+    cursor = db.get_cursor()
+    res = cursor.execute('select count(*) from User where email = %s',(em,))
+    res = cursor.fetchall()
+    print("数据库查询结果:" + str(res[0][0]))
+    print(type(res[0][0]))
+    if res[0][0] > 0:
+        return False;
+    return True;
+
+def add_new_user(un,pw,em):
+    db = DBTools('root','liubixue','GetMyTable')
+    conn = db.connect()
+    cursor = db.get_cursor()
+    try:
+        cursor.execute('insert into User(username,password,email) values(%s,%s,%s)',(un,pw,em))
+        conn.commit()
+        return True
+    except Exception:
+        return False
+
+
+    
+@app.route("/register",methods=["POST"])
+def register():
+    un = request.form['username']
+    pw = request.form['password']
+    em = request.form['email']
+    if add_new_user(un,pw,em):
+        return '{"status": "success"}'
+    else:
+        return '{"status": "failed"}'
+
+@app.route("/is_name_valid",methods=["POST"])
+def is_name_valid():
+    un = request.form['username']
+    print("username is " + un)
+    if valid_username(un):
+        return '{"status": "success"}'
+    else:
+        return '{"status": "failed"}'
+
+@app.route("/is_email_valid",methods=["POST"])
+def is_email_valid():
+    em = request.form['email']
+    print("email is " + em)
+    if valid_email(em):
+        return '{"status": "success"}'
+    else:
+        return '{"status": "failed"}'
+
+
+if __name__ == '__main__':
+    app.run(host="0.0.0.0")
+
+
