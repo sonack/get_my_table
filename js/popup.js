@@ -1,19 +1,53 @@
+// 全局状态变量
+
+var am_I_online = false;
+
 // UI相关
 (function UI_relative($)
 {
 
 
     //  main home index html
-    var home_div = ` <div id="home_div">
-    <h3 class="ui teal header">
-    <i class="warning circle icon"></i>
-    <div class="content">请登录以便在云端同步您的表格数据!
-    </div>
-    </h3>
-    <div class="currentTable">
-    <h3 class="prompt" style="color:#2185D0"> <i class="info big circle icon blue"></i>当前未选中表格</h3>  
-    </div>
-    </div>`,
+    // var home_div = ` <div id="home_div">
+    // <h3 class="ui teal header">
+    // <i class="warning circle icon"></i>
+    // <div class="content">请登录以便在云端同步您的表格数据!
+    // </div>
+    // </h3>
+    // <div class="currentTable">
+    // <h3 class="prompt" style="color:#2185D0"> <i class="info big circle icon blue"></i>当前未选中表格</h3>  
+    // </div>
+    // </div>`,
+
+    var home_div = `
+    <div id="main_header">
+        <div id="please_login" class="float_right" style="margin-right: 20px;display: none;">
+          <h3 class="ui teal header">
+            <i class="warning circle icon"></i>
+            <div class="content">请登录以便在云端同步您的表格数据!</div>
+          </h3>
+        </div>
+
+        <div id="table_header" class="float_left" style="margin-left: 20px;">
+          <h3 class="ui purple header">
+          <i class="table circle icon"></i>
+          <div class="content">当前选定表格:</div>
+        </h3>
+        </div>
+      </div>
+      <div id="main_content">
+      
+        <div class="currentTable">
+         <div class="table_content" id="scrollbar">
+            <h3 class="prompt" style="color:#2185D0">
+            <i class="info big circle icon blue"></i>当前未选中表格</h3>
+         </div>
+         <div id="table_button" style="display: none;">
+           <button class="ui primary button disabled" id="save_to_cloud">保存到云端... </button>
+           <button class="ui button" style="margin-left: 50px;"">放弃 </button>
+         </div>
+        </div>
+      </div>`,
 
 
     // 注册页面
@@ -130,7 +164,7 @@
             {
                 $.ajax({type:"post", data:{username:username_input.val()},url:remoteHost+"/is_name_valid",success:function(result)
                 {
-                    res = JSON.parse(result)
+                    var res = JSON.parse(result)
                     if(res.status === 'success')
                     {
                         $("#username_errormsg").css("color","green");
@@ -213,7 +247,7 @@
             {
                 $.ajax({type:"post", data:{email:email_input.val()},url:remoteHost+"/is_email_valid",success:function(result)
                 {
-                    res = JSON.parse(result)
+                    var res = JSON.parse(result)
                     if(res.status === 'success')
                     {
                         $("#email_errormsg").css("color","green");
@@ -252,7 +286,7 @@
             {
                 $.ajax({type:"post", data:$('#register_form').serialize(),url:"http://0.0.0.0:5000/register",success:function(result)
                 {
-                    res = JSON.parse(result);
+                    var res = JSON.parse(result);
                     if(res.status === 'success')
                     {
                         alert("注册成功,请登录!");
@@ -299,7 +333,7 @@
                 {
                     $.ajax({type:"post", data:{username:username_input.val()},url:remoteHost+"/is_name_valid",success:function(result)
                     {
-                        res = JSON.parse(result)
+                        var res = JSON.parse(result)
                         if(res.status === 'success')
                         {
                             $("#username_errormsg").css("color","green");
@@ -368,10 +402,30 @@
            {
             $.ajax({type:"post", data:$('#login_form').serialize(),url:"http://0.0.0.0:5000/login",success:function(result)
             {
-                res = JSON.parse(result);
+                var res = JSON.parse(result);
                 if(res.status === 'success')
                 {
                     alert("登录成功!");
+                    am_I_online = true;
+                    $("#logout_button_div").css("display","block");
+                    $("#login_username").text(res.log_username);
+                    $("#logout_button").unbind("click");
+                    $("#logout_button").click(function(){
+                        $.ajax({type:"get", url:"http://0.0.0.0:5000/logout",success:function(result){
+                        var res = JSON.parse(result);
+                        if(res.status === 'success')
+                        {
+                            alert("注销成功...");
+                            am_I_online = false;
+                            $("#please_login").css("display","block");
+                            $("#logout_button_div").css("display","none");
+                        }
+                        else
+                            alert("注销失败!");
+                        $("#home_button").click();
+                    }});});
+                    $("#home_button").click();
+
                 }
                 else
                 {
@@ -384,19 +438,29 @@
     });
          
          $("#home_button").click(function(){
+
+
             $.ajax({type:"get",url:"http://0.0.0.0:5000/index",success:function(result)
             {
-                res = JSON.parse(result);
+                var res = JSON.parse(result);
                 if(res.status === 'success')
                 {
-                    alert("在线中...");
+                    console.log("在线中...");
+                    $("#save_to_cloud").removeClass("disabled");
                 }
                 else
                 {
-                 alert("离线中...");
+                    console.log("离线中...");
                 }
             }});
             changeTo(home_div);
+            $("#save_to_cloud").click(function(){
+                alert("保存到云端...");
+                if(am_I_online)
+                    alert("当前在线");
+                else
+                    alert("当前离线");
+            });
         });
      };
 
@@ -479,13 +543,59 @@ var init = function(state) {
 $(function(){
     sendCommand("openPopup", false, init)
     sendCommand("anySelection",false);
-}
-)
+    $.ajax({type:"get",url:"http://0.0.0.0:5000/online",success:function(result)
+            {
+                var res = JSON.parse(result);
+                if(res.status === 'success')
+                {
+                    console.log("在线中...");
+                    am_I_online = true;
+                    $("#save_to_cloud").removeClass("disabled");
+                    $("#please_login").css("display","none");
+                    $("#logout_button_div").css("display","block");
+                    $("#login_username").text(res.log_username);
+                    var logout_button = $("#logout_button");
+                    var obj_e = $._data(logout_button, "events");
+                    if(!obj_e || !obj_e['click'])
+                    {
+                        logout_button.click(function(){
+                        $.ajax({type:"get", url:"http://0.0.0.0:5000/logout",success:function(result){
+                        var res = JSON.parse(result);
+                        if(res.status === 'success')
+                        {
+                            alert("注销成功...");
+                            am_I_online = false;
+                            $("#please_login").css("display","block");
+                            $("#logout_button_div").css("display","none");
+                        }
+                        else
+                            alert("注销失败!");
+                        $("#home_button").click();
+                    }});});
+                    }
+
+                }
+                else
+                {
+                    console.log("离线中...");
+                    $("#please_login").css("display","block");
+                    $("#logout_button_div").css("display","none");
+                }
+            }});
+      
+     $("#save_to_cloud").click(function(){
+                alert("保存到云端...");
+                alert( $(".table_content").html());
+    });
+
+});
+
 })(jQuery);
 
 var updateTablePreview = function(tableContent)
 {
     $(".table_content").html(tableContent);
+    $("#table_button").css("display","block");
 }
 
 var makeTableEditable = function()

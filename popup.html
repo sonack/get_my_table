@@ -17,14 +17,14 @@
       <div class="topItem float_left">
         <div class="ui buttons">
           <button class="ui orange button icon animated mFind" tabindex="0" cmd="findPrevTable">
-            <div class="visible content" cmd="findPrevTable">上一张</div>
+            <div class="visible content" cmd="findPrevTable">&nbsp;上一张</div>
             <div class="hidden content" cmd="findPrevTable">
               <i class="left arrow icon" cmd="findPrevTable"></i>
             </div>
           </button>
           <div class="or" data-text="或"></div>
           <button class="ui positive button icon animated mFind" tabindex="0" cmd="findNextTable">
-            <div class="visible content" cmd="findNextTable">下一张</div>
+            <div class="visible content" cmd="findNextTable">&nbsp;&nbsp;&nbsp;下一张</div>
             <div class="hidden content" cmd="findNextTable">
               <i class="right arrow icon" cmd="findNextTable"></i>
             </div>
@@ -67,9 +67,8 @@
       
       <!-- 左浮动 设置按钮 -->
       <div class="topItem float_left">
-        <div class="item ui floating labeled icon dropdown button blue">
+        <div class="item ui floating icon dropdown button blue">
           <i class="settings icon"></i>
-          <span class="text">设置</span>
           <div class="menu">
             <div class="header">
               <i class="tags icon"></i>热键</div>
@@ -79,34 +78,54 @@
       </div>
       
       <!-- 左浮动 主页按钮 -->
-      <div class="topItem float_left ui button blue" id="home_button" tabindex="0">
-        <i class="home icon"></i>主页
+      <div class="topItem float_left" id="home_button">
+      <div  class="ui button icon blue">
+        <i class="home icon"></i></div>
+      </div>
+
+
+      <!-- 右浮动 用户按钮 -->
+     <div class="topItem float_right" style="display: none;" id="logout_button_div">
+        <div class="ui teal buttons">
+          <div class="ui icon button">
+              <i class="user icon"></i>
+              <span id="login_username"></span>
+          </div>
+          <div class="ui floating dropdown icon button">
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="item" id="logout_button">
+                <i class="sign out icon"></i>注销</div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- 右浮动 登录/注册按钮 -->
       <div class="topItem float_right">
         <div class="ui buttons">
           <button id="login_button" class="ui red button icon animated" tabindex="0">
-            <div class="visible content">登录</div>
+            <div class="visible content">&nbsp;&nbsp;登录</div>
             <div class="hidden content">
               <i class="user icon"></i>
             </div>
           </button>
           <div class="or" data-text="或"></div>
           <button id="signup_button" class="ui violet button icon animated" tabindex="0">
-            <div class="visible content">注册</div>
+            <div class="visible content">&nbsp;&nbsp;注册</div>
             <div class="hidden content">
               <i class="sign in icon"></i>
             </div>
           </button>
         </div>
       </div>
+
     </div>
     <div class="ui divider"></div>
     <!-- main 开始 -->
     <div id="main">
       <div id="main_header">
-        <div id="please_login" class="float_right" style="margin-right: 20px;">
+        <div id="please_login" class="float_right" style="margin-right: 20px;display: none;">
           <h3 class="ui teal header">
             <i class="warning circle icon"></i>
             <div class="content">请登录以便在云端同步您的表格数据!</div>
@@ -127,8 +146,8 @@
             <h3 class="prompt" style="color:#2185D0">
             <i class="info big circle icon blue"></i>当前未选中表格</h3>
          </div>
-         <div id="table_button">
-           <button class="ui primary button">保存到云端... </button>
+         <div id="table_button" style="display: none;">
+           <button class="ui primary button disabled" id="save_to_cloud">保存到云端... </button>
            <button class="ui button" style="margin-left: 50px;"">放弃 </button>
          </div>
         </div>

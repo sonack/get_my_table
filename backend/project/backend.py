@@ -90,13 +90,28 @@ def login():
     pw = request.form['password']
     if exist_user(un,pw):
         session['username'] = un;
-        return '{"status": "success"}'
+        return '{"status": "success","log_username": "' + un + '"}'
     else:
         return '{"status": "failed"}'
 
 @app.route('/index',methods=['GET'])
 def index():
     if session.get('username',None):
+        return '{"status": "success"}'
+    else:
+        return '{"status": "failed"}'
+
+@app.route('/online',methods=['GET'])
+def online():
+    un = session.get('username',None)
+    if un:
+        return '{"status": "success","log_username": "' + un + '"}'
+    else:
+        return '{"status": "failed"}'
+
+@app.route('/logout',methods=['GET'])
+def logout():
+    if session.pop('username',None):
         return '{"status": "success"}'
     else:
         return '{"status": "failed"}'

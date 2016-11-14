@@ -135,7 +135,8 @@ html,body
 /*table element*/
 th,td
 {
-  border: 3px solid #2185D0;
+  border: 3px solid #333333;
+  padding: 2px;
 }
 table
 {
