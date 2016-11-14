@@ -116,6 +116,34 @@ def logout():
     else:
         return '{"status": "failed"}'
 
+def save_table_to_DB(un,tbl):
+    db = DBTools('root','liubixue','GetMyTable')
+    conn = db.connect()
+    cursor = db.get_cursor()
+    try:
+        cursor.execute('insert into Data(belongTo,content) values(%s,%s)',(un,tbl))
+        conn.commit()
+        return True
+    except Exception:
+        return False
+
+
+
+@app.route('/save_table',methods=['POST'])
+def save_table():
+    print("Save To Table DB")
+    print(request.json)
+    tbl = request.json['content']
+    print(tbl)
+    un = session.get('username',None)
+    if un == None:
+        return '{"status": "failed"}'
+    if save_table_to_DB(un,tbl):
+        return '{"status": "success"}'
+    else:
+        return '{"status": "failed"}'
+
+
 
 if __name__ == '__main__':
     app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'

@@ -584,8 +584,20 @@ $(function(){
             }});
       
      $("#save_to_cloud").click(function(){
-                alert("保存到云端...");
-                alert( $(".table_content").html());
+                // alert( $(".table_content").html());
+                var to_send_data = {}
+                to_send_data['content'] = $(".table_content").html()
+                $.ajax({type:"post", url:"http://0.0.0.0:5000/save_table",data : JSON.stringify(to_send_data) , contentType: 'application/json;charset=UTF-8',success:function(result){
+                    var res = JSON.parse(result)
+                    if(res.status === 'success')
+                    {
+                        alert("保存成功!");
+                    }
+                    else
+                    {
+                        alert("保存失败!");
+                    }
+                }});
     });
 
 });
