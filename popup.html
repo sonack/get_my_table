@@ -8,9 +8,34 @@
     <link rel="stylesheet" type="text/css" href="css/vendor/reset.css">
     <link rel="stylesheet" type="text/css" href="semantic_ui/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css"></head>
-  
   <body>
-    <!-- 顶部工具栏 开始 -->
+  <div class="ui sidebar vertical menu" id="left_sidebar">
+    <a class="item">
+      生活
+    </a>
+    <a class="item">
+      课程学习
+    </a>
+    <a class="item">
+      财政收支
+    </a>
+  </div>
+  <div class="pusher">
+
+    <div class="ui right sidebar inverted vertical menu" id="right_sidebar">
+    <a class="item">
+      1
+    </a>
+    <a class="item">
+      2
+    </a>
+    <a class="item">
+      3
+    </a>
+  </div>
+  <div class="pusher">
+    <!-- Site content !-->
+       <!-- 顶部工具栏 开始 -->
     <div class="topBar">
     <!-- 左浮动 表格上下定位  -->
       
@@ -79,21 +104,23 @@
       
       <!-- 左浮动 主页按钮 -->
       <div class="topItem float_left" id="home_button">
-      <div  class="ui button icon blue">
+      <div  class="ui button icon brown">
         <i class="home icon"></i></div>
       </div>
 
 
       <!-- 右浮动 用户按钮 -->
-     <div class="topItem float_right" style="display: none;" id="logout_button_div">
+     <div class="topItem float_right" style="display: none;" id="user_div">
         <div class="ui teal buttons">
-          <div class="ui icon button">
+          <div class="ui icon button cloud_button">
               <i class="user icon"></i>
               <span id="login_username"></span>
           </div>
           <div class="ui floating dropdown icon button">
             <i class="dropdown icon"></i>
             <div class="menu">
+              <div class="item cloud_button">
+                <i class="cloud icon"></i>云表格</div>
               <div class="item" id="logout_button">
                 <i class="sign out icon"></i>注销</div>
             </div>
@@ -101,8 +128,29 @@
         </div>
       </div>
 
+
+  <!-- 选择云表格 -->
+    <div class="topItem float_right" id="cloud_select" style="display: none;">
+           <div class="ui buttons">
+          <button class="ui orange button icon animated" tabindex="0" id="choose_class">
+            <div class="visible content">&nbsp;选择分类</div>
+            <div class="hidden content">
+              <i class="list icon"></i>
+            </div>
+          </button>
+          <div class="or" data-text="或"></div>
+          <button class="ui positive button icon animated" tabindex="0" id="choose_id">
+            <div class="visible content">&nbsp;&nbsp;&nbsp;选择表格</div>
+            <div class="hidden content">
+              <i class="ordered list icon"></i>
+            </div>
+          </button>
+        </div>
+    </div>
+
+
       <!-- 右浮动 登录/注册按钮 -->
-      <div class="topItem float_right">
+      <div class="topItem float_right" id="login_or_register">
         <div class="ui buttons">
           <button id="login_button" class="ui red button icon animated" tabindex="0">
             <div class="visible content">&nbsp;&nbsp;登录</div>
@@ -124,7 +172,8 @@
     <div class="ui divider"></div>
     <!-- main 开始 -->
     <div id="main">
-      <div id="main_header">
+      
+  <div id="main_header">
         <div id="please_login" class="float_right" style="margin-right: 20px;display: none;">
           <h3 class="ui teal header">
             <i class="warning circle icon"></i>
@@ -152,11 +201,21 @@
          </div>
         </div>
       </div>
-      <!-- main 结束 --></div>
-    <!-- js脚本 -->
+
+      </div>
+
+
+
+
+
+
+  </div>
+  <!-- js脚本 -->
     <script type="text/javascript" src="js/vendor/jquery.min.js"></script>
     <script type="text/javascript" src="semantic_ui/semantic.min.js"></script>
     <script type="text/javascript" src="js/popup.js"></script>
-  </body>
-
+  </div>
+    <!-- Site content !-->
+     
+</body>
 </html>

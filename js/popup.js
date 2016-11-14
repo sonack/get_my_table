@@ -1,25 +1,33 @@
 // 全局状态变量
 
 var am_I_online = false;
+ var save_confirm_div = `<div id="save_confirm_div">
+       <h3 class="ui header purple" style="margin-left: 30px;">
+  <i class="plug icon"></i>
+  <div class="content">请完善表格信息 </div>
+</h3>
+      <div class="ui form" style="margin-left: 200px; margin-top: 40px;">
+   
 
-// UI相关
-(function UI_relative($)
-{
-
-
-    //  main home index html
-    // var home_div = ` <div id="home_div">
-    // <h3 class="ui teal header">
-    // <i class="warning circle icon"></i>
-    // <div class="content">请登录以便在云端同步您的表格数据!
-    // </div>
-    // </h3>
-    // <div class="currentTable">
-    // <h3 class="prompt" style="color:#2185D0"> <i class="info big circle icon blue"></i>当前未选中表格</h3>  
-    // </div>
-    // </div>`,
-
-    var home_div = `
+    <div class="seven wide required field">
+    <label>表格名称:</label>
+    <input type="text" id="table_name_input">
+  </div>
+  <div class="seven wide field" >
+    <label>分类于:</label>
+    <select class="ui search dropdown" id="all_class">
+      <option value="">输入分类</option>
+    </select>
+  </div>
+  <div id="save_confirm_div_button" style="margin-top: 30px;">
+  <button class="ui green button" style="margin-left: -30px;" id="add_new_class_button">新增分类 </button>
+  <button class="ui primary button" style="margin-left: 20px;" id="confirm_button">确定 </button>
+  <button class="ui red button" style="margin-left: 20px;" id="cancel_button">取消 </button>
+  </div>
+</div>
+</div>
+`,
+    home_div = `
     <div id="main_header">
         <div id="please_login" class="float_right" style="margin-right: 20px;display: none;">
           <h3 class="ui teal header">
@@ -117,18 +125,35 @@ var am_I_online = false;
 
     <!-- 登录页面 结束 -->
     `;
-
-
-    var main = $("#main");
-    
-    function changeTo(target_div)
+ var main = $("#main");
+function changeTo(target_div)
     {
         main.transition(
-            'slide down'
+            'fade down'
             );
         main.html(target_div);
-        main.transition('tada');
+        main.transition('fade up');
     }
+// UI相关
+(function UI_relative($)
+{
+
+
+    //  main home index html
+    // var home_div = ` <div id="home_div">
+    // <h3 class="ui teal header">
+    // <i class="warning circle icon"></i>
+    // <div class="content">请登录以便在云端同步您的表格数据!
+    // </div>
+    // </h3>
+    // <div class="currentTable">
+    // <h3 class="prompt" style="color:#2185D0"> <i class="info big circle icon blue"></i>当前未选中表格</h3>  
+    // </div>
+    // </div>`,
+   
+
+   
+    
      // 初始化
      function init(){
         var remoteHost = "http://0.0.0.0:5000";
@@ -407,8 +432,11 @@ var am_I_online = false;
                 {
                     alert("登录成功!");
                     am_I_online = true;
-                    $("#logout_button_div").css("display","block");
+                    $("#login_or_register").hide();
+                    $("#user_div").css("display","block");
                     $("#login_username").text(res.log_username);
+
+
                     $("#logout_button").unbind("click");
                     $("#logout_button").click(function(){
                         $.ajax({type:"get", url:"http://0.0.0.0:5000/logout",success:function(result){
@@ -417,13 +445,20 @@ var am_I_online = false;
                         {
                             alert("注销成功...");
                             am_I_online = false;
+                            $("#login_or_register").show();
                             $("#please_login").css("display","block");
-                            $("#logout_button_div").css("display","none");
+                            $("#user_div").css("display","none");
                         }
                         else
                             alert("注销失败!");
                         $("#home_button").click();
                     }});});
+
+                    $(".cloud_button").unbind("click");
+                    $(".cloud_button").click(function(){
+                        alert("查看所有云表格...");
+                    });
+
                     $("#home_button").click();
 
                 }
@@ -455,11 +490,70 @@ var am_I_online = false;
             }});
             changeTo(home_div);
             $("#save_to_cloud").click(function(){
-                alert("保存到云端...");
-                if(am_I_online)
-                    alert("当前在线");
-                else
-                    alert("当前离线");
+                $.ajax({type:"get",url:"http://0.0.0.0:5000/get_all_class",success:function(result)
+                {
+                    var to_send_data = {}
+                    to_send_data['content'] = $(".table_content").html()
+                    changeTo(save_confirm_div);
+                    var res = JSON.parse(result);
+                    var prt = $("#all_class");
+                    $.each(res,function(idx,ele){
+                        var opt = $("<option></option>");
+                        opt.text(ele);
+                        opt.attr("value",ele);
+                        prt.append(opt);
+                        // alert("添加了" + ele)
+                    });
+                    $('select.dropdown').dropdown();
+
+                    console.log("绑定kaishi");
+                    $("#add_new_class_button").click(function(){
+                    var new_class_name = ""
+                    alert("增加新分类");
+                });
+                    console.log("绑定结束");
+
+                    $('#confirm_button').click(function(){
+                        var table_name = $("#table_name_input").val();
+                        var table_class = $("#all_class").val();
+                        if(table_name === "")
+                        {
+                           alert("请输入表格名字!");
+                           return false;
+                        }else if(table_class === "")
+                        {
+                            alert("请选择表格类别!");
+                            return false;
+                        }
+
+                    to_send_data['table_name'] = table_name;
+                    to_send_data['table_class'] = table_class;
+                    $.ajax({type:"post", url:"http://0.0.0.0:5000/save_table",data : JSON.stringify(to_send_data) , contentType: 'application/json;charset=UTF-8',success:function(result){
+                    var res = JSON.parse(result)
+                    if(res.status === 'success')
+                    {
+                        alert("保存成功!");
+                    }
+                    else
+                    {
+                        alert("保存失败!");
+                    }
+                    changeTo(home_div);
+                }});
+
+                    });
+
+
+
+                }});
+              
+
+
+
+                // if(am_I_online)
+                //     alert("当前在线");
+                // else
+                //     alert("当前离线");
             });
         });
      };
@@ -550,9 +644,10 @@ $(function(){
                 {
                     console.log("在线中...");
                     am_I_online = true;
+                    $("#login_or_register").hide();
                     $("#save_to_cloud").removeClass("disabled");
                     $("#please_login").css("display","none");
-                    $("#logout_button_div").css("display","block");
+                    $("#user_div").css("display","block");
                     $("#login_username").text(res.log_username);
                     var logout_button = $("#logout_button");
                     var obj_e = $._data(logout_button, "events");
@@ -565,8 +660,9 @@ $(function(){
                         {
                             alert("注销成功...");
                             am_I_online = false;
+                            $("#login_or_register").show();
                             $("#please_login").css("display","block");
-                            $("#logout_button_div").css("display","none");
+                            $("#user_div").css("display","none");
                         }
                         else
                             alert("注销失败!");
@@ -579,15 +675,42 @@ $(function(){
                 {
                     console.log("离线中...");
                     $("#please_login").css("display","block");
-                    $("#logout_button_div").css("display","none");
+                    $("#user_div").css("display","none");
                 }
             }});
       
-     $("#save_to_cloud").click(function(){
-                // alert( $(".table_content").html());
-                var to_send_data = {}
-                to_send_data['content'] = $(".table_content").html()
-                $.ajax({type:"post", url:"http://0.0.0.0:5000/save_table",data : JSON.stringify(to_send_data) , contentType: 'application/json;charset=UTF-8',success:function(result){
+         $("#save_to_cloud").click(function(){
+                $.ajax({type:"get",url:"http://0.0.0.0:5000/get_all_class",success:function(result)
+                {
+                    var to_send_data = {}
+                    to_send_data['content'] = $(".table_content").html()
+                    changeTo(save_confirm_div);
+                    var res = JSON.parse(result);
+                    var prt = $("#all_class");
+                    $.each(res,function(idx,ele){
+                        var opt = $("<option></option>");
+                        opt.text(ele);
+                        opt.attr("value",ele);
+                        prt.append(opt);
+                        // alert("添加了" + ele)
+                    });
+                    $('select.dropdown').dropdown();
+                    $('#confirm_button').click(function(){
+                        var table_name = $("#table_name_input").val();
+                        var table_class = $("#all_class").val();
+                        if(table_name === "")
+                        {
+                           alert("请输入表格名字!");
+                           return false;
+                        }else if(table_class === "")
+                        {
+                            alert("请选择表格类别!");
+                            return false;
+                        }
+
+                    to_send_data['table_name'] = table_name;
+                    to_send_data['table_class'] = table_class;
+                    $.ajax({type:"post", url:"http://0.0.0.0:5000/save_table",data : JSON.stringify(to_send_data) , contentType: 'application/json;charset=UTF-8',success:function(result){
                     var res = JSON.parse(result)
                     if(res.status === 'success')
                     {
@@ -597,8 +720,45 @@ $(function(){
                     {
                         alert("保存失败!");
                     }
+                    changeTo(home_div);
+
                 }});
+
+                    });
+                }});
+              
+
+                $("#add_new_class_button").click(function(){
+                    var new_class_name = ""
+                });
+
+                // if(am_I_online)
+                //     alert("当前在线");
+                // else
+                //     alert("当前离线");
+            });
+
+    $(".cloud_button").click(function(){
+        alert("查看所有云表格...");
+        $("#cloud_select").show();
     });
+
+    // start
+
+     $("#choose_class").click(function(){
+          $("#left_sidebar").sidebar('toggle');
+      });
+     $("#choose_id").click(function(){
+          $("#right_sidebar").sidebar('toggle');
+      });
+
+     $("#left_sidebar *").click(function(event){
+            alert("选择的是" + $(event.target).text());
+            $("#left_sidebar").sidebar('toggle');
+     });
+
+
+
 
 });
 
@@ -606,8 +766,8 @@ $(function(){
 
 var updateTablePreview = function(tableContent)
 {
+    $("#table_button").show();
     $(".table_content").html(tableContent);
-    $("#table_button").css("display","block");
 }
 
 var makeTableEditable = function()

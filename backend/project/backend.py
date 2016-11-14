@@ -1,5 +1,6 @@
 # !/usr/bin/env python3
 
+import json
 from flask import Flask,request,session
 from dbtools import DBTools
 app = Flask(__name__)
@@ -116,12 +117,12 @@ def logout():
     else:
         return '{"status": "failed"}'
 
-def save_table_to_DB(un,tbl):
+def save_table_to_DB(un,tbl,tbl_n,tbl_c):
     db = DBTools('root','liubixue','GetMyTable')
     conn = db.connect()
     cursor = db.get_cursor()
     try:
-        cursor.execute('insert into Data(belongTo,content) values(%s,%s)',(un,tbl))
+        cursor.execute('insert into Data(belongTo,content,name,class) values(%s,%s,%s,%s)',(un,tbl,tbl_n,tbl_c))
         conn.commit()
         return True
     except Exception:
@@ -134,15 +135,32 @@ def save_table():
     print("Save To Table DB")
     print(request.json)
     tbl = request.json['content']
+    tbl_n = request.json['table_name']
+    tbl_c = request.json['table_class']
     print(tbl)
+    print(tbl_n)
+    print(tbl_c)
     un = session.get('username',None)
     if un == None:
         return '{"status": "failed"}'
-    if save_table_to_DB(un,tbl):
+    if save_table_to_DB(un,tbl,tbl_n,tbl_c):
         return '{"status": "success"}'
     else:
         return '{"status": "failed"}'
 
+
+@app.route('/get_all_class',methods=['GET'])
+def get_all_class():
+    db = DBTools('root','liubixue','GetMyTable')
+    db.connect()
+    cursor = db.get_cursor()
+    res = cursor.execute('select className from Class');
+    res = cursor.fetchall()
+    classes = []
+    for t in res:
+        classes.append(t[0])
+    print(classes)
+    return json.dumps(classes)
 
 
 if __name__ == '__main__':

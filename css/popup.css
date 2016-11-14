@@ -1,8 +1,8 @@
 html,body
 {
-  width: 680px;
+  width: 700px;
   height: 420px;
-  background: url(../images/background.jpg) fixed;
+  background: white !important;
   overflow: hidden;
 }
 
