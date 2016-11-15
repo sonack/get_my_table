@@ -52,7 +52,7 @@ var am_I_online = false;
          </div>
          <div id="table_button" style="display: none;">
            <button class="ui primary button disabled" id="save_to_cloud">保存到云端... </button>
-           <button class="ui button" style="margin-left: 50px;"">放弃 </button>
+           <button class="ui button" style="margin-left: 50px;" id="discard_button">放弃 </button>
          </div>
         </div>
       </div>`,
@@ -434,9 +434,11 @@ function changeTo(target_div)
                     am_I_online = true;
                     $("#login_or_register").hide();
                     $("#user_div").css("display","block");
+                    // alert(res.log_username)
+                    // console.log(res);
+                    if(res.log_username.length > 9)
+                        res.log_username = res.log_username.substr(0,6) + "...";
                     $("#login_username").text(res.log_username);
-
-
                     $("#logout_button").unbind("click");
                     $("#logout_button").click(function(){
                         $.ajax({type:"get", url:"http://123.206.84.93:5000/logout",success:function(result){
@@ -485,7 +487,9 @@ function changeTo(target_div)
                 {
                     console.log("离线中...");
                 }
-              
+            $("#discard_button").click(function(){
+                $("#home_button").click();
+            });
                             // 点击保存到云端后
             $("#save_to_cloud").click(function(){
                 $.ajax({type:"get",url:"http://123.206.84.93:5000/get_all_class",success:function(result)
@@ -597,11 +601,8 @@ function changeTo(target_div)
                         $("#home_button").click();
                     });
 
-
-
             }});
            
-
 // 确认按钮 结束
                 });
               
@@ -736,7 +737,156 @@ $(function(){
                     $("#user_div").css("display","none");
                 }
             }});
-    $("#home_button").click();
+
+
+    // 触发主页事件
+
+    (function(){
+            $.ajax({type:"get",url:"http://123.206.84.93:5000/index",success:function(result)
+            {
+                // changeTo(home_div);
+                $("#cloud_select").slideUp();
+                // alert("点击home_button");
+                var res = JSON.parse(result);
+                if(res.status === 'success')
+                {
+                    console.log("在线中...");
+                    $("#save_to_cloud").removeClass("disabled");
+                    $("#please_login").css("display","none");
+                }
+                else
+                {
+                    console.log("离线中...");
+                }
+            $("#discard_button").click(function(){
+                $("#home_button").click();
+            });
+                            // 点击保存到云端后
+            $("#save_to_cloud").click(function(){
+                $.ajax({type:"get",url:"http://123.206.84.93:5000/get_all_class",success:function(result)
+                {
+                    // alert("进入函数...");
+                    var to_send_data = {}
+                    to_send_data['content'] = $(".table_content").html()
+                    changeTo(save_confirm_div);
+                    var res = JSON.parse(result);
+                    var prt = $("#all_class");
+                    $.each(res,function(idx,ele){
+                        var opt = $("<option></option>");
+                        opt.text(ele);
+                        opt.attr("value",ele);
+                        prt.append(opt);
+                        console.log("添加了" + ele)
+                    });
+                    $('select.dropdown').dropdown();
+                    $('input.search').keypress(function(e)
+                    {
+                        if(e.which == 13)
+                           {
+                                $('#confirm_button').click();
+                           }
+                    });
+// 增加新分类结束
+                    console.log("绑定开始");
+                    $("#add_new_class_button").click(function(){
+                    while(true)
+                    {
+                    var new_class_name = prompt("请输入新分类的名称:","新分类");
+                    if(new_class_name === null) break;
+                    if(new_class_name === "")
+                    {
+                        alert("分类名不能为空!");
+                    }
+                    else
+                    {
+                        console.log("新增加的分类名称为" + new_class_name);
+                        $.ajax({type:"post",data:'{"new_class_name":"' + new_class_name + '"}', url:"http://123.206.84.93:5000/add_new_class", contentType:"application/json;charset=UTF-8",success:function(result)
+                        {
+                            var res = JSON.parse(result);
+                            if(res.status === 'success')
+                            {
+                                alert("添加分类 [ " + new_class_name+" ] 成功!");
+                                $.ajax({type:"get",url:"http://123.206.84.93:5000/get_all_class",success:function(result)
+                                {
+                                    var res = JSON.parse(result);
+                                    var prt = $("#all_class");
+                                    prt.empty();
+                                    $.each(res,function(idx,ele){
+                                        var opt = $("<option></option>");
+                                        opt.text(ele);
+                                        opt.attr("value",ele);
+                                        prt.append(opt);
+                                        console.log("添加了" + ele)
+                                    });
+                                    // $('#all_class').dropdown("set selected",new_class_name);
+                                }});
+                            }
+                            else if(res.status === 'existed')
+                            {
+                                alert("分类[ "+new_class_name+" ]已存在!");
+                            }
+                            else if(res.status === "failed")
+                            {
+                                alert("添加失败!");
+                            }
+                        }
+                        });
+                        break;
+                    }
+                    }
+                });
+// 增加新分类 结束
+                    console.log("绑定结束");
+// 确认按钮 开始
+                    $('#confirm_button').click(function(){
+                        var table_name = $("#table_name_input").val();
+                        var table_class = $("#all_class").val();
+                        if(table_name === "")
+                        {
+                           alert("请输入表格名字!");
+                           return false;
+                        }else if(table_class === "")
+                        {
+                            alert("请选择表格类别!");
+                            return false;
+                        }
+
+                    to_send_data['table_name'] = table_name;
+                    to_send_data['table_class'] = table_class;
+                    $.ajax({type:"post", url:"http://123.206.84.93:5000/save_table",data : JSON.stringify(to_send_data) , contentType: 'application/json;charset=UTF-8',success:function(result){
+                    var res = JSON.parse(result)
+                    if(res.status === 'success')
+                    {
+                        alert("保存成功!");
+                    }
+                    else
+                    {
+                        alert("保存失败!");
+                    }
+                    // changeTo(home_div);
+                    $("#home_button").click();
+                }});
+                    });
+
+                    $("#cancel_button").click(function(){
+                        $("#home_button").click();
+                    });
+
+            }});
+           
+// 确认按钮 结束
+                });
+              
+
+
+
+                // if(am_I_online)
+                //     alert("当前在线");
+                // else
+                //     alert("当前离线");
+            }});
+    })();
+    
     $(".cloud_button").click(function(){
         $("#cloud_select").slideDown();
         $.ajax({type:"get",url:"http://123.206.84.93:5000/get_all_class",success:function(result)
