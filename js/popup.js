@@ -156,7 +156,7 @@ function changeTo(target_div)
     
      // 初始化
      function init(){
-        var remoteHost = "http://0.0.0.0:5000";
+        var remoteHost = "http://123.206.84.93:5000";
         $(".dropdown").dropdown();
 
 
@@ -309,7 +309,7 @@ function changeTo(target_div)
             }
             else
             {
-                $.ajax({type:"post", data:$('#register_form').serialize(),url:"http://0.0.0.0:5000/register",success:function(result)
+                $.ajax({type:"post", data:$('#register_form').serialize(),url:"http://123.206.84.93:5000/register",success:function(result)
                 {
                     var res = JSON.parse(result);
                     if(res.status === 'success')
@@ -425,7 +425,7 @@ function changeTo(target_div)
            }
            else
            {
-            $.ajax({type:"post", data:$('#login_form').serialize(),url:"http://0.0.0.0:5000/login",success:function(result)
+            $.ajax({type:"post", data:$('#login_form').serialize(),url:"http://123.206.84.93:5000/login",success:function(result)
             {
                 var res = JSON.parse(result);
                 if(res.status === 'success')
@@ -439,7 +439,7 @@ function changeTo(target_div)
 
                     $("#logout_button").unbind("click");
                     $("#logout_button").click(function(){
-                        $.ajax({type:"get", url:"http://0.0.0.0:5000/logout",success:function(result){
+                        $.ajax({type:"get", url:"http://123.206.84.93:5000/logout",success:function(result){
                         var res = JSON.parse(result);
                         if(res.status === 'success')
                         {
@@ -469,7 +469,7 @@ function changeTo(target_div)
          $("#home_button").click(function(){
 
 
-            $.ajax({type:"get",url:"http://0.0.0.0:5000/index",success:function(result)
+            $.ajax({type:"get",url:"http://123.206.84.93:5000/index",success:function(result)
             {
                 changeTo(home_div);
                 $("#cloud_select").slideUp();
@@ -488,7 +488,7 @@ function changeTo(target_div)
               
                             // 点击保存到云端后
             $("#save_to_cloud").click(function(){
-                $.ajax({type:"get",url:"http://0.0.0.0:5000/get_all_class",success:function(result)
+                $.ajax({type:"get",url:"http://123.206.84.93:5000/get_all_class",success:function(result)
                 {
                     // alert("进入函数...");
                     var to_send_data = {}
@@ -525,13 +525,13 @@ function changeTo(target_div)
                     else
                     {
                         console.log("新增加的分类名称为" + new_class_name);
-                        $.ajax({type:"post",data:'{"new_class_name":"' + new_class_name + '"}', url:"http://0.0.0.0:5000/add_new_class", contentType:"application/json;charset=UTF-8",success:function(result)
+                        $.ajax({type:"post",data:'{"new_class_name":"' + new_class_name + '"}', url:"http://123.206.84.93:5000/add_new_class", contentType:"application/json;charset=UTF-8",success:function(result)
                         {
                             var res = JSON.parse(result);
                             if(res.status === 'success')
                             {
                                 alert("添加分类 [ " + new_class_name+" ] 成功!");
-                                $.ajax({type:"get",url:"http://0.0.0.0:5000/get_all_class",success:function(result)
+                                $.ajax({type:"get",url:"http://123.206.84.93:5000/get_all_class",success:function(result)
                                 {
                                     var res = JSON.parse(result);
                                     var prt = $("#all_class");
@@ -578,7 +578,7 @@ function changeTo(target_div)
 
                     to_send_data['table_name'] = table_name;
                     to_send_data['table_class'] = table_class;
-                    $.ajax({type:"post", url:"http://0.0.0.0:5000/save_table",data : JSON.stringify(to_send_data) , contentType: 'application/json;charset=UTF-8',success:function(result){
+                    $.ajax({type:"post", url:"http://123.206.84.93:5000/save_table",data : JSON.stringify(to_send_data) , contentType: 'application/json;charset=UTF-8',success:function(result){
                     var res = JSON.parse(result)
                     if(res.status === 'success')
                     {
@@ -695,7 +695,7 @@ var init = function(state) {
 $(function(){
     sendCommand("openPopup", false, init)
     sendCommand("anySelection",false);
-    $.ajax({type:"get",url:"http://0.0.0.0:5000/online",success:function(result)
+    $.ajax({type:"get",url:"http://123.206.84.93:5000/online",success:function(result)
             {
                 var res = JSON.parse(result);
                 if(res.status === 'success')
@@ -712,7 +712,7 @@ $(function(){
                     if(!obj_e || !obj_e['click'])
                     {
                         logout_button.click(function(){
-                        $.ajax({type:"get", url:"http://0.0.0.0:5000/logout",success:function(result){
+                        $.ajax({type:"get", url:"http://123.206.84.93:5000/logout",success:function(result){
                         var res = JSON.parse(result);
                         if(res.status === 'success')
                         {
@@ -739,7 +739,7 @@ $(function(){
     $("#home_button").click();
     $(".cloud_button").click(function(){
         $("#cloud_select").slideDown();
-        $.ajax({type:"get",url:"http://0.0.0.0:5000/get_all_class",success:function(result)
+        $.ajax({type:"get",url:"http://123.206.84.93:5000/get_all_class",success:function(result)
         {
               var res = JSON.parse(result);
               var prt = $("#left_sidebar");
@@ -756,7 +756,7 @@ $(function(){
               {
                 // alert();
                 var class_name = $(this).attr("class_name");
-                 $.ajax({type:"get", url:"http://0.0.0.0:5000/get_all_table?class_name=" + class_name ,success:function(result)
+                 $.ajax({type:"get", url:"http://123.206.84.93:5000/get_all_table?class_name=" + class_name ,success:function(result)
                  {
                     var tbls = JSON.parse(result);
                     var prt = $("#right_sidebar");
@@ -771,7 +771,7 @@ $(function(){
                     });
                     $("#right_sidebar a").click(function(){
                         var tbl_id = $(this).attr("table_id");
-                        $.ajax({type:"post",data: '{"table_id":"' + tbl_id + '"}', url:"http://0.0.0.0:5000/get_table_by_id", contentType:"application/json;charset=UTF-8", success:function(result)
+                        $.ajax({type:"post",data: '{"table_id":"' + tbl_id + '"}', url:"http://123.206.84.93:5000/get_table_by_id", contentType:"application/json;charset=UTF-8", success:function(result)
                             {
                                 var res = JSON.parse(result);
                                 console.log(res);
