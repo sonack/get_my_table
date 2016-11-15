@@ -29,7 +29,7 @@ var am_I_online = false;
 `,
     home_div = `
     <div id="main_header">
-        <div id="please_login" class="float_right" style="margin-right: 20px;display: none;">
+        <div id="please_login" class="float_right" style="margin-right: 20px;">
           <h3 class="ui teal header">
             <i class="warning circle icon"></i>
             <div class="content">请登录以便在云端同步您的表格数据!</div>
@@ -453,12 +453,6 @@ function changeTo(target_div)
                             alert("注销失败!");
                         $("#home_button").click();
                     }});});
-
-                    $(".cloud_button").unbind("click");
-                    $(".cloud_button").click(function(){
-                        alert("查看所有云表格...");
-                    });
-
                     $("#home_button").click();
 
                 }
@@ -469,7 +463,7 @@ function changeTo(target_div)
          }});
         }
         return false;
-    })
+    });
     });
          
          $("#home_button").click(function(){
@@ -477,21 +471,26 @@ function changeTo(target_div)
 
             $.ajax({type:"get",url:"http://0.0.0.0:5000/index",success:function(result)
             {
+                changeTo(home_div);
+                $("#cloud_select").slideUp();
+                // alert("点击home_button");
                 var res = JSON.parse(result);
                 if(res.status === 'success')
                 {
                     console.log("在线中...");
                     $("#save_to_cloud").removeClass("disabled");
+                    $("#please_login").css("display","none");
                 }
                 else
                 {
                     console.log("离线中...");
                 }
-            }});
-            changeTo(home_div);
+              
+                            // 点击保存到云端后
             $("#save_to_cloud").click(function(){
                 $.ajax({type:"get",url:"http://0.0.0.0:5000/get_all_class",success:function(result)
                 {
+                    // alert("进入函数...");
                     var to_send_data = {}
                     to_send_data['content'] = $(".table_content").html()
                     changeTo(save_confirm_div);
@@ -502,17 +501,68 @@ function changeTo(target_div)
                         opt.text(ele);
                         opt.attr("value",ele);
                         prt.append(opt);
-                        // alert("添加了" + ele)
+                        console.log("添加了" + ele)
                     });
                     $('select.dropdown').dropdown();
-
-                    console.log("绑定kaishi");
+                    $('input.search').keypress(function(e)
+                    {
+                        if(e.which == 13)
+                           {
+                                $('#confirm_button').click();
+                           }
+                    });
+// 增加新分类结束
+                    console.log("绑定开始");
                     $("#add_new_class_button").click(function(){
-                    var new_class_name = ""
-                    alert("增加新分类");
+                    while(true)
+                    {
+                    var new_class_name = prompt("请输入新分类的名称:","新分类");
+                    if(new_class_name === null) break;
+                    if(new_class_name === "")
+                    {
+                        alert("分类名不能为空!");
+                    }
+                    else
+                    {
+                        console.log("新增加的分类名称为" + new_class_name);
+                        $.ajax({type:"post",data:'{"new_class_name":"' + new_class_name + '"}', url:"http://0.0.0.0:5000/add_new_class", contentType:"application/json;charset=UTF-8",success:function(result)
+                        {
+                            var res = JSON.parse(result);
+                            if(res.status === 'success')
+                            {
+                                alert("添加分类 [ " + new_class_name+" ] 成功!");
+                                $.ajax({type:"get",url:"http://0.0.0.0:5000/get_all_class",success:function(result)
+                                {
+                                    var res = JSON.parse(result);
+                                    var prt = $("#all_class");
+                                    prt.empty();
+                                    $.each(res,function(idx,ele){
+                                        var opt = $("<option></option>");
+                                        opt.text(ele);
+                                        opt.attr("value",ele);
+                                        prt.append(opt);
+                                        console.log("添加了" + ele)
+                                    });
+                                    // $('#all_class').dropdown("set selected",new_class_name);
+                                }});
+                            }
+                            else if(res.status === 'existed')
+                            {
+                                alert("分类[ "+new_class_name+" ]已存在!");
+                            }
+                            else if(res.status === "failed")
+                            {
+                                alert("添加失败!");
+                            }
+                        }
+                        });
+                        break;
+                    }
+                    }
                 });
+// 增加新分类 结束
                     console.log("绑定结束");
-
+// 确认按钮 开始
                     $('#confirm_button').click(function(){
                         var table_name = $("#table_name_input").val();
                         var table_class = $("#all_class").val();
@@ -538,14 +588,16 @@ function changeTo(target_div)
                     {
                         alert("保存失败!");
                     }
-                    changeTo(home_div);
+                    // changeTo(home_div);
+                    $("#home_button").click();
                 }});
-
                     });
 
+            }});
+           
 
-
-                }});
+// 确认按钮 结束
+                });
               
 
 
@@ -554,7 +606,7 @@ function changeTo(target_div)
                 //     alert("当前在线");
                 // else
                 //     alert("当前离线");
-            });
+            }});
         });
      };
 
@@ -678,69 +730,65 @@ $(function(){
                     $("#user_div").css("display","none");
                 }
             }});
-      
-         $("#save_to_cloud").click(function(){
-                $.ajax({type:"get",url:"http://0.0.0.0:5000/get_all_class",success:function(result)
-                {
-                    var to_send_data = {}
-                    to_send_data['content'] = $(".table_content").html()
-                    changeTo(save_confirm_div);
-                    var res = JSON.parse(result);
-                    var prt = $("#all_class");
-                    $.each(res,function(idx,ele){
-                        var opt = $("<option></option>");
-                        opt.text(ele);
-                        opt.attr("value",ele);
-                        prt.append(opt);
-                        // alert("添加了" + ele)
-                    });
-                    $('select.dropdown').dropdown();
-                    $('#confirm_button').click(function(){
-                        var table_name = $("#table_name_input").val();
-                        var table_class = $("#all_class").val();
-                        if(table_name === "")
-                        {
-                           alert("请输入表格名字!");
-                           return false;
-                        }else if(table_class === "")
-                        {
-                            alert("请选择表格类别!");
-                            return false;
-                        }
-
-                    to_send_data['table_name'] = table_name;
-                    to_send_data['table_class'] = table_class;
-                    $.ajax({type:"post", url:"http://0.0.0.0:5000/save_table",data : JSON.stringify(to_send_data) , contentType: 'application/json;charset=UTF-8',success:function(result){
-                    var res = JSON.parse(result)
-                    if(res.status === 'success')
-                    {
-                        alert("保存成功!");
-                    }
-                    else
-                    {
-                        alert("保存失败!");
-                    }
-                    changeTo(home_div);
-
-                }});
-
-                    });
-                }});
-              
-
-                $("#add_new_class_button").click(function(){
-                    var new_class_name = ""
-                });
-
-                // if(am_I_online)
-                //     alert("当前在线");
-                // else
-                //     alert("当前离线");
-            });
-
+    $("#home_button").click();
     $(".cloud_button").click(function(){
-        alert("查看所有云表格...");
-        $("#cloud_select").show();
+        $("#cloud_select").slideDown();
+        $.ajax({type:"get",url:"http://0.0.0.0:5000/get_all_class",success:function(result)
+        {
+              var res = JSON.parse(result);
+              var prt = $("#left_sidebar");
+              prt.empty();
+              $.each(res,function(idx,ele){
+                var opt = $("<a class='item'></a>");
+                opt.text(ele);
+                opt.attr("class_name",ele);
+                prt.append(opt);
+                console.log("添加了类别" + ele);
+              });
+
+              $("#left_sidebar a").click(function()
+              {
+                // alert();
+                var class_name = $(this).attr("class_name");
+                 $.ajax({type:"get", url:"http://0.0.0.0:5000/get_all_table?class_name=" + class_name ,success:function(result)
+                 {
+                    var tbls = JSON.parse(result);
+                    var prt = $("#right_sidebar");
+                    prt.empty();
+                    $.each(tbls,function(idx,ele)
+                    {
+                        var opt = $("<a class='item'></a>");
+                        opt.text(ele[0]);
+                        opt.attr("table_id",ele[1]);
+                        prt.append(opt);
+                        console.log("添加了表格" + ele);
+                    });
+                    $("#right_sidebar a").click(function(){
+                        var tbl_id = $(this).attr("table_id");
+                        $.ajax({type:"post",data: '{"table_id":"' + tbl_id + '"}', url:"http://0.0.0.0:5000/get_table_by_id", contentType:"application/json;charset=UTF-8", success:function(result)
+                            {
+                                var res = JSON.parse(result);
+                                console.log(res);
+                                if(res.status === 'success')
+                                {
+                                    updateTablePreview(res.content);
+                                    makeTableEditable();
+                                }
+                                else
+                                {
+                                    console.log("获取表格信息失败...");
+                                }
+                            }});
+                        $("#right_sidebar").sidebar('toggle');
+                    });
+                    $("#choose_id").click();
+                 }});
+              });
+        }});
+    });
+
+    $("#please_select_class_first").click(function(){
+        $("#choose_class").click();
     });
 
     // start
