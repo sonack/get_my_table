@@ -593,6 +593,12 @@ function changeTo(target_div)
                 }});
                     });
 
+                    $("#cancel_button").click(function(){
+                        $("#home_button").click();
+                    });
+
+
+
             }});
            
 
