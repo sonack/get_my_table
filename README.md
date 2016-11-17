@@ -39,14 +39,14 @@
 ### Overview:
 
     鉴于Plan A的种种问题，我们考虑转而开发一款Chrome扩展插件，以实现和Plan A相同的功能。  
-    后端仍然采用Struts2框架，前后端使用JSON格式进行数据交换。
+    后端采用Python的Flask框架，让代码更加精炼高效，前后端使用JSON格式进行数据交换。
 
 ### Techs:
 
     1. Chrome扩展开发需要Chrome相关开发技术，主要是JavaScript和BOM、DOM等通用技术和Chrome API等。
-    2. 后端服务器仍然采用Struts2框架，需要继续学习Struts2 JSON开发相关的知识，身份验证仍然使用Interceptor机制。
+    2. 后端服务器采用Python的Flask框架，需要学习Python Web开发相关的知识，前后端交互需要JSON交换格式相关的知识。
     3. 数据库操作需要相关的SQL等知识(基本的CRUD语句)。
-    4. Chrome扩展的前端页面采用基于Bootstrap的Flat UI框架。
+    4. Chrome扩展的前端页面采用语义化的Semantic UI框架。
 
 ### Advantages:
 
