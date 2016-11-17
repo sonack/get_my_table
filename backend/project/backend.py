@@ -181,7 +181,7 @@ def add_new_class():
     db = DBTools('root','liubixue','GetMyTable')
     conn = db.connect()
     cursor = db.get_cursor()
-    res = cursor.execute('select count(*) from Class where className = %s',(new_class_name,))
+    res = cursor.execute('select count(*) from Class where className = %s and belongTo = %s',(new_class_name,un))
     res = cursor.fetchall()
     if(res[0][0] > 0):
         return '{"status": "existed"}'
