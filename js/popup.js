@@ -22,36 +22,30 @@ function changeTo(target_div) {
 
 // ---------------------------------------------------------------------------------
 // 页面HTML
-
 // ---------------------------------------------------------------------------------
-
 // 表格保存确认页面
-
 // 主页
-
 // 注册页面
-
 // 登录页面
 // 保存表格 确认页面
 var save_confirm_div = ` < div id = "save_confirm_div" >
 
 <h3 class = "ui header purple"style = "margin-left: 30px;" > <i class = "plug icon" > </i>   <div class="content"><span id="complete_table_text">请完善表格信息 </span > </div></h3 >
 
-<div class = "ui form"style = "margin-left: 200px; margin-top: 40px;" > <div class = "seven wide required field" > <label > <span id = "table_name_text" > 表格名称: </span></label > <input type = "text"id = "table_name_input" ></div>
+<div class = "ui form"style = "margin-left: 200px; margin-top: 40px;" > <div class = "seven wide required field" > <label > <span id = "table_name_text" > 表格名称: </span></label > <input type = "text"id = "table_name_input" > </div>
             <div class="seven wide field" >
-                <label><span id = "be_classified_in_text">分类于:</span ></label>     
+                <label><span id = "be_classified_in_text">分类于:</span > </label>     
                 <select class="ui search dropdown" id="all_class">
                     <option value="" id="input_the_cate_text">输入分类</option > </select></div > <div id = "save_confirm_div_button"style = "margin-top: 30px;" > <button class = "ui green button"style = "margin-left: -30px;"id = "add_new_class_button" > 新增分类 < /button>
                 <button class="ui primary button" style="margin-left: 20px;" id="confirm_button">确定 </button > <button class = "ui red button"style = "margin-left: 20px;"id = "cancel_button" > 取消 < /button></div > </div>
 
     </div > `,
 // 空主页
-
-empty_div = ` < div id = "main_header" > <div id = "please_login"class = "float_right"style = "margin-right: 20px;" ></div>
+empty_div = ` < div id = "main_header" > <div id = "please_login"class = "float_right"style = "margin-right: 20px;" > </div>
            
             <div id="table_header" class="float_left" style="margin-left: 20px;">
                 <h3 class="ui purple header">
-                    <i class="table circle icon"></i > <div class = "content" > <span id = "table_context_text" > 表格内容: </span></div ></h3>
+                    <i class="table circle icon"></i > <div class = "content" > <span id = "table_context_text" > 表格内容: </span></div > </h3>
                 <!-- <img alt="Avatar" height="50px" width="50px" id="avatar" src="images/default_avatar.png "> --></div>
         </div>
 
@@ -460,7 +454,6 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                 return false; // 禁止默认提交方式
             });
         }); // 点击注册页面，事件绑定结束
-
         // 单击登录界面，事件绑定
         $("#login_button").click(function() {
             // 切换页面
@@ -908,7 +901,6 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
 // ---------------------------------------------------------------------------------
 // 与背景页面通信
 // ---------------------------------------------------------------------------------
-
 (function communicate($) {
     // 向标签页发送消息
     function sendCommand(cmd, broadcast, fn) {
