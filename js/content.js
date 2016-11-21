@@ -1060,6 +1060,7 @@
     
     
     
+    
 
     // '上下文菜单' - 注册上一次事件，即选区建立后，更新菜单信息
     var onContextMenu = function(e) {
