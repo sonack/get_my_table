@@ -1048,6 +1048,7 @@
 
     // '复制' - 默认复制为富文本
     var onCopy = function(e) {
+    	
         if (!selection) return;
         doCopy("copyRich"); // 默认富文本，可黏贴到word中
         e.preventDefault();
