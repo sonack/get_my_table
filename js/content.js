@@ -1053,6 +1053,7 @@
         if (!selection) return;
         doCopy("copyRich"); // 默认富文本，可黏贴到word中
         e.preventDefault();
+        
         e.stopPropagation();
     };
 
