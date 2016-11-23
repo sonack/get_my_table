@@ -1047,6 +1047,7 @@
     };
 
     // '复制' - 默认复制为富文本
+    
     var onCopy = function(e) {
     	
         if (!selection) return;
