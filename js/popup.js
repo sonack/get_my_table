@@ -32,22 +32,19 @@ var save_confirm_div = ` < div id = "save_confirm_div" >
 
 <h3 class = "ui header purple"style = "margin-left: 30px;" > <i class = "plug icon" > </i>   <div class="content"><span id="complete_table_text">请完善表格信息 </span > </div></h3 >
 
-<div class = "ui form"style = "margin-left: 200px; margin-top: 40px;" > <div class = "seven wide required field" > <label > <span id = "table_name_text" > 表格名称: </span></label > <input type = "text"id = "table_name_input" > </div>
+<div class = "ui form"style = "margin-left: 200px; margin-top: 40px;" > <div class = "seven wide required field" > <label > <span id = "table_name_text" > 表格名称: </span></label > <input type = "text"id = "table_name_input" ></div>
             <div class="seven wide field" >
-                <label><span id = "be_classified_in_text">分类于:</span > </label>     
+                <label><span id = "be_classified_in_text">分类于:</span ></label>     
                 <select class="ui search dropdown" id="all_class">
                     <option value="" id="input_the_cate_text">输入分类</option > </select></div > <div id = "save_confirm_div_button"style = "margin-top: 30px;" > <button class = "ui green button"style = "margin-left: -30px;"id = "add_new_class_button" > 新增分类 < /button>
-                <button class="ui primary button" style="margin-left: 20px;" id="confirm_button">确定 </button > <button class = "ui red button"style = "margin-left: 20px;"id = "cancel_button" > 取消 < /button></div > </div>
-
-    </div > `,
-    // 空主页
-    empty_div = ` < div id = "main_header" > <div id = "please_login"class = "float_right"style = "margin-right: 20px;" > </div>
+                <button class="ui primary button" style="margin-left: 20px;" id="confirm_button">确定 </button > <button class = "ui red button"style = "margin-left: 20px;"id = "cancel_button" > 取消 < /button></div > </div></div > `,
+// 空主页
+empty_div = ` < div id = "main_header" > <div id = "please_login"class = "float_right"style = "margin-right: 20px;" ></div>
            
             <div id="table_header" class="float_left" style="margin-left: 20px;">
                 <h3 class="ui purple header">
-                    <i class="table circle icon"></i > <div class = "content" > <span id = "table_context_text" > 表格内容: </span></div > </h3>
-                <!-- <img alt="Avatar" height="50px" width="50px" id="avatar" src="images/default_avatar.png "> --></div>
-        </div>
+                    <i class="table circle icon"></i > <div class = "content" > <span id = "table_context_text" > 表格内容: </span></div ></h3>
+                <!-- <img alt="Avatar" height="50px" width="50px" id="avatar" src="images/default_avatar.png "> --></div></div>
 
         <div id="main_content ">
             <div class="currentTable ">
@@ -73,23 +70,20 @@ margin - top: 8px;
             <div id="please_login " class="float_right " style="margin - right: 20px;
 ">
                 <h3 class="ui teal header ">
-                    <i class="warning circle icon "></i>     <div class="content "><span id = "plz_log_in_text ">请登录以便在云端同步您的表格数据!</span></div></h3>
-            </div>
+                    <i class="warning circle icon "></i>     <div class="content "><span id = "plz_log_in_text ">请登录以便在云端同步您的表格数据!</span></div></h3></div>
            
             <div id="table_header " class="float_left " style="margin - left: 20px;
 ">
                 <h3 class="ui purple header ">
                     <i class="table circle icon " id="table_circle_icon "></i>
                     <div class="content "><span id="current_selected_table_text ">当前选定表格:</span></div></h3>
-                <!-- <img alt="Avatar " height="50px " width="50px " id="avatar " src="images / default_avatar.png "> --></div>
-        </div>
+                <!-- <img alt="Avatar " height="50px " width="50px " id="avatar " src="images / default_avatar.png "> --></div></div>
 
         <div id="main_content ">
             <div class="currentTable ">
                 <div class="table_content " id="scrollbar ">
                     <h3 class="prompt " style="color: #2185D0 " id="no_select_prompt ">
-                        <i class="info big circle icon blue " id="no_select_head "></i>   <span id="no_table_selected_text ">当前未选中表格</span></h3>
-                </div>
+                        <i class="info big circle icon blue " id="no_select_head "></i>   <span id="no_table_selected_text ">当前未选中表格</span></h3></div>
                 <div id="table_button " style="display: none;
 ">
                     <button class="ui primary button disabled " id="save_to_cloud ">保存 </button>
@@ -109,8 +103,7 @@ margin - top: 8px;
 ">
             <i class="add square icon "></i>
             <div class="content "><span id="sign_up_text ">用户注册</span>
-                <div class="sub header "><span id="after_sign_up_text ">注册后，您就可以将表格保存到云端！</span></div></div>
-        </h3>
+                <div class="sub header "><span id="after_sign_up_text ">注册后，您就可以将表格保存到云端！</span></div></div></h3>
         
         <div class="ui divider "></div>
 
@@ -135,8 +128,7 @@ margin: auto;
             <button class="ui red button " id="register_button " style="margin - right: 50px;
 margin - left: 50px;
 ">注册</button>
-            <button class="ui violet button " type="reset "><span id = "reset_text ">重置</span></button></form>
-    </div>
+            <button class="ui violet button " type="reset "><span id = "reset_text ">重置</span></button></form></div>
     <!-- 注册页面 结束 -->
 `,
 
@@ -149,8 +141,7 @@ margin - left: 50px;
 ">
             <i class="home icon "></i>
             <div class="content "><span id="user_log_in_text ">用户登录</span>
-                <div class="sub header "><span id="no_account_text ">还没有账号？请先注册用户</span></div></div>
-        </h3>
+                <div class="sub header "><span id="no_account_text ">还没有账号？请先注册用户</span></div></div></h3>
 
         <div class="ui divider "></div>
 
@@ -168,8 +159,7 @@ margin: auto;
 
             <button class="ui red button " id="login_submit_button " style="margin - left: 100px;
 margin - top: 25px;
-"><span id="denglu_text ">登录</span></button></form>
-    </div> 
+"><span id="denglu_text ">登录</span></button></form></div> 
     <!-- 登录页面 结束 -->
 `;
 
@@ -186,8 +176,7 @@ margin: auto;
 margin - top: 10px;
 ">
           <div class="field " >
-                <input type="text " name="avatar_url " placeholder="请输入个性化头像的url " id="avatar_url "></div>
-          </div>
+                <input type="text " name="avatar_url " placeholder="请输入个性化头像的url " id="avatar_url "></div></div>
           <h2 id="username_info ">sonack</h2></div>
 
         <div id="right_info ">
@@ -208,8 +197,7 @@ margin - top: 10px;
              <button class="ui red button " id="info_confirm_button " style="margin - right: 50px;
 margin - left: 50px;
 ">确定</button>
-            <button class="ui violet button " id="info_cancel_button ">取消</button></form>
-        </div>
+            <button class="ui violet button " id="info_cancel_button ">取消</button></form></div>
     </div>
 
 
@@ -223,12 +211,10 @@ var cloud_square_div = `
         <div>
           <h3 class="ui header blue " id="share_square_header ">
             <i class="users icon " id="shared_tables_text_icon "></i>
-            <div class="content "><span id="shared_tables_text ">动态广场</span> </div></h3>  
-        </div>
+            <div class="content "><span id="shared_tables_text ">动态广场</span> </div></h3></div>
 
         <div id="share_square_content_div ">
-            <div class="ui feed share_feed_div " id="scrollbar "></div>
-        </div>
+            <div class="ui feed share_feed_div " id="scrollbar "></div></div>
 </div>
 `;
 
@@ -266,14 +252,12 @@ var cloud_save_buttons = `
 
 
           <button class="ui circular purple button icon cloud_share_button " tabindex="0 " style="margin - left: 60px;
-id = "" > <div class = "visible content " > <i class = "share alternate icon" > </i>&nbsp;<span id="share_text">分享... </span > &nbsp; < /div></button >
-
-</div>
+id = "" > <div class = "visible content " > <i class = "share alternate icon" > </i>&nbsp;<span id="share_text">分享... </span > &nbsp; < /div></button ></div>
      
 `;
 
 
-/ /---------------------------------------------------------------------------------
+/ / ---------------------------------------------------------------------------------
 // UI相关部分
 // ---------------------------------------------------------------------------------
 (function UI_relative($) {
@@ -285,16 +269,16 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
 
         // 事件注册
         // 单击注册按钮 事件注册
-        $("#signup_button").click(function () {
+        $("#signup_button").click(function() {
             changeTo(signup_div); // 切换页面
             var state1 = true,
-                // 三个表单输入字段正确与否
-                state2 = true,
-                state3 = true;
+            // 三个表单输入字段正确与否
+            state2 = true,
+            state3 = true;
 
             // 表单验证部分
             // 用户名验证函数
-            var validate_username = function () {
+            var validate_username = function() {
                 var username_input = $("#username_input");
                 // 判断为空
                 if (username_input.val().length === 0) {
@@ -304,7 +288,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                     state1 = false;
                 }
                 // 判断是否为3到20位的数字字母格式
-                else if (!(/^\w{3,20}$/.test(username_input.val()))) {
+                else if (! (/^\w{3,20}$/.test(username_input.val()))) {
                     $("#username_errormsg").css("color", "red");
                     $("#username_errormsg").text("用户名只能由3到20位的字母数字组成！");
                     state1 = false;
@@ -318,7 +302,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                         },
                         url: remoteHost + "/is_name_valid",
                         success: // 回调函数
-                            function (result) {
+                        function(result) {
                             // 返回结果
                             var res = JSON.parse(result);
                             if (res.status === 'success') {
@@ -336,12 +320,12 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                 }
             };
             // 绑定失去焦点事件，失去焦点即检查表单
-            (function () {
+            (function() {
                 $("#username_input").blur(validate_username);
             })();
 
             // 密码验证
-            var validate_password = function () {
+            var validate_password = function() {
                 var password_input = $("#password_input");
                 // 判断为空
                 if (password_input.val().length === 0) {
@@ -350,7 +334,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                     state2 = false;
                 }
                 // 至少6位字母数字组成
-                else if (!(/^\w{6,}$/.test(password_input.val()))) {
+                else if (! (/^\w{6,}$/.test(password_input.val()))) {
                     $("#password_errormsg").css("color", "red");
                     $("#password_errormsg").text("密码至少6位!");
                     state2 = false;
@@ -364,12 +348,12 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
             };
 
             // 绑定失去焦点事件
-            (function () {
+            (function() {
                 $("#password_input").blur(validate_password);
             })();
 
             // 电子邮箱验证
-            var validate_email = function () {
+            var validate_email = function() {
                 var email_input = $("#email_input");
                 // 判断为空
                 if (email_input.val().length === 0) {
@@ -378,7 +362,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                     state3 = false;
                 }
                 // 检查email格式
-                else if (!(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/.test(email_input.val()))) {
+                else if (! (/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/.test(email_input.val()))) {
                     // 设置错误信息
                     $("#email_errormsg").css("color", "red");
                     $("#email_errormsg").text("邮箱格式不合法!");
@@ -390,9 +374,9 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                             email: email_input.val()
                         },
                         url: remoteHost + "/is_email_valid",
-                        success: function (result) {
+                        success: function(result) {
                             var res = JSON.parse(result)
-                                // 验证成功
+                            // 验证成功
                             if (res.status === 'success') {
                                 $("#email_errormsg").css("color", "green");
                                 $("#email_errormsg").text("该邮箱可以注册");
@@ -411,12 +395,12 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
             };
 
             // 绑定失去焦点事件
-            (function () {
+            (function() {
                 $("#email_input").blur(validate_email);
             })();
 
             // 点击“注册”按钮 事件注册
-            $("#register_button").click(function () {
+            $("#register_button").click(function() {
                 // 再次验证
                 $("#username_input").blur();
                 $("#password_input").blur();
@@ -431,7 +415,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                         data: $('#register_form').serialize(),
                         // 传送表单数据
                         url: remoteHost + "/register",
-                        success: function (result) {
+                        success: function(result) {
                             var res = JSON.parse(result);
                             // 注册成功
                             if (res.status === 'success') {
@@ -454,20 +438,20 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
             });
         }); // 点击注册页面，事件绑定结束
         // 单击登录界面，事件绑定
-        $("#login_button").click(function () {
+        $("#login_button").click(function() {
             // 切换页面
             changeTo(login_div);
             var state1 = true,
-                state2 = true;
+            state2 = true;
 
             // 验证用户名
-            var validate_username = function () {
+            var validate_username = function() {
                 var username_input = $("#username_input");
                 if (username_input.val().length === 0) {
                     $("#username_errormsg").css("color", "red");
                     $("#username_errormsg").text("请输入用户名!");
                     state1 = false;
-                } else if (!(/^\w{3,20}$/.test(username_input.val()))) {
+                } else if (! (/^\w{3,20}$/.test(username_input.val()))) {
                     $("#username_errormsg").css("color", "red");
                     $("#username_errormsg").text("用户名只能由3到20位的字母数字组成！");
                     state1 = false;
@@ -478,7 +462,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                             username: username_input.val()
                         },
                         url: remoteHost + "/is_name_valid",
-                        success: function (result) {
+                        success: function(result) {
                             var res = JSON.parse(result) if (res.status === 'success') {
                                 $("#username_errormsg").css("color", "green");
                                 $("#username_errormsg").text("用户不存在!") state1 = false;
@@ -491,17 +475,17 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
             };
 
             // 绑定验证用户名事件
-            (function () {
+            (function() {
                 $("#username_input").blur(validate_username);
             })();
 
-            var validate_password = function () {
+            var validate_password = function() {
                 var password_input = $("#password_input");
                 if (password_input.val().length === 0) {
                     $("#password_errormsg").css("color", "red");
                     $("#password_errormsg").text("请输入密码!");
                     state2 = false;
-                } else if (!(/^\w{6,}$/.test(password_input.val()))) {
+                } else if (! (/^\w{6,}$/.test(password_input.val()))) {
                     $("#password_errormsg").css("color", "red");
                     $("#password_errormsg").text("密码至少6位!");
                     state2 = false;
@@ -512,11 +496,11 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
             };
 
             // 绑定失去焦点事件
-            (function () {
+            (function() {
                 $("#password_input").blur(validate_password);
             })();
 
-            $("#login_submit_button").click(function () {
+            $("#login_submit_button").click(function() {
                 // 激活验证
                 $("#username_input").blur();
                 $("username_input").blur();
@@ -527,62 +511,62 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                         type: "post",
                         data: $('#login_form').serialize(),
                         url: remoteHost + "/login",
-                        success: function (result) {
-                                var res = JSON.parse(result);
-                                if (res.status === 'success') {
-                                    alert("登录成功!");
-                                    // 更新状态信息
-                                    am_I_online = true;
-                                    // 登录/注册 按钮组 隐藏
-                                    $("#login_or_register").hide();
-                                    // 显示用户管理区块
-                                    $("#user_div").css("display", "block");
-                                    // 长用户名处理，显示前6位加...
-                                    if (res.log_username.length > 9) res.log_username = res.log_username.substr(0, 6) + "...";
-                                    // 显示用户名
-                                    $("#login_username").text(res.log_username);
-                                    // 注销按钮解除事件
-                                    $("#logout_button").unbind("click");
-                                    // 注销按钮重新绑定事件
-                                    $("#logout_button").click(function () {
-                                        $.ajax({
-                                            type: "get",
-                                            url: remoteHost + "/logout",
-                                            success: function (result) {
-                                                var res = JSON.parse(result);
-                                                // 注销成功
-                                                if (res.status === 'success') {
-                                                    alert("注销成功...");
-                                                    // 更新状态信息
-                                                    am_I_online = false;
-                                                    $("#cloud_select").hide();
-                                                    // 显示登录或注册按钮组
-                                                    $("#login_or_register").show();
-                                                    // 显示提示信息
-                                                    $("#please_login").css("display", "block");
-                                                    // 用户管理区块隐藏
-                                                    $("#user_div").css("display", "none");
-                                                } else {
-                                                    alert("注销失败!");
-                                                }
-                                                // 注销完毕，回到主页
-                                                $("#home_button").click();
+                        success: function(result) {
+                            var res = JSON.parse(result);
+                            if (res.status === 'success') {
+                                alert("登录成功!");
+                                // 更新状态信息
+                                am_I_online = true;
+                                // 登录/注册 按钮组 隐藏
+                                $("#login_or_register").hide();
+                                // 显示用户管理区块
+                                $("#user_div").css("display", "block");
+                                // 长用户名处理，显示前6位加...
+                                if (res.log_username.length > 9) res.log_username = res.log_username.substr(0, 6) + "...";
+                                // 显示用户名
+                                $("#login_username").text(res.log_username);
+                                // 注销按钮解除事件
+                                $("#logout_button").unbind("click");
+                                // 注销按钮重新绑定事件
+                                $("#logout_button").click(function() {
+                                    $.ajax({
+                                        type: "get",
+                                        url: remoteHost + "/logout",
+                                        success: function(result) {
+                                            var res = JSON.parse(result);
+                                            // 注销成功
+                                            if (res.status === 'success') {
+                                                alert("注销成功...");
+                                                // 更新状态信息
+                                                am_I_online = false;
+                                                $("#cloud_select").hide();
+                                                // 显示登录或注册按钮组
+                                                $("#login_or_register").show();
+                                                // 显示提示信息
+                                                $("#please_login").css("display", "block");
+                                                // 用户管理区块隐藏
+                                                $("#user_div").css("display", "none");
+                                            } else {
+                                                alert("注销失败!");
                                             }
-                                        });
+                                            // 注销完毕，回到主页
+                                            $("#home_button").click();
+                                        }
                                     });
+                                });
 
-                                    // 显示主页 登录完毕
-                                    $("#home_button").click();
+                                // 显示主页 登录完毕
+                                $("#home_button").click();
 
-                                }
-                                // 登录失败
-                                else {
-                                    alert("用户名或密码错误!");
-                                }
-                            },
-                            error: function () {
-                                alert("网络好像有问题...等下试试吧！");
                             }
+                            // 登录失败
+                            else {
+                                alert("用户名或密码错误!");
+                            }
+                        },
+                        error: function() {
+                            alert("网络好像有问题...等下试试吧！");
+                        }
 
                     });
                 }
@@ -591,12 +575,12 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
         });
 
         // 单击主页页面 绑定事件 
-        $("#home_button").click(function () {
+        $("#home_button").click(function() {
             save_status = false;
             var prt = $("#right_sidebar");
             prt.empty();
             prt.append('<a class="item" id="please_select_class_first">请首先选择分类</a>');
-            $("#please_select_class_first").click(function () {
+            $("#please_select_class_first").click(function() {
                 $("#choose_class").click();
             });
 
@@ -607,7 +591,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
             $.ajax({
                 type: "get",
                 url: remoteHost + "/index",
-                success: function (result) {
+                success: function(result) {
                     changeTo(home_div);
                     // 云端表格选择按钮组 隐藏
                     // $("#cloud_select").slideUp();
@@ -615,7 +599,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                     $.ajax({
                         type: "get",
                         url: remoteHost + "/get_all_class",
-                        success: function (result) {
+                        success: function(result) {
                             var res = JSON.parse(result);
                             // alert("更新分类信息");
                             console.log(res);
@@ -631,15 +615,15 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                             }
                             // 添加类别
                             $.each(res,
-                                function (idx, ele) {
-                                    var opt = $("<a class='item'></a>");
-                                    opt.text(ele);
-                                    opt.attr("class_name", ele);
-                                    opt.append("<img class='remove_button' src='images/remove.png'  height='20px' style='float:right; margin-right:10px;'/>") prt.append(opt);
-                                    console.log("添加了类别" + ele);
-                                });
+                            function(idx, ele) {
+                                var opt = $("<a class='item'></a>");
+                                opt.text(ele);
+                                opt.attr("class_name", ele);
+                                opt.append("<img class='remove_button' src='images/remove.png'  height='20px' style='float:right; margin-right:10px;'/>") prt.append(opt);
+                                console.log("添加了类别" + ele);
+                            });
 
-                            $("#left_sidebar a .remove_button").click(function (e) {
+                            $("#left_sidebar a .remove_button").click(function(e) {
                                 var class_name = $(this.parentNode).attr("class_name");
 
                                 var con = confirm("您确定要删除分类 [ " + class_name + " ] 吗？（注意！该分类下的所有表格都将被删除）");
@@ -649,7 +633,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                                         data: '{"class_name":"' + class_name + '"}',
                                         url: remoteHost + "/delete_class_name",
                                         contentType: "application/json;charset=UTF-8",
-                                        success: function (result) {
+                                        success: function(result) {
                                             var res = JSON.parse(result);
                                             console.log(res);
                                             if (res.status === 'success') {
@@ -667,27 +651,27 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
 
                             if (!no_item)
                             // 添加超链接事件
-                                $("#left_sidebar a").click(function () {
+                            $("#left_sidebar a").click(function() {
                                 var class_name = $(this).attr("class_name");
                                 // 获取该类别所有的表格
                                 $.ajax({
                                     type: "get",
                                     url: remoteHost + "/get_all_table?class_name=" + class_name,
-                                    success: function (result) {
+                                    success: function(result) {
                                         var tbls = JSON.parse(result);
                                         var prt = $("#right_sidebar");
                                         prt.empty();
                                         // 每个表格都有一个table_id
                                         $.each(tbls,
-                                            function (idx, ele) {
-                                                var opt = $("<a class='item'></a>");
-                                                opt.text(ele[0]);
-                                                opt.attr("table_id", ele[1]);
-                                                prt.append(opt);
-                                                console.log("添加了表格" + ele);
-                                            });
+                                        function(idx, ele) {
+                                            var opt = $("<a class='item'></a>");
+                                            opt.text(ele[0]);
+                                            opt.attr("table_id", ele[1]);
+                                            prt.append(opt);
+                                            console.log("添加了表格" + ele);
+                                        });
 
-                                        $("#right_sidebar a").click(function () {
+                                        $("#right_sidebar a").click(function() {
 
                                             var tbl_id = $(this).attr("table_id");
                                             $.ajax({
@@ -695,7 +679,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                                                 data: '{"table_id":"' + tbl_id + '"}',
                                                 url: remoteHost + "/get_table_by_id",
                                                 contentType: "application/json;charset=UTF-8",
-                                                success: function (result) {
+                                                success: function(result) {
                                                     var res = JSON.parse(result);
                                                     console.log(res);
                                                     if (res.status === 'success') {
@@ -718,7 +702,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                             // no class item
                             else {
                                 $("#no_class_item").unbind("click");
-                                $("#no_class_item").click(function () {
+                                $("#no_class_item").click(function() {
                                     $("#left_sidebar").sidebar('setting', 'transition', 'overlay').sidebar('toggle');
                                 })
                             }
@@ -736,18 +720,18 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                         console.log("离线中...");
                     }
                     // 舍弃按钮绑定事件
-                    $("#discard_button").click(function () {
+                    $("#discard_button").click(function() {
                         // 返回主页
                         $("#home_button").click();
                     });
 
                     // 点击保存到云端 绑定事件
-                    $("#save_to_cloud").click(function () {
+                    $("#save_to_cloud").click(function() {
                         // 获取所有的分类信息
                         $.ajax({
                             type: "get",
                             url: remoteHost + "/get_all_class",
-                            success: function (result) {
+                            success: function(result) {
                                 var to_send_data = {};
                                 to_send_data['content'] = $(".table_content").html();
                                 // 转到保存页面
@@ -756,26 +740,26 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                                 // 添加分类目录
                                 var prt = $("#all_class");
                                 $.each(res,
-                                    function (idx, ele) {
-                                        var opt = $("<option></option>");
-                                        opt.text(ele);
-                                        opt.attr("value", ele);
-                                        prt.append(opt);
-                                        console.log("添加了" + ele)
-                                    });
+                                function(idx, ele) {
+                                    var opt = $("<option></option>");
+                                    opt.text(ele);
+                                    opt.attr("value", ele);
+                                    prt.append(opt);
+                                    console.log("添加了" + ele)
+                                });
                                 // 初始化select元素
                                 $('select.dropdown').dropdown();
                                 // 回车键直接提交
-                                $('input.search').keypress(function (e) {
+                                $('input.search').keypress(function(e) {
                                     if (e.which == 13) $('#confirm_button').click();
                                 });
                                 // console.log($('#table_name_input'));
-                                $('#table_name_input').keypress(function (e) {
+                                $('#table_name_input').keypress(function(e) {
                                     if (e.which == 13) $('#confirm_button').click();
                                 });
 
                                 // 绑定事件，点击添加新分类按钮
-                                $("#add_new_class_button").click(function () {
+                                $("#add_new_class_button").click(function() {
                                     while (true) {
                                         var new_class_name = prompt("请输入新分类的名称:", "新分类");
                                         // 点击取消
@@ -790,7 +774,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                                                 url: remoteHost + "/add_new_class",
                                                 contentType: "application/json;charset=UTF-8",
                                                 //json格式
-                                                success: function (result) {
+                                                success: function(result) {
                                                     var res = JSON.parse(result);
                                                     // 添加成功后，重新获取所有类名
                                                     if (res.status === 'success') {
@@ -799,19 +783,19 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                                                         $.ajax({
                                                             type: "get",
                                                             url: remoteHost + "/get_all_class",
-                                                            success: function (result) {
+                                                            success: function(result) {
                                                                 var res = JSON.parse(result);
                                                                 var prt = $("#all_class");
                                                                 // 清空类别选择下拉菜单
                                                                 prt.empty();
                                                                 $.each(res,
-                                                                    function (idx, ele) {
-                                                                        var opt = $("<option></option>");
-                                                                        opt.text(ele);
-                                                                        opt.attr("value", ele);
-                                                                        prt.append(opt);
-                                                                        console.log("添加了" + ele)
-                                                                    });
+                                                                function(idx, ele) {
+                                                                    var opt = $("<option></option>");
+                                                                    opt.text(ele);
+                                                                    opt.attr("value", ele);
+                                                                    prt.append(opt);
+                                                                    console.log("添加了" + ele)
+                                                                });
                                                                 // $('#all_class').dropdown("set selected",new_class_name);
                                                             }
                                                         });
@@ -828,7 +812,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                                 });
 
                                 // 绑定事件，点击确认保存按钮
-                                $('#confirm_button').click(function () {
+                                $('#confirm_button').click(function() {
                                     var table_name = $("#table_name_input").val();
                                     var table_class = $("#all_class").val();
                                     if (table_name === "") {
@@ -845,7 +829,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                                         url: remoteHost + "/save_table",
                                         data: JSON.stringify(to_send_data),
                                         contentType: 'application/json;charset=UTF-8',
-                                        success: function (result) {
+                                        success: function(result) {
                                             var res = JSON.parse(result) if (res.status === 'success') {
                                                 alert("保存成功!");
                                             } else {
@@ -859,7 +843,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                                         data: '{"table_id":"' + tableID + '"}',
                                         url: remoteHost + "/delete_table_by_id",
                                         contentType: "application/json;charset=UTF-8",
-                                        success: function (result) {
+                                        success: function(result) {
                                             var res = JSON.parse(result);
                                             console.log(res);
                                             if (res.status === 'success') {
@@ -875,7 +859,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                                 });
 
                                 // 取消保存按钮
-                                $("#cancel_button").click(function () {
+                                $("#cancel_button").click(function() {
                                     $("#home_button").click();
                                 });
 
@@ -892,7 +876,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
             });
         }); // 主页按钮 click事件绑定结束
     }; // init函数结束
-    $(function () {
+    $(function() {
         init();
     });
 })(jQuery);
@@ -903,24 +887,24 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
 (function communicate($) {
     // 向标签页发送消息
     function sendCommand(cmd, broadcast, fn) {
-        var qry = broadcast ? {} : {
+        var qry = broadcast ? {}: {
             active: true,
             currentWindow: true
         };
         chrome.tabs.query(qry,
-            function (tabs) {
-                tabs.forEach(function (tab) {
-                    chrome.tabs.sendMessage(tab.id, {
-                            command: cmd
-                        },
-                        fn ||
-                        function (r) {});
-                });
+        function(tabs) {
+            tabs.forEach(function(tab) {
+                chrome.tabs.sendMessage(tab.id, {
+                    command: cmd
+                },
+                fn ||
+                function(r) {});
             });
+        });
     }
 
     // 更新按钮状态，与CSS相结合
-    var updateState = function (state) {
+    var updateState = function(state) {
         if (!state) {
             // $("#modKey0").addClass("active");
             // $("#modKey1").removeClass("active");
@@ -944,23 +928,23 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
     }
 
     // 初始化函数 
-    var init = function (state) {
+    var init = function(state) {
         document.addEventListener("click",
-            function (e) {
-                var cmd = e.target.getAttribute("cmd");
-                if (!cmd) return;
-                // 获取点击按钮命令
-                console.log(cmd);
-                // 更新选项
-                sendCommand("updateOptions", true);
-                sendCommand(cmd, false,
-                    function (state) {
-                        updateState(state);
-                        if (e.target.getAttribute("close") == "1") {
-                            window.close();
-                        }
-                    });
+        function(e) {
+            var cmd = e.target.getAttribute("cmd");
+            if (!cmd) return;
+            // 获取点击按钮命令
+            console.log(cmd);
+            // 更新选项
+            sendCommand("updateOptions", true);
+            sendCommand(cmd, false,
+            function(state) {
+                updateState(state);
+                if (e.target.getAttribute("close") == "1") {
+                    window.close();
+                }
             });
+        });
 
         // Mac 处理
         if (navigator.userAgent.indexOf("Macintosh") > 0) {
@@ -971,7 +955,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
         updateState(state);
     }
 
-    $(function () {
+    $(function() {
         // 打开PopUp页
         sendCommand("openPopup", false, init); // 打开PopUp页
         sendCommand("anySelection", false); // 检查是否有选区
@@ -979,7 +963,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
         $.ajax({
             type: "get",
             url: remoteHost + "/online",
-            success: function (result) {
+            success: function(result) {
                 var res = JSON.parse(result);
                 if (res.status === 'success') {
                     console.log("在线中...");
@@ -1001,11 +985,11 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                     var obj_e = $._data(logout_button, "events");
                     // 如果没有绑定，则绑定
                     if (!obj_e || !obj_e['click']) {
-                        logout_button.click(function () {
+                        logout_button.click(function() {
                             $.ajax({
                                 type: "get",
                                 url: remoteHost + "/logout",
-                                success: function (result) {
+                                success: function(result) {
                                     var res = JSON.parse(result);
                                     if (res.status === 'success') {
                                         alert("注销成功...");
@@ -1030,12 +1014,12 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
         });
 
         // 触发主页，绑定按钮事件
-        (function () {
+        (function() {
             save_status = false;
             $.ajax({
                 type: "get",
                 url: remoteHost + "/index",
-                success: function (result) {
+                success: function(result) {
                     $("#cloud_select").fadeOut();
                     var res = JSON.parse(result);
                     if (res.status === 'success') {
@@ -1045,40 +1029,40 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                     } else {
                         console.log("离线中...");
                     }
-                    $("#discard_button").click(function () {
+                    $("#discard_button").click(function() {
                         $("#home_button").click();
                     });
                     // 点击保存到云端后
-                    $("#save_to_cloud").click(function () {
+                    $("#save_to_cloud").click(function() {
                         // 获取分类信息
                         $.ajax({
                             type: "get",
                             url: remoteHost + "/get_all_class",
-                            success: function (result) {
+                            success: function(result) {
                                 var to_send_data = {}
                                 to_send_data['content'] = $(".table_content").html() changeTo(save_confirm_div);
                                 var res = JSON.parse(result);
                                 var prt = $("#all_class");
                                 $.each(res,
-                                    function (idx, ele) {
-                                        var opt = $("<option></option>");
-                                        opt.text(ele);
-                                        opt.attr("value", ele);
-                                        prt.append(opt);
-                                        console.log("添加了" + ele)
-                                    });
+                                function(idx, ele) {
+                                    var opt = $("<option></option>");
+                                    opt.text(ele);
+                                    opt.attr("value", ele);
+                                    prt.append(opt);
+                                    console.log("添加了" + ele)
+                                });
                                 $('select.dropdown').dropdown();
-                                $('input.search').keypress(function (e) {
+                                $('input.search').keypress(function(e) {
                                     if (e.which == 13) {
                                         $('#confirm_button').click();
                                     }
                                 });
-                                $('#table_name_input').keypress(function (e) {
+                                $('#table_name_input').keypress(function(e) {
                                     if (e.which == 13) $('#confirm_button').click();
                                 });
                                 // 增加新分类按钮
                                 // console.log("绑定开始");
-                                $("#add_new_class_button").click(function () {
+                                $("#add_new_class_button").click(function() {
                                     while (true) {
                                         var new_class_name = prompt("请输入新分类的名称:", "新分类");
                                         if (new_class_name === null) break;
@@ -1091,25 +1075,25 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                                                 data: '{"new_class_name":"' + new_class_name + '"}',
                                                 url: remoteHost + "/add_new_class",
                                                 contentType: "application/json;charset=UTF-8",
-                                                success: function (result) {
+                                                success: function(result) {
                                                     var res = JSON.parse(result);
                                                     if (res.status === 'success') {
                                                         alert("添加分类 [ " + new_class_name + " ] 成功!");
                                                         $.ajax({
                                                             type: "get",
                                                             url: remoteHost + "/get_all_class",
-                                                            success: function (result) {
+                                                            success: function(result) {
                                                                 var res = JSON.parse(result);
                                                                 var prt = $("#all_class");
                                                                 prt.empty();
                                                                 $.each(res,
-                                                                    function (idx, ele) {
-                                                                        var opt = $("<option></option>");
-                                                                        opt.text(ele);
-                                                                        opt.attr("value", ele);
-                                                                        prt.append(opt);
-                                                                        console.log("添加了" + ele)
-                                                                    });
+                                                                function(idx, ele) {
+                                                                    var opt = $("<option></option>");
+                                                                    opt.text(ele);
+                                                                    opt.attr("value", ele);
+                                                                    prt.append(opt);
+                                                                    console.log("添加了" + ele)
+                                                                });
                                                                 // $('#all_class').dropdown("set selected",new_class_name);
                                                             }
                                                         });
@@ -1126,7 +1110,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                                 });
                                 // console.log("绑定结束");
                                 // 确认按钮 开始绑定事件
-                                $('#confirm_button').click(function () {
+                                $('#confirm_button').click(function() {
                                     var table_name = $("#table_name_input").val();
                                     var table_class = $("#all_class").val();
                                     if (table_name === "") {
@@ -1144,7 +1128,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                                         url: remoteHost + "/save_table",
                                         data: JSON.stringify(to_send_data),
                                         contentType: 'application/json;charset=UTF-8',
-                                        success: function (result) {
+                                        success: function(result) {
                                             var res = JSON.parse(result) if (res.status === 'success') {
                                                 alert("保存成功!");
                                             } else {
@@ -1158,7 +1142,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                                         data: '{"table_id":"' + tableID + '"}',
                                         url: remoteHost + "/delete_table_by_id",
                                         contentType: "application/json;charset=UTF-8",
-                                        success: function (result) {
+                                        success: function(result) {
                                             var res = JSON.parse(result);
                                             console.log(res);
                                             if (res.status === 'success') {
@@ -1174,7 +1158,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                                 });
 
                                 // 取消保存 按钮
-                                $("#cancel_button").click(function () {
+                                $("#cancel_button").click(function() {
                                     $("#home_button").click();
                                 });
                             }
@@ -1189,14 +1173,14 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
         })();
 
         // 点击云表格按钮
-        $(".cloud_button").click(function () {
+        $(".cloud_button").click(function() {
             $("#home_button").click();
             $("#cloud_select").fadeIn();
 
             $.ajax({
                 type: "get",
                 url: remoteHost + "/get_all_class",
-                success: function (result) {
+                success: function(result) {
                     var res = JSON.parse(result);
                     // alert("更新分类信息");
                     console.log(res);
@@ -1212,15 +1196,15 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                     }
                     // 添加类别
                     $.each(res,
-                        function (idx, ele) {
-                            var opt = $("<a class='item'></a>");
-                            opt.text(ele);
-                            opt.attr("class_name", ele);
-                            opt.append("<img class='remove_button' src='images/remove.png'  height='20px' style='float:right; margin-right:10px;'/>") prt.append(opt);
-                            console.log("添加了类别" + ele);
-                        });
+                    function(idx, ele) {
+                        var opt = $("<a class='item'></a>");
+                        opt.text(ele);
+                        opt.attr("class_name", ele);
+                        opt.append("<img class='remove_button' src='images/remove.png'  height='20px' style='float:right; margin-right:10px;'/>") prt.append(opt);
+                        console.log("添加了类别" + ele);
+                    });
 
-                    $("#left_sidebar a .remove_button").click(function (e) {
+                    $("#left_sidebar a .remove_button").click(function(e) {
                         var class_name = $(this.parentNode).attr("class_name");
 
                         var con = confirm("您确定要删除分类 [ " + class_name + " ] 吗？（注意！该分类下的所有表格都将被删除）");
@@ -1230,7 +1214,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                                 data: '{"class_name":"' + class_name + '"}',
                                 url: remoteHost + "/delete_class_name",
                                 contentType: "application/json;charset=UTF-8",
-                                success: function (result) {
+                                success: function(result) {
                                     var res = JSON.parse(result);
                                     console.log(res);
                                     if (res.status === 'success') {
@@ -1248,27 +1232,27 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
 
                     if (!no_item)
                     // 添加超链接事件
-                        $("#left_sidebar a").click(function () {
+                    $("#left_sidebar a").click(function() {
                         var class_name = $(this).attr("class_name");
                         // 获取该类别所有的表格
                         $.ajax({
                             type: "get",
                             url: remoteHost + "/get_all_table?class_name=" + class_name,
-                            success: function (result) {
+                            success: function(result) {
                                 var tbls = JSON.parse(result);
                                 var prt = $("#right_sidebar");
                                 prt.empty();
                                 // 每个表格都有一个table_id
                                 $.each(tbls,
-                                    function (idx, ele) {
-                                        var opt = $("<a class='item'></a>");
-                                        opt.text(ele[0]);
-                                        opt.attr("table_id", ele[1]);
-                                        prt.append(opt);
-                                        console.log("添加了表格" + ele);
-                                    });
+                                function(idx, ele) {
+                                    var opt = $("<a class='item'></a>");
+                                    opt.text(ele[0]);
+                                    opt.attr("table_id", ele[1]);
+                                    prt.append(opt);
+                                    console.log("添加了表格" + ele);
+                                });
 
-                                $("#right_sidebar a").click(function () {
+                                $("#right_sidebar a").click(function() {
 
                                     var tbl_id = $(this).attr("table_id");
                                     $.ajax({
@@ -1276,7 +1260,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                                         data: '{"table_id":"' + tbl_id + '"}',
                                         url: remoteHost + "/get_table_by_id",
                                         contentType: "application/json;charset=UTF-8",
-                                        success: function (result) {
+                                        success: function(result) {
                                             var res = JSON.parse(result);
                                             console.log(res);
                                             if (res.status === 'success') {
@@ -1299,7 +1283,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                     // no class item
                     else {
                         $("#no_class_item").unbind("click");
-                        $("#no_class_item").click(function () {
+                        $("#no_class_item").click(function() {
                             $("#left_sidebar").sidebar('setting', 'transition', 'overlay').sidebar('toggle');
                         })
                     }
@@ -1308,22 +1292,22 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
             });
         });
 
-        $("#please_select_class_first").click(function () {
+        $("#please_select_class_first").click(function() {
             $("#choose_class").click();
         });
 
         // start 为云表格选取按钮绑定事件
-        $("#choose_class").click(function () {
+        $("#choose_class").click(function() {
             updateLang();
             $("#left_sidebar").sidebar('setting', 'transition', 'overlay').sidebar('toggle');
             // $(".cloud_button").click();
         });
-        $("#choose_id").click(function () {
+        $("#choose_id").click(function() {
             $("#right_sidebar").sidebar('setting', 'transition', 'overlay').sidebar('toggle');
         });
 
         // 开始 *************************************************
-        $(".info_button").click(function () {
+        $(".info_button").click(function() {
             // alert("点击个人信息...");
             changeTo(person_info_div);
 
@@ -1339,12 +1323,12 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
             $(".mFind").addClass("disabled");
             $(".mCopy").addClass("disabled");
 
-            $("#info_cancel_button").click(function () {
+            $("#info_cancel_button").click(function() {
                 $("#home_button").click();
                 return false;
             });
 
-            $("#info_confirm_button").click(function (e) {
+            $("#info_confirm_button").click(function(e) {
                 e.preventDefault();
                 var info_dict = {};
 
@@ -1364,12 +1348,12 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                     url: remoteHost + "/save_info",
                     data: JSON.stringify(info_dict),
                     contentType: 'application/json;charset=UTF-8',
-                    success: function (result) {
+                    success: function(result) {
                         var res = JSON.parse(result) if (res.status === 'success') {
-                                alert("修改成功!");
-                            } else {
-                                alert("修改失败!");
-                            }
+                            alert("修改成功!");
+                        } else {
+                            alert("修改失败!");
+                        }
                         $("#home_button").click();
                     }
                 });
@@ -1380,16 +1364,16 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
             $.ajax({
                 type: "get",
                 url: remoteHost + "/get_info",
-                success: function (result) {
+                success: function(result) {
                     var res = JSON.parse(result);
                     if (res.status === 'success') {
 
                         // alert("获取个人信息成功...");
                         var un = res.username,
-                            ava = res.ava_url,
-                            emi = res.email,
-                            pn = res.person_net,
-                            intr = res.intro;
+                        ava = res.ava_url,
+                        emi = res.email,
+                        pn = res.person_net,
+                        intr = res.intro;
                         set_obj_un.text(un);
                         set_obj_ava.attr('src', ava);
                         set_obj_emi.val(emi);
@@ -1397,7 +1381,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                         if (intr !== '无') set_obj_intr.val(intr);
 
                         var ava_dom = set_obj_ava[0];
-                        ava_dom.onerror = function () {
+                        ava_dom.onerror = function() {
                             // alert("Hello");
                             this.src = "images/default_avatar.png";
                             set_obj_ava.show();
@@ -1415,7 +1399,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
         });
 
         // 云广场
-        $(".cloud_square").click(function () {
+        $(".cloud_square").click(function() {
             console.log("进入云广场");
             changeTo(cloud_square_div);
             $("#choose_class").addClass("disabled");
@@ -1454,7 +1438,7 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
             $.ajax({
                 type: "get",
                 url: remoteHost + "/get_all_share",
-                success: function (result) {
+                success: function(result) {
                     var res = JSON.parse(result);
                     // 注销成功
                     if (res.status === 'success') {
@@ -1470,230 +1454,230 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
                         } else {
                             prt.empty();
                             $.each(items,
-                                function (idx, ele) {
-                                    console.log(share_event);
-                                    var evt = $(share_event);
-                                    if (cur_lang == 0) {
-                                        evt.find("#has_shared_table").text("has shared the table");
-                                        evt.find("#and_said").text("and said");
+                            function(idx, ele) {
+                                console.log(share_event);
+                                var evt = $(share_event);
+                                if (cur_lang == 0) {
+                                    evt.find("#has_shared_table").text("has shared the table");
+                                    evt.find("#and_said").text("and said");
+                                }
+                                var username = evt.find("#user");
+                                var table = evt.find("#table");
+                                var date = evt.find(".date");
+                                var ava = evt.find("#ava");
+                                var com = evt.find("#comm");
+
+                                var username_v = ele[0];
+                                var table_v = ele[2];
+                                var date_v = ele[1];
+                                var comm = ele[3];
+
+                                username.text(username_v);
+                                com.text(comm);
+                                $.ajax({
+                                    type: "post",
+                                    data: '{"table_id":"' + table_v + '"}',
+                                    url: remoteHost + "/get_table_name",
+                                    contentType: "application/json;charset=UTF-8",
+                                    success: function(result) {
+                                        var res = JSON.parse(result);
+                                        console.log(res);
+                                        if (res.status === 'success') {
+                                            console.log("获取成功!");
+                                            table.text(res.name);
+                                            table.attr("table_id", table_v);
+                                        } else {
+                                            console.log("获取失败!!");
+                                        }
                                     }
-                                    var username = evt.find("#user");
-                                    var table = evt.find("#table");
-                                    var date = evt.find(".date");
-                                    var ava = evt.find("#ava");
-                                    var com = evt.find("#comm");
+                                });
 
-                                    var username_v = ele[0];
-                                    var table_v = ele[2];
-                                    var date_v = ele[1];
-                                    var comm = ele[3];
+                                $.ajax({
+                                    type: "get",
+                                    url: remoteHost + "/get_avatar_url?username=" + username_v,
+                                    success: function(result) {
+                                        var res = JSON.parse(result);
+                                        console.log(res);
+                                        if (res.status === 'success') {
+                                            console.log("头像获取成功!");
+                                            ava.attr("src", res.url);
+                                        } else {
+                                            console.log("头像获取失败!");
+                                        }
+                                    }
+                                });
 
-                                    username.text(username_v);
-                                    com.text(comm);
+                                date.html(processTime(date_v));
+                                prt.append(evt);
+                                updateLang();
+                                table.click(function() {
+                                    var tbl_id = $(this).attr("table_id");
                                     $.ajax({
                                         type: "post",
-                                        data: '{"table_id":"' + table_v + '"}',
-                                        url: remoteHost + "/get_table_name",
+                                        data: '{"table_id":"' + tbl_id + '"}',
+                                        url: remoteHost + "/get_table_by_id",
                                         contentType: "application/json;charset=UTF-8",
-                                        success: function (result) {
+                                        success: function(result) {
                                             var res = JSON.parse(result);
                                             console.log(res);
                                             if (res.status === 'success') {
-                                                console.log("获取成功!");
-                                                table.text(res.name);
-                                                table.attr("table_id", table_v);
-                                            } else {
-                                                console.log("获取失败!!");
-                                            }
-                                        }
-                                    });
-
-                                    $.ajax({
-                                        type: "get",
-                                        url: remoteHost + "/get_avatar_url?username=" + username_v,
-                                        success: function (result) {
-                                            var res = JSON.parse(result);
-                                            console.log(res);
-                                            if (res.status === 'success') {
-                                                console.log("头像获取成功!");
-                                                ava.attr("src", res.url);
-                                            } else {
-                                                console.log("头像获取失败!");
-                                            }
-                                        }
-                                    });
-
-                                    date.html(processTime(date_v));
-                                    prt.append(evt);
-                                    updateLang();
-                                    table.click(function () {
-                                        var tbl_id = $(this).attr("table_id");
-                                        $.ajax({
-                                            type: "post",
-                                            data: '{"table_id":"' + tbl_id + '"}',
-                                            url: remoteHost + "/get_table_by_id",
-                                            contentType: "application/json;charset=UTF-8",
-                                            success: function (result) {
-                                                var res = JSON.parse(result);
-                                                console.log(res);
-                                                if (res.status === 'success') {
-                                                    main.html(empty_div);
-                                                    $(".table_content").html(res.content);
-                                                    makeTableEditable();
-                                                    $("#save_to_cloud").click(function () {
-                                                        // 获取所有的分类信息
-                                                        $.ajax({
-                                                            type: "get",
-                                                            url: remoteHost + "/get_all_class",
-                                                            success: function (result) {
-                                                                var to_send_data = {};
-                                                                to_send_data['content'] = $(".table_content").html();
-                                                                // 转到保存页面
-                                                                changeTo(save_confirm_div);
-                                                                var res = JSON.parse(result);
-                                                                // 添加分类目录
-                                                                var prt = $("#all_class");
-                                                                $.each(res,
-                                                                    function (idx, ele) {
-                                                                        var opt = $("<option></option>");
-                                                                        opt.text(ele);
-                                                                        opt.attr("value", ele);
-                                                                        prt.append(opt);
-                                                                        console.log("添加了" + ele)
-                                                                    });
-                                                                // 初始化select元素
-                                                                $('select.dropdown').dropdown();
-                                                                // 回车键直接提交
-                                                                $('input.search').keypress(function (e) {
-                                                                    if (e.which == 13) $('#confirm_button').click();
-                                                                });
-                                                                $('#table_name_input').keypress(function (e) {
-                                                                    if (e.which == 13) $('#confirm_button').click();
-                                                                });
-                                                                // 绑定事件，点击添加新分类按钮
-                                                                $("#add_new_class_button").click(function () {
-                                                                    while (true) {
-                                                                        var new_class_name = prompt("请输入新分类的名称:", "新分类");
-                                                                        // 点击取消
-                                                                        if (new_class_name === null) break;
-                                                                        // 输入为空
-                                                                        else if (new_class_name === "") alert("分类名不能为空!");
-                                                                        else {
-                                                                            console.log("新增加的分类名称为" + new_class_name);
-                                                                            $.ajax({
-                                                                                type: "post",
-                                                                                data: '{ "new_class_name" : "' + new_class_name + '" }',
-                                                                                url: remoteHost + "/add_new_class",
-                                                                                contentType: "application/json;charset=UTF-8",
-                                                                                //json格式
-                                                                                success: function (result) {
-                                                                                    var res = JSON.parse(result);
-                                                                                    // 添加成功后，重新获取所有类名
-                                                                                    if (res.status === 'success') {
-                                                                                        // 提示添加分类成功
-                                                                                        alert("添加分类 [ " + new_class_name + " ] 成功!");
-                                                                                        $.ajax({
-                                                                                            type: "get",
-                                                                                            url: remoteHost + "/get_all_class",
-                                                                                            success: function (result) {
-                                                                                                var res = JSON.parse(result);
-                                                                                                var prt = $("#all_class");
-                                                                                                // 清空类别选择下拉菜单
-                                                                                                prt.empty();
-                                                                                                $.each(res,
-                                                                                                    function (idx, ele) {
-                                                                                                        var opt = $("<option></option>");
-                                                                                                        opt.text(ele);
-                                                                                                        opt.attr("value", ele);
-                                                                                                        prt.append(opt);
-                                                                                                        console.log("添加了" + ele)
-                                                                                                    });
-                                                                                                // $('#all_class').dropdown("set selected",new_class_name);
-                                                                                            }
-                                                                                        });
-                                                                                    } else if (res.status === 'existed') {
-                                                                                        alert("分类[ " + new_class_name + " ]已存在!");
-                                                                                    } else if (res.status === "failed") {
-                                                                                        alert("添加失败!");
-                                                                                    }
+                                                main.html(empty_div);
+                                                $(".table_content").html(res.content);
+                                                makeTableEditable();
+                                                $("#save_to_cloud").click(function() {
+                                                    // 获取所有的分类信息
+                                                    $.ajax({
+                                                        type: "get",
+                                                        url: remoteHost + "/get_all_class",
+                                                        success: function(result) {
+                                                            var to_send_data = {};
+                                                            to_send_data['content'] = $(".table_content").html();
+                                                            // 转到保存页面
+                                                            changeTo(save_confirm_div);
+                                                            var res = JSON.parse(result);
+                                                            // 添加分类目录
+                                                            var prt = $("#all_class");
+                                                            $.each(res,
+                                                            function(idx, ele) {
+                                                                var opt = $("<option></option>");
+                                                                opt.text(ele);
+                                                                opt.attr("value", ele);
+                                                                prt.append(opt);
+                                                                console.log("添加了" + ele)
+                                                            });
+                                                            // 初始化select元素
+                                                            $('select.dropdown').dropdown();
+                                                            // 回车键直接提交
+                                                            $('input.search').keypress(function(e) {
+                                                                if (e.which == 13) $('#confirm_button').click();
+                                                            });
+                                                            $('#table_name_input').keypress(function(e) {
+                                                                if (e.which == 13) $('#confirm_button').click();
+                                                            });
+                                                            // 绑定事件，点击添加新分类按钮
+                                                            $("#add_new_class_button").click(function() {
+                                                                while (true) {
+                                                                    var new_class_name = prompt("请输入新分类的名称:", "新分类");
+                                                                    // 点击取消
+                                                                    if (new_class_name === null) break;
+                                                                    // 输入为空
+                                                                    else if (new_class_name === "") alert("分类名不能为空!");
+                                                                    else {
+                                                                        console.log("新增加的分类名称为" + new_class_name);
+                                                                        $.ajax({
+                                                                            type: "post",
+                                                                            data: '{ "new_class_name" : "' + new_class_name + '" }',
+                                                                            url: remoteHost + "/add_new_class",
+                                                                            contentType: "application/json;charset=UTF-8",
+                                                                            //json格式
+                                                                            success: function(result) {
+                                                                                var res = JSON.parse(result);
+                                                                                // 添加成功后，重新获取所有类名
+                                                                                if (res.status === 'success') {
+                                                                                    // 提示添加分类成功
+                                                                                    alert("添加分类 [ " + new_class_name + " ] 成功!");
+                                                                                    $.ajax({
+                                                                                        type: "get",
+                                                                                        url: remoteHost + "/get_all_class",
+                                                                                        success: function(result) {
+                                                                                            var res = JSON.parse(result);
+                                                                                            var prt = $("#all_class");
+                                                                                            // 清空类别选择下拉菜单
+                                                                                            prt.empty();
+                                                                                            $.each(res,
+                                                                                            function(idx, ele) {
+                                                                                                var opt = $("<option></option>");
+                                                                                                opt.text(ele);
+                                                                                                opt.attr("value", ele);
+                                                                                                prt.append(opt);
+                                                                                                console.log("添加了" + ele)
+                                                                                            });
+                                                                                            // $('#all_class').dropdown("set selected",new_class_name);
+                                                                                        }
+                                                                                    });
+                                                                                } else if (res.status === 'existed') {
+                                                                                    alert("分类[ " + new_class_name + " ]已存在!");
+                                                                                } else if (res.status === "failed") {
+                                                                                    alert("添加失败!");
                                                                                 }
-                                                                            });
-                                                                            break;
-                                                                        }
-                                                                    }
-                                                                });
-
-                                                                // 绑定事件，点击确认保存按钮
-                                                                $('#confirm_button').click(function () {
-                                                                    var table_name = $("#table_name_input").val();
-                                                                    var table_class = $("#all_class").val();
-                                                                    if (table_name === "") {
-                                                                        alert("请输入表格名字!");
-                                                                        return false;
-                                                                    } else if (table_class === "") {
-                                                                        alert("请选择表格类别!");
-                                                                        return false;
-                                                                    }
-                                                                    to_send_data['table_name'] = table_name;
-                                                                    to_send_data['table_class'] = table_class;
-                                                                    $.ajax({
-                                                                        type: "post",
-                                                                        url: remoteHost + "/save_table",
-                                                                        data: JSON.stringify(to_send_data),
-                                                                        contentType: 'application/json;charset=UTF-8',
-                                                                        success: function (result) {
-                                                                            var res = JSON.parse(result) if (res.status === 'success') {
-                                                                                alert("保存成功!");
-                                                                            } else {
-                                                                                alert("保存失败!");
                                                                             }
-                                                                        }
-                                                                    });
+                                                                        });
+                                                                        break;
+                                                                    }
+                                                                }
+                                                            });
 
-                                                                    if (save_status) $.ajax({
-                                                                        type: "post",
-                                                                        data: '{"table_id":"' + tableID + '"}',
-                                                                        url: remoteHost + "/delete_table_by_id",
-                                                                        contentType: "application/json;charset=UTF-8",
-                                                                        success: function (result) {
-                                                                            var res = JSON.parse(result);
-                                                                            console.log(res);
-                                                                            if (res.status === 'success') {
-                                                                                console.log("删除成功");
-                                                                            } else {
-                                                                                console.log("删除失败...");
-                                                                            }
-                                                                        }
-                                                                    });
-
-                                                                    $("#home_button").click();
+                                                            // 绑定事件，点击确认保存按钮
+                                                            $('#confirm_button').click(function() {
+                                                                var table_name = $("#table_name_input").val();
+                                                                var table_class = $("#all_class").val();
+                                                                if (table_name === "") {
+                                                                    alert("请输入表格名字!");
                                                                     return false;
+                                                                } else if (table_class === "") {
+                                                                    alert("请选择表格类别!");
+                                                                    return false;
+                                                                }
+                                                                to_send_data['table_name'] = table_name;
+                                                                to_send_data['table_class'] = table_class;
+                                                                $.ajax({
+                                                                    type: "post",
+                                                                    url: remoteHost + "/save_table",
+                                                                    data: JSON.stringify(to_send_data),
+                                                                    contentType: 'application/json;charset=UTF-8',
+                                                                    success: function(result) {
+                                                                        var res = JSON.parse(result) if (res.status === 'success') {
+                                                                            alert("保存成功!");
+                                                                        } else {
+                                                                            alert("保存失败!");
+                                                                        }
+                                                                    }
                                                                 });
 
-                                                                // 取消保存按钮
-                                                                $("#cancel_button").click(function () {
-                                                                    $("#home_button").click();
+                                                                if (save_status) $.ajax({
+                                                                    type: "post",
+                                                                    data: '{"table_id":"' + tableID + '"}',
+                                                                    url: remoteHost + "/delete_table_by_id",
+                                                                    contentType: "application/json;charset=UTF-8",
+                                                                    success: function(result) {
+                                                                        var res = JSON.parse(result);
+                                                                        console.log(res);
+                                                                        if (res.status === 'success') {
+                                                                            console.log("删除成功");
+                                                                        } else {
+                                                                            console.log("删除失败...");
+                                                                        }
+                                                                    }
                                                                 });
 
-                                                            }
-                                                        }); // 点击“保存到云端”的ajax操作结束            
-                                                        // 点击按钮 事件绑定结束
-                                                    });
+                                                                $("#home_button").click();
+                                                                return false;
+                                                            });
 
-                                                    // 舍弃按钮绑定事件
-                                                    $("#discard_button").click(function () {
-                                                        // 返回主页
-                                                        $("#home_button").click();
-                                                    });
-                                                    console.log(res);
-                                                    // alert("成功");
-                                                } else {
-                                                    // alert("失败");
-                                                }
+                                                            // 取消保存按钮
+                                                            $("#cancel_button").click(function() {
+                                                                $("#home_button").click();
+                                                            });
+
+                                                        }
+                                                    }); // 点击“保存到云端”的ajax操作结束            
+                                                    // 点击按钮 事件绑定结束
+                                                });
+
+                                                // 舍弃按钮绑定事件
+                                                $("#discard_button").click(function() {
+                                                    // 返回主页
+                                                    $("#home_button").click();
+                                                });
+                                                console.log(res);
+                                                // alert("成功");
+                                            } else {
+                                                // alert("失败");
                                             }
-                                        });
+                                        }
                                     });
                                 });
+                            });
                         }
                     } else {
                         console.log("获取动态失败");
@@ -1704,8 +1688,8 @@ id = "" > <div class = "visible content " > <i class = "share alternate icon" > 
     });
 })(jQuery);
 
-var updateLang = function (lang) {
-    if (typeof (lang) !== "undefined") cur_lang = lang;
+var updateLang = function(lang) {
+    if (typeof(lang) !== "undefined") cur_lang = lang;
     console.log("当前语言" + cur_lang);
     switch (cur_lang) {
     case 0:
@@ -1718,7 +1702,7 @@ var updateLang = function (lang) {
 }
 
 // 更换语言为英语
-var setLang0 = function () {
+var setLang0 = function() {
     console.log("语言更换为英语");
     $("#previous_text").text("Prev");
     $("#next_text").text("Next");
@@ -1801,7 +1785,7 @@ var setLang0 = function () {
 }
 
 // 更换语言为汉语
-var setLang1 = function () {
+var setLang1 = function() {
     console.log("汉语");
     $("#previous_text").text("上一张");
     $("#next_text").text("下一张");
@@ -1882,7 +1866,7 @@ var setLang1 = function () {
     $(".tian_ago").text(" 天以前");
 }
 
-var changeSkin = function (skinID) {
+var changeSkin = function(skinID) {
     console.log("换肤" + skinID);
     var skinPath = "skins/skin" + skinID + ".css";
     var theme = $("#theme");
@@ -1890,7 +1874,7 @@ var changeSkin = function (skinID) {
 }
 
 // 更新表格预览
-var updateTablePreview = function (tableContent, on_cloud, tbl_id) {
+var updateTablePreview = function(tableContent, on_cloud, tbl_id) {
     if (!on_cloud) {
         $("#cloud_table_button").hide();
         $("#table_button").show();
@@ -1905,27 +1889,27 @@ var updateTablePreview = function (tableContent, on_cloud, tbl_id) {
         }
 
         $("#cloud_save").unbind("click");
-        $("#cloud_save").click(function () {
+        $("#cloud_save").click(function() {
             save_status = true;
             tableID = tbl_id;
             $("#save_to_cloud").click();
         });
         $("#cloud_save_as").unbind("click");
-        $("#cloud_save_as").click(function () {
+        $("#cloud_save_as").click(function() {
             $("#save_to_cloud").click();
             return false;
         });
 
         $("#cloud_reset").unbind("click");
         console.log("点击" + tableContent);
-        $("#cloud_reset").click(function () {
+        $("#cloud_reset").click(function() {
             console.log(tableContent);
             $(".table_content").html(tableContent);
             return false;
         });
 
         $("#cloud_delete").unbind("click");
-        $("#cloud_delete").click(function () {
+        $("#cloud_delete").click(function() {
             var con = confirm("您确定要删除这张表格吗?");
             if (con) {
                 $.ajax({
@@ -1933,7 +1917,7 @@ var updateTablePreview = function (tableContent, on_cloud, tbl_id) {
                     data: '{"table_id":"' + tbl_id + '"}',
                     url: remoteHost + "/delete_table_by_id",
                     contentType: "application/json;charset=UTF-8",
-                    success: function (result) {
+                    success: function(result) {
                         var res = JSON.parse(result);
                         console.log(res);
                         if (res.status === 'success') {
@@ -1947,7 +1931,7 @@ var updateTablePreview = function (tableContent, on_cloud, tbl_id) {
             }
         });
         $(".cloud_share_button").unbind("click");
-        $(".cloud_share_button").click(function (e) {
+        $(".cloud_share_button").click(function(e) {
             var share_detail = {}
             share_detail['tbl_id'] = tbl_id;
             share_detail['time'] = Date.parse(new Date()) / 1000;
@@ -1961,12 +1945,12 @@ var updateTablePreview = function (tableContent, on_cloud, tbl_id) {
                 url: remoteHost + "/new_share",
                 data: JSON.stringify(share_detail),
                 contentType: 'application/json;charset=UTF-8',
-                success: function (result) {
+                success: function(result) {
                     var res = JSON.parse(result) if (res.status === 'success') {
-                            alert("分享成功!");
-                        } else {
-                            alert("分享失败!");
-                        }
+                        alert("分享成功!");
+                    } else {
+                        alert("分享失败!");
+                    }
                     $("#home_button").click();
                 }
             });
@@ -1978,7 +1962,7 @@ var updateTablePreview = function (tableContent, on_cloud, tbl_id) {
 }
 
 // 使表格可编辑
-var makeTableEditable = function () {
+var makeTableEditable = function() {
     var tbl = document.getElementsByTagName("table");
     if (tbl) tbl[0].contentEditable = true;
 }
