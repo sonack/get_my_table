@@ -1,7 +1,11 @@
-(function () {
+// 获取和改变用户正在浏览的页面
+// 向背景页面发送命令，接受背景页面的命令 
 
+(function main() {
+
+    // ---------------------------------------------------------------------------------
     // 设置
-    // ---------------------------
+    // ---------------------------------------------------------------------------------
 
     // 最小滚动速度(每秒中多少滚)
     var scrollMinSpeed = 30;
@@ -30,8 +34,10 @@
     // 修改热键，ctrl/command或者alt
     var modKeys = [(navigator.userAgent.indexOf("Macintosh") > 0) ? "metaKey" : "ctrlKey","altKey"];
 
+
+    // ---------------------------------------------------------------------------------
     // 工具方法
-    // ---------------------------
+    // ---------------------------------------------------------------------------------
 
     // 根据id获取元素
     var $ = function(id) {
@@ -174,7 +180,7 @@
         return r;
     };
 
-    // 如果矩形a和b相交，则返回true，注意这里的矩形的边都是平行于坐标轴的
+    // 如果矩形a和b相交，则返回true，注意这里的矩形的边都是平行于坐标轴的，边的重叠不算相交
     var intersect = function(a, b) {
         return !(a[0] >= b[2] || a[2] <= b[0] || a[1] >= b[3] || a[3] <= b[1])
     };
@@ -205,15 +211,17 @@
     var rstrip = function(s) { return s.replace(/\s+$/, "") };
     var strip  = function(s) { return lstrip(rstrip(s)) };
 
+
+    // ---------------------------------------------------------------------------------
     // 选项
-    // ---------------------------
+    // ---------------------------------------------------------------------------------
     
     var options = {
         modKey: 0           // 默认选取第一个，ctrl键
     };
 
 
-    // 获得选项信息
+    // 获得chrome存储的选项信息
     var updateOptions = function(fn) {
         chrome.storage.local.get(null, function(opts) {
             if(Object.keys(opts).length)
@@ -230,10 +238,11 @@
         chrome.storage.local.set(options);
     }
 
-    // 选取操作
-    // ---------------------------
+    // ---------------------------------------------------------------------------------
+    // 选择操作
+    // ---------------------------------------------------------------------------------
 
-    // 当前选取
+    // 当前选择区域
     var selection = null;
 
     // 上次处理的事件
@@ -355,7 +364,7 @@
             return row.map(function(cell) {
                 if(cell.td && (all || isSelected(cell.td)))
                     return strip(cell.td.innerText.replace(/[\r\n]+/g, " "));   // 替换换行符为空格符
-                return "";
+                return "";  // 空内容
             });
         });
 
@@ -486,9 +495,10 @@
 
         var base = fdoc.createElement("BASE");
         base.setAttribute("href", document.location);
-        fdoc.body.appendChild(base);
 
+        fdoc.body.appendChild(base);
         fdoc.body.appendChild(fdoc.importNode(table, true));
+
         var ftable = fdoc.body.lastChild;
 
         walk(ftable, function(el) {
@@ -506,7 +516,7 @@
         });
 
         fixRelativeLinks(ftable);
-        fdoc.body.removeChild(fdoc.body.firstChild);
+        fdoc.body.removeChild(fdoc.body.firstChild);    // 删除BASE标签
 
         var html = fdoc.body.innerHTML;
 
@@ -522,13 +532,15 @@
         return reduceWhitespace(html);
     };
 
-    // 处理滚动选择
-    // ---------------------------
+
+    // ---------------------------------------------------------------------------------
+    // 滚动选择
+    // ---------------------------------------------------------------------------------
 
     // 滚动计时器
     var scrollTimer = 0;
 
-    // 滚动监视器
+    // 滚动
     var scrollWatch = function() {
         if(!selection)
             return;
@@ -585,15 +597,17 @@
         selection.scrollSpeed = scrollMinSpeed;
     };
 
-    // 停止滚动.
+    // 停止滚动循环
     var scrollUnwatch = function() {
         clearTimeout(scrollTimer);
     }
 
-    // 选择工具
-    // ---------------------------
 
+    // ---------------------------------------------------------------------------------
+    // 选择函数
+    // ---------------------------------------------------------------------------------
 
+    // 向背景视图发送选择操作结束消息      Debug1
     var selectFinished = function(){
         chrome.runtime.sendMessage({popup_cmd:"hasSelected", content:contentForCopy("copyHTML")});  
     }
@@ -606,35 +620,35 @@
     // 初始化选区
     var selectionInit = function(el, extend) {
 
-        var td = closest(el, "TH TD"),
-            table = closest(td, "TABLE");
+        var td = closest(el, "TH TD"),          // 最近的单元格
+            table = closest(td, "TABLE");       // 最近的表格
 
-        if(!table)
+        if(!table)      // 不存在表格，返回false
             return false;
 
-        window.getSelection().removeAllRanges();
+        window.getSelection().removeAllRanges();    // 清空选区
 
-        if(selection && selection.table != table)
+        if(selection && selection.table != table)   // 改变表格，重置选区
             selectionReset();
 
-        if(!extend)
+        if(!extend)     // 如果不是extend，清空选区
             selection = null;
 
-        scrollReset();
+        scrollReset();  // 滚动复位
 
-        if(selection) {
+        if(selection) {     // 更新当前锚点
             selection.anchor = td;
             return true;
         }
 
-        selection = {
+        selection = {            // 选中单元格
             anchor: td,
             table: table,
-            x: bounds(td)[0] + 1,
-            y: bounds(td)[1] + 1
+            x: bounds(td)[0] + 1,   // 向右移动一单位
+            y: bounds(td)[1] + 1    // 向下移动一单位
         };
 
-        var t = closestScrollable(selection.anchor.parentNode);
+        var t = closestScrollable(selection.anchor.parentNode);     // 最近的可滚动父元素，即寻找滚动基点
         if(t && t != document.documentElement) {
             selection.scrollBase = t;
             selection.x += selection.scrollBase.scrollLeft;
@@ -649,19 +663,19 @@
 
     // 更新当前选区
     var selectionUpdate = function(e) {
-        var cx = e.clientX;
+        var cx = e.clientX;     // 当前鼠标指针位置
         var cy = e.clientY;
 
-        var ax = selection.x;
+        var ax = selection.x;       // anchor的client rect
         var ay = selection.y;
 
+        // 计算出相对滚动位置
         if(selection.scrollBase) {
             ax -= selection.scrollBase.scrollLeft;
             ay -= selection.scrollBase.scrollTop;
         } else {
             ax -= window.scrollX;
             ay -= window.scrollY;
-
         }
 
         var rect = [
@@ -675,6 +689,7 @@
             removeClass(td, clsDragover);
         });
 
+        // 添加拖拽类
         each("TD TH", selection.table, function(td) {
             if(intersect(bounds(td), rect))
                 addClass(td, clsDragover);
@@ -686,6 +701,7 @@
 
     // 重置选区，移除旧的listener
     var selectionReset = function() {
+        // 清除标志
         $C(clsSelected).forEach(function(td) { removeClass(td, clsSelected) });
         $C(clsDragover).forEach(function(td) { removeClass(td, clsDragover) });
 
@@ -695,7 +711,7 @@
         selection = null;
     };
 
-    // 选择一行、一列或者整个表格
+    // 选择/反选 一行、一列或者整个表格
     var selectionExtend = function(command, toggle) {
         var tds = [], sel = bounds(selection.anchor);
 
@@ -710,6 +726,7 @@
                 tds.push(td);
         });
 
+        // toggle = true 允许反选, 默认不允许
         var isSelected = tds.every(function(td) { return hasClass(td, clsSelected) });
 
         if(toggle && isSelected)
@@ -720,8 +737,10 @@
         selectFinished();
     };
 
-    // 命令处理工具
-    // ---------------------------
+
+    // ---------------------------------------------------------------------------------
+    // 功能函数
+    // ---------------------------------------------------------------------------------
 
     // 产生拷贝内容
     var contentForCopy = function(command) {
@@ -729,7 +748,7 @@
         var anySelected = $$("TD TH", selection.table).some(function(td) {
             return isSelected(td);
         });
-
+        // 如果有任何被选中，则all=false,则选择选中区域
         switch(command) {
             case "copyRich":
             case "copyStyled":
@@ -763,7 +782,7 @@
     var selectTable = function(table) {
         if(!table)
             return;
-        var tds = $$("TD TH", table);
+        var tds = $$("TD TH", table);   // 没有单元格的表格 忽略
         if(!tds)
             return;
         if(!selectionInit(tds[0]))
@@ -771,15 +790,18 @@
         selectionExtend("selectTable");
 
         var xy = offset(table);
-        window.scrollTo(            // 滚动到表格位置
+        // 滚动到表格位置
+        window.scrollTo(
             xy[0] - window.innerWidth / 3,
-            xy[1] - window.innerHeight /3);
+            xy[1] - window.innerHeight /3
+        );
     }
 
-    // 菜单状态
+    // 获得菜单状态
     var menuState = function() {
         var n = document.body.getElementsByTagName("TABLE").length, // 当前页面的表格数量
-            sel = lastEvent && canSelect(lastEvent.target);
+            sel = lastEvent && canSelect(lastEvent.target); // 右键所在的单元格
+        console.log(lastEvent.target);
         return {
             hasSelection: !!selection,
             numTables:  n,
@@ -796,17 +818,16 @@
         chrome.runtime.sendMessage({command:"menuUpdate", state:ms});
     }
 
+    // ---------------------------------------------------------------------------------
     // 事件处理
-    // ---------------------------
+    // ---------------------------------------------------------------------------------
 
     // 监听处理来自后台background的事件
     chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
         switch(message.command) {
             case "anySelection":
                 if(selection)
-                {
                     selectFinished();
-                }
                 break;
             case "openPopup":
                 break;
@@ -814,7 +835,7 @@
             case "selectColumn":
             case "selectTable":
                 if(lastEvent && selectionInit(lastEvent.target))
-                    selectionExtend(message.command, true);
+                    selectionExtend(message.command, true);         // 支持反选
                 else
                     selectionReset();
                 break;
@@ -838,8 +859,8 @@
             case "copyCSV":
                 if(selection)
                     doCopy(message.command);
-                else if(lastEvent && selectionInit(lastEvent.target)) {
-                    selectionExtend("selectTable", false);  // 处理反选
+                else if(lastEvent && selectionInit(lastEvent.target)) { // 没有选区，默认选取整个表格
+                    selectionExtend("selectTable", false);  // 直接正选
                     doCopy(message.command);
                     selectionReset();
                 } else
@@ -862,12 +883,17 @@
         sendResponse(menuState());   // 返回当前菜单状态
     });
 
+
     // 判断是否是有效的点击
+    // 有效的点击条件
+    // @1 鼠标左键按下
+    // @2 同时按着热键
+    // @3 事件对象可以被选择
     var isValidClick = function(e) {
         if(e.which != 1)    // 是不是鼠标左键
             return false;
         if(!e[modKeys[options.modKey]]) {   // 有没有同时按着热键
-            selectionReset();
+            selectionReset();   // 重置选区
             return false;
         }
         if(!canSelect(e.target)) {  // 能不能选择
@@ -877,20 +903,21 @@
         return true;
     }
 
-    // `鼠标按下` - 初始化选区
+    // '鼠标按下' - 初始化选区
     var onMouseDown = function(e) {
         lastEvent = e;
-        menuUpdate();
+        menuUpdate();       // 更新菜单状态
 
-        if(!isValidClick(e))
+        if(!isValidClick(e))    // 不合法的点击
             return;
 
-        selectionInit(e.target, e.shiftKey);
-        selection.selectAnchor = true;
+        selectionInit(e.target, e.shiftKey);    // 按住shift 实现扩展选择
+        selection.selectAnchor = true;  // 选择锚点确定
         if(hasClass(selection.anchor, clsSelected)) {
             removeClass(selection.anchor, clsSelected); // 反选
             selection.selectAnchor = false;
         }
+        // 更新单元格状态
         selectionUpdate(e);
         scrollWatch();    // 滚动选择
 
@@ -902,45 +929,44 @@
         document.addEventListener("mouseup", onMouseUp);
     };
 
-    // `鼠标移动` - 更新选区
+    // '鼠标移动' - 更新选区
     var onMouseMove = function(e) {
         lastEvent = e;
-
         if(!selection || e.which != 1 || !e[modKeys[options.modKey]])
             return;
-
         selection.scrollSpeed = scrollMinSpeed;
         selectionUpdate(e);
         e.preventDefault();
         e.stopPropagation();
     };
 
-    // `鼠标松开` - 停止选区选择
+    // '鼠标松开' - 停止选区选择
     var onMouseUp = function(e) {
-        scrollUnwatch();
-        if(selection) {
+        scrollUnwatch();    //停止滚动
+        if(selection) {         // 拖拽类升级为选中类
             $C(clsDragover, selection.table).forEach(function(td) {
                 removeClass(td, clsDragover);
                 addClass(td, clsSelected);
             });
         }
-        selectFinished();
-        document.removeEventListener("mousemove", onMouseMove);
+        selectFinished();       // 选择结束
+        // 清理事件监听器
+        document.removeEventListener("mousemove", onMouseMove); 
         document.removeEventListener("mouseup", onMouseUp);
     };
 
-    // `鼠标双击` - 选择一行或者一列
+    // '鼠标双击' - 选择一行或者一列
     var onDblClick = function(e) {
         if(!isValidClick(e))
             return;
         selectionInit(e.target, 0);
-        var secondaryKey = e[modKeys[1 - options.modKey]];  // 判断有没有同时按着两个功能键
-        selectionExtend(secondaryKey ? "selectRow" : "selectColumn", true);
+        var secondaryKey = e[modKeys[1 - options.modKey]];  // 判断有没有同时按着两个功能键   互补
+        selectionExtend(secondaryKey ? "selectRow" : "selectColumn", true); // 同时按着alt+ctrl选择一行，否则只选择一列
         e.preventDefault();
         e.stopPropagation();
     };
 
-    // `复制` - 默认复制为富文本
+    // '复制' - 默认复制为富文本
     var onCopy = function(e) {
         if(!selection)
             return;
@@ -949,21 +975,23 @@
         e.stopPropagation();
     };
 
-    // `上下文菜单` - 注册上一次事件，即选区建立后，更新菜单信息
+    // '上下文菜单' - 注册上一次事件，即选区建立后，更新菜单信息
     var onContextMenu = function(e) {
         lastEvent = e;
         menuUpdate();
     }
 
+
+    // ---------------------------------------------------------------------------------
     // main()
-    // ---------------------------
+    // ---------------------------------------------------------------------------------
 
-    document.addEventListener("mousedown", onMouseDown, true);
-    document.addEventListener("contextmenu", onContextMenu);
-    document.addEventListener("dblclick", onDblClick);
-    document.addEventListener("copy", onCopy);
+    document.addEventListener("mousedown", onMouseDown, true);  // Capture Stage Catch
+    document.addEventListener("contextmenu", onContextMenu);    // 触发上下文菜单
+    document.addEventListener("dblclick", onDblClick);  // 双击
+    document.addEventListener("copy", onCopy);  // 复制操作
 
-    updateOptions();
-    menuUpdate();
+    updateOptions();    // 更新选项
+    menuUpdate();       // 更新上下文菜单
 
 })();

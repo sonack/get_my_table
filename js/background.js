@@ -1,3 +1,12 @@
+// 背景页面
+// 检查视图
+
+
+// 主要包括     "上下文菜单" (Context Menu)
+//             "消息传递机制"
+
+
+// 默认enabled=false
 var ctx = ["page", "selection", "link", "editable"];
 var menu = {};
 menu.root          = chrome.contextMenus.create({"title": "表格数据抽取...",                              "enabled": false, "contexts": ctx});
@@ -15,7 +24,11 @@ menu.copyStyled    = chrome.contextMenus.create({ "title": "带样式的HTML",  
 menu.copyCSV       = chrome.contextMenus.create({ "title": "CSV格式",           "parentId": menu.copy, "enabled": false, "contexts": ctx, "onclick": function() { menuClick("copyCSV")      }});
 menu.copyText      = chrome.contextMenus.create({ "title": "纯文本",     "parentId": menu.copy, "enabled": false, "contexts": ctx, "onclick": function() { menuClick("copyText")     }});
 
-// Send a command to tabs.
+// 向标签页发送消息
+// @Params
+//      cmd 命令消息内容
+//      broadcast 若为true, 则广播给所有tabs; 若为false, 只传递给当前窗口的活动标签页
+//      fn 指定回调函数，默认为空
 function sendCommand(cmd, broadcast, fn) {
     var qry = broadcast ? {} : {active: true, currentWindow: true};
     chrome.tabs.query(qry, function(tabs) {
@@ -25,17 +38,18 @@ function sendCommand(cmd, broadcast, fn) {
     });
 }
 
-// Menu selection - dispatch the message to the content.js
+// 点击上下文菜单，选择了某项操作，将其分发给tab，在content.js中继续处理
 function menuClick(cmd) {
     sendCommand(cmd);
 }
 
-// Notify tab that it's activated.
+// 当tab被激活时，通知其消息
 chrome.tabs.onActivated.addListener(function() {
     sendCommand("activate");
 });
 
-// Content command - handle a message from the content.js
+
+// 处理来自content.js消息命令
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     switch(message.command) {
 
@@ -95,18 +109,15 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     switch(message.popup_cmd) {
         case "hasSelected":
-            
             var popupPage = chrome.extension.getViews({
                 type: "popup"
             });
             if(popupPage)
             {
                 popupPage = popupPage[0];
-                // alert(message.content);
                 popupPage.updateTablePreview(message.content);
                 popupPage.makeTableEditable();
             }
-
             break;
     }
 });
