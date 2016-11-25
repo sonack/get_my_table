@@ -261,26 +261,26 @@ var share_event = `
 `;
 
 var cloud_save_buttons = `
-    <div id="cloud_table_button">
+      <div id="cloud_table_button">
     
-        <div class="ui buttons">
-        <button class="ui primary button" id="cloud_save">保存 </button>
-        <div class="or" data-text="或"></div>
-        <button class="ui positive button" id="cloud_save_as">另存为 </button>
-        </div>
+          <div class="ui buttons">
+          <button class="ui primary button" id="cloud_save">保存 </button>
+          <div class="or" data-text="或"></div>
+          <button class="ui positive button" id="cloud_save_as">另存为 </button>
+          </div>
 
-        <div class="ui buttons" style="margin-left:25px;">
-         <button class="ui teal button" id="cloud_reset">恢复 </button>
-        <div class="or" data-text="或"></div>
-        <button class="ui red button" id="cloud_delete">删除 </button>
-        </div>
+          <div class="ui buttons" style="margin-left:25px;">
+          <button class="ui teal button" id="cloud_reset">恢复 </button>
+          <div class="or" data-text="或"></div>
+          <button class="ui red button" id="cloud_delete">删除 </button>
+          </div>
 
 
-        <button class="ui circular purple button icon cloud_share_button" tabindex="0" style="margin-left:60px; id="">
-            <div class="visible content "> <i class="share alternate icon"></i>&nbsp;<span id="share_text">分享... </span>&nbsp;</div>
-        </button>
+          <button class="ui circular purple button icon cloud_share_button" tabindex="0" style="margin-left:60px; id="">
+              <div class="visible content "> <i class="share alternate icon"></i>&nbsp;<span id="share_text">分享... </span>&nbsp;</div>
+          </button>
 
-    </div>
+      </div>
 `;
 // ---------------------------------------------------------------------------------
 // UI相关部分
@@ -313,42 +313,42 @@ var cloud_save_buttons = `
                 if(username_input.val().length === 0)
                 {
                     // 设置错误信息
-                    $("#username_errormsg").css("color","red");
-                    $("#username_errormsg").text("请输入用户名!");
-                    state1 = false;
+                      $("#username_errormsg").css("color","red");
+                      $("#username_errormsg").text("请输入用户名!");
+                      state1 = false;
                 } 
                 // 判断是否为3到20位的数字字母格式
                 else if(!(/^\w{3,20}$/.test(username_input.val())))
                 {
-                    $("#username_errormsg").css("color","red");
-                    $("#username_errormsg").text("用户名只能由3到20位的字母数字组成！");
-                    state1 = false;
+                      $("#username_errormsg").css("color","red");
+                      $("#username_errormsg").text("用户名只能由3到20位的字母数字组成！");
+                      state1 = false;
                 }
                 // ajax方式判断是否用户名已存在
                 else
                 {
-                    $.ajax(
-                        {
-                            type: "post",
-                            data: { username : username_input.val() },
-                            url: remoteHost+"/is_name_valid",
-                            success: // 回调函数
-                                function(result) {
+                      $.ajax(
+                          {
+                              type: "post",
+                              data: { username : username_input.val() },
+                              url: remoteHost+"/is_name_valid",
+                              success: // 回调函数
+                                  function(result) {
                                     // 返回结果
-                                    var res = JSON.parse(result);
-                                    if(res.status === 'success')
+                                      var res = JSON.parse(result);
+                                      if(res.status === 'success')
                                     {
                                         // 验证成功
-                                        $("#username_errormsg").css("color","green");
-                                        $("#username_errormsg").text("用户名合法")
-                                        state1 = true;
+                                          $("#username_errormsg").css("color","green");
+                                          $("#username_errormsg").text("用户名合法")
+                                          state1 = true;
                                     }
                                     else
                                     {
                                         // 用户名已存在
-                                        $("#username_errormsg").css("color","red");
-                                        $("#username_errormsg").text("用户名已注册!")
-                                        state1 = false;
+                                          $("#username_errormsg").css("color","red");
+                                          $("#username_errormsg").text("用户名已注册!")
+                                          state1 = false;
                                     }
                                 }
                         });
@@ -356,9 +356,9 @@ var cloud_save_buttons = `
                 }
             };
             // 绑定失去焦点事件，失去焦点即检查表单
-            (function(){
-                $("#username_input").blur(validate_username);
-            })();
+              (function(){
+                  $("#username_input").blur(validate_username);
+              })();
         
 
             // 密码验证
@@ -2234,3 +2234,78 @@ var makeTableEditable = function()
     if(tbl) 
         tbl[0].contentEditable = true;
 }
+
+//(function UI_relative($)
+//{    
+//    // 初始化函数
+//    function init(){
+//      
+//
+//        // 初始化UI元素
+//        $(".dropdown").dropdown();
+//
+//
+//        // 事件注册
+//        // 单击注册按钮 事件注册
+//        $("#signup_button").click(function(){
+//            changeTo(signup_div);   // 切换页面
+//            var state1 = true,  // 三个表单输入字段正确与否
+//            state2 = true,
+//            state3 = true;
+//
+//            // 表单验证部分
+//
+//            // 用户名验证函数
+//            var validate_username = function()
+//            {
+//                var username_input = $("#username_input");
+//                // 判断为空
+//                if(username_input.val().length === 0)
+//                {
+//                    // 设置错误信息
+//                      $("#username_errormsg").css("color","red");
+//                      $("#username_errormsg").text("请输入用户名!");
+//                      state1 = false;
+//                } 
+//                // 判断是否为3到20位的数字字母格式
+//                else if(!(/^\w{3,20}$/.test(username_input.val())))
+//                {
+//                      $("#username_errormsg").css("color","red");
+//                      $("#username_errormsg").text("用户名只能由3到20位的字母数字组成！");
+//                      state1 = false;
+//                }
+//                // ajax方式判断是否用户名已存在
+//                else
+//                {
+//                      $.ajax(
+//                          {
+//                              type: "post",
+//                              data: { username : username_input.val() },
+//                              url: remoteHost+"/is_name_valid",
+//                              success: // 回调函数
+//                                  function(result) {
+//                                    // 返回结果
+//                                      var res = JSON.parse(result);
+//                                      if(res.status === 'success')
+//                                    {
+//                                        // 验证成功
+//                                          $("#username_errormsg").css("color","green");
+//                                          $("#username_errormsg").text("用户名合法")
+//                                          state1 = true;
+//                                    }
+//                                    else
+//                                    {
+//                                        // 用户名已存在
+//                                          $("#username_errormsg").css("color","red");
+//                                          $("#username_errormsg").text("用户名已注册!")
+//                                          state1 = false;
+//                                    }
+//                                }
+//                        });
+//
+//                }
+//            };
+//            // 绑定失去焦点事件，失去焦点即检查表单
+//              (function(){
+//                  $("#username_input").blur(validate_username);
+//              })();
