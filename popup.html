@@ -1,264 +1,289 @@
-< !DOCTYPE html > <html lang = "en" >
+< !DOCTYPE html>
+    <html lang="en">
 
-<head > <meta charset = "UTF-8" > <title > PopUp页面 < /title>
-      <!-- 样式表 -->
-      <link rel="stylesheet" type="text/css " href="css / vendor / reset.css ">
-      <link rel="stylesheet " type="text / css " href="semantic_ui / semantic.min.css ">
-      <link rel="stylesheet " type="text / css " href="css / popup.css ">
-      <link rel="stylesheet " type="text / css " href="#" id="theme ">
-    
-      </head>
+    <head>
+        <meta charset="UTF-8">
+        <title>PopUp页面
+            < /title>
+                <!-- 样式表 -->
+                <link rel="stylesheet" type="text/css " href="css / vendor / reset.css ">
+                <link rel="stylesheet " type="text / css " href="semantic_ui / semantic.min.css ">
+                <link rel="stylesheet " type="text / css " href="css / popup.css ">
+                <link rel="stylesheet " type="text / css " href="#" id="theme ">
+
+    </head>
+
     <body id="popup_body ">
-    <div class="ui sidebar vertical menu " id="left_sidebar ">
-      <a class="item " id="no_class_item ">
+        <div class="ui sidebar vertical menu " id="left_sidebar ">
+            <a class="item " id="no_class_item ">
         当前没有类别
       </a>
-    </div>
-    <div class="pusher ">
+        </div>
+        <div class="pusher ">
 
-      <div class="ui right sidebar inverted vertical menu " id="right_sidebar ">
-      <a class="item " id="please_select_class_first ">
+            <div class="ui right sidebar inverted vertical menu " id="right_sidebar ">
+                <a class="item " id="please_select_class_first ">
         请首先选择分类
       </a>
-    </div>
-    <div class="pusher ">
-      <!-- Site content !-->
-         <!-- 顶部工具栏 开始 -->
-      <div class="topBar ">
-      <!-- 左浮动 表格上下定位  -->
-      
-        <div class="topItem float_left ">
-          <div class="ui buttons ">
-            <button class="ui orange button icon animated mFind " tabindex="0 " cmd="findPrevTable " id="prev_button ">
-              <div class="visible content " cmd="findPrevTable ">&nbsp;<span id="previous_text ">上一张</span></div>
-              <div class="hidden content " cmd="findPrevTable ">
-                <i class="left arrow icon " cmd="findPrevTable "></i>
-              </div>
-            </button>
-            <div class="or " data-text="或"></div>
-            <button class="ui positive button icon animated mFind " tabindex="0 " cmd="findNextTable " id="next_button ">
-              <div class="visible content " cmd="findNextTable ">&nbsp;&nbsp;&nbsp;<span id="next_text ">下一张</span></div>
-              <div class="hidden content " cmd="findNextTable ">
-                <i class="right arrow icon " cmd="findNextTable "></i>
-              </div>
-            </button>
-          </div>
-        </div>
-      
-        <!-- 左浮动 拷贝下拉菜单 -->
-        <div class="topItem float_left ">
-        <div class="ui teal buttons ">
-          <div class="ui button animated mCopy " cmd="copyRich " id="copy_button ">
-            <div class="visible content " cmd="copyRich "><span id="copy_text ">拷贝</span></div>
-            <div class="hidden content " cmd="copyRich ">
-              <i class="paint brush icon " cmd="copyRich "></i>
             </div>
-          </div>
-          <div class="ui floating dropdown icon button mCopy " id="copy_dropdown_icon ">
-            <i class="dropdown icon "></i>
-            <div class="menu ">
-              <div class="header ">
-                <i class="tags icon "></i><span id="text_text ">文本</span></div>
-              <div class="item " cmd="copyText ">
-                <i class="file text outline icon "></i><span id="puretext_text " cmd="copyText ">纯文本</span></div>
-              <div class="item " cmd="copyRich ">
-                <i class="file word outline icon "></i><span id="richtext_text " cmd="copyRich ">富文本</span></div>
-              <div class="header ">
-                <i class="tags icon "></i>HTML</div>
-              <div class="item " cmd="copyHTML ">
-                <i class="html5 icon "></i><span id="simplehtml_text " cmd="copyHTML ">简单HTML</span></div>
-              <div class="item " cmd="copyStyled ">
-                <i class="css3 icon "></i>HTML+CSS</div>
-              <div class="header ">
-                <i class="tags icon "></i><span id="otherformat_text " >其他格式</span></div>
-              <div class="item " cmd="copyCSV ">
-                <i class="table icon "></i>CSV</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- 左浮动 设置按钮 -->
-      <div class="topItem float_left " style="margin - left: 0px;
+            <div class="pusher ">
+                <!-- Site content !-->
+                <!-- 顶部工具栏 开始 -->
+                <div class="topBar ">
+                    <!-- 左浮动 表格上下定位  -->
+
+                    <div class="topItem float_left ">
+                        <div class="ui buttons ">
+                            <button class="ui orange button icon animated mFind " tabindex="0 " cmd="findPrevTable " id="prev_button ">
+                                <div class="visible content " cmd="findPrevTable ">&nbsp;<span id="previous_text ">上一张</span>
+                                </div>
+                                <div class="hidden content " cmd="findPrevTable ">
+                                    <i class="left arrow icon " cmd="findPrevTable "></i>
+                                </div>
+                            </button>
+                            <div class="or " data-text="或"></div>
+                            <button class="ui positive button icon animated mFind " tabindex="0 " cmd="findNextTable " id="next_button ">
+                                <div class="visible content " cmd="findNextTable ">&nbsp;&nbsp;&nbsp;<span id="next_text ">下一张</span>
+                                </div>
+                                <div class="hidden content " cmd="findNextTable ">
+                                    <i class="right arrow icon " cmd="findNextTable "></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 左浮动 拷贝下拉菜单 -->
+                    <div class="topItem float_left ">
+                        <div class="ui teal buttons ">
+                            <div class="ui button animated mCopy " cmd="copyRich " id="copy_button ">
+                                <div class="visible content " cmd="copyRich "><span id="copy_text ">拷贝</span>
+                                </div>
+                                <div class="hidden content " cmd="copyRich ">
+                                    <i class="paint brush icon " cmd="copyRich "></i>
+                                </div>
+                            </div>
+                            <div class="ui floating dropdown icon button mCopy " id="copy_dropdown_icon ">
+                                <i class="dropdown icon "></i>
+                                <div class="menu ">
+                                    <div class="header ">
+                                        <i class="tags icon "></i><span id="text_text ">文本</span>
+                                    </div>
+                                    <div class="item " cmd="copyText ">
+                                        <i class="file text outline icon "></i><span id="puretext_text " cmd="copyText ">纯文本</span>
+                                    </div>
+                                    <div class="item " cmd="copyRich ">
+                                        <i class="file word outline icon "></i><span id="richtext_text " cmd="copyRich ">富文本</span>
+                                    </div>
+                                    <div class="header ">
+                                        <i class="tags icon "></i>HTML</div>
+                                    <div class="item " cmd="copyHTML ">
+                                        <i class="html5 icon "></i><span id="simplehtml_text " cmd="copyHTML ">简单HTML</span>
+                                    </div>
+                                    <div class="item " cmd="copyStyled ">
+                                        <i class="css3 icon "></i>HTML+CSS</div>
+                                    <div class="header ">
+                                        <i class="tags icon "></i><span id="otherformat_text ">其他格式</span>
+                                    </div>
+                                    <div class="item " cmd="copyCSV ">
+                                        <i class="table icon "></i>CSV</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 左浮动 设置按钮 -->
+                    <div class="topItem float_left " style="margin - left: 0px;
 margin - right: 0px;
 ">
-        <div class="item ui floating icon dropdown button blue circular large " id="setting_button ">
-          <i class="settings icon "></i>
-          <div class="menu ">
-            <div class="ui dropdown item ">
-            <div class="header ">
-              <i class="keyboard icon "></i><span id="hotkey_text ">热键</span></div>
-              <div class="menu ">
-                  <div class="item " id="modKey0 " cmd="setModKey0 ">Ctrl</div>
-                  <div class="item " id="modKey1 " cmd="setModKey1 ">Alt</div>
-              </div>
-            </div>
-            <div class="ui dropdown item ">
-              <div class="header ">
-              <i class="tags icon "></i><span id="language_text ">语言</span></div>
-              <div class="menu ">
-                <div class="item " id="langKey0 " cmd="setLang0 ">英文</div>
-                <div class="item " id="langKey1 " cmd="setLang1 ">中文</div>
-              </div>
+                        <div class="item ui floating icon dropdown button blue circular large " id="setting_button ">
+                            <i class="settings icon "></i>
+                            <div class="menu ">
+                                <div class="ui dropdown item ">
+                                    <div class="header ">
+                                        <i class="keyboard icon "></i><span id="hotkey_text ">热键</span>
+                                    </div>
+                                    <div class="menu ">
+                                        <div class="item " id="modKey0 " cmd="setModKey0 ">Ctrl</div>
+                                        <div class="item " id="modKey1 " cmd="setModKey1 ">Alt</div>
+                                    </div>
+                                </div>
+                                <div class="ui dropdown item ">
+                                    <div class="header ">
+                                        <i class="tags icon "></i><span id="language_text ">语言</span>
+                                    </div>
+                                    <div class="menu ">
+                                        <div class="item " id="langKey0 " cmd="setLang0 ">英文</div>
+                                        <div class="item " id="langKey1 " cmd="setLang1 ">中文</div>
+                                    </div>
 
-            </div>
-          
-            
-            <div class="ui dropdown item ">  
-              <div class="header ">
-              <i class="diamond icon "></i><span id="skin_text ">皮肤</span>
-              </div>
-              <div class="menu ">
-                <a class="item " cmd="setSkin0 " id="skin0_text ">无皮肤</a>
-                <a class="item " cmd="setSkin1 " id="skin1_text ">皮肤1</a>
-                <a class="item " cmd="setSkin2 " id="skin2_text ">皮肤2</a>
-                <a class="item " cmd="setSkin3 " id="skin3_text ">皮肤3</a>
-                <a class="item " cmd="setSkin4 " id="skin4_text ">皮肤4</a>
-              </div>
-            </div>
-            
-            </div>
-        </div>
-      </div>
-      
-      
-      
-      <!-- 左浮动 主页按钮 -->
-      <div class="topItem float_left " id="home_button ">
-      <div  class="ui button icon brown circular large " id="ret_home_button ">
-        <i class="home icon "></i></div>
-      </div>
+                                </div>
+
+
+                                <div class="ui dropdown item ">
+                                    <div class="header ">
+                                        <i class="diamond icon "></i><span id="skin_text ">皮肤</span>
+                                    </div>
+                                    <div class="menu ">
+                                        <a class="item " cmd="setSkin0 " id="skin0_text ">无皮肤</a>
+                                        <a class="item " cmd="setSkin1 " id="skin1_text ">皮肤1</a>
+                                        <a class="item " cmd="setSkin2 " id="skin2_text ">皮肤2</a>
+                                        <a class="item " cmd="setSkin3 " id="skin3_text ">皮肤3</a>
+                                        <a class="item " cmd="setSkin4 " id="skin4_text ">皮肤4</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
 
 
 
+                    <!-- 左浮动 主页按钮 -->
+                    <div class="topItem float_left " id="home_button ">
+                        <div class="ui button icon brown circular large " id="ret_home_button ">
+                            <i class="home icon "></i>
+                        </div>
+                    </div>
 
-      <!-- 右浮动 用户按钮 -->
-     <div class="topItem float_right " style="display: none;
+
+
+
+                    <!-- 右浮动 用户按钮 -->
+                    <div class="topItem float_right " style="display: none;
 " id="user_div ">
-        <div class="ui teal buttons ">
-          <div class="ui icon button cloud_button user_button ">
-              <i class="user icon "></i>
-              <span id="login_username "></span>
-          </div>
-          <div class="ui floating dropdown icon button user_button ">
-            <i class="dropdown icon "></i>
-            <div class="menu ">
-              <div class="item cloud_button ">
-                <i class="cloud icon "></i><span id="saved_tables_text ">云表格</span></div>
-              <div class="item cloud_square ">
-                <i class="users icon "></i><span id="share_center_text ">云广场</span></div>
-              <div class="item info_button ">
-                  <i class="info icon "></i><span id="information_text ">信息</span></div>
-                <div class="item " id="logout_button ">
-                  <i class="sign out icon "></i><span id="sign_out_text ">注销</span></div>
-               </div>
-            </div>
-          </div>
-          
-        </div>
+                        <div class="ui teal buttons ">
+                            <div class="ui icon button cloud_button user_button ">
+                                <i class="user icon "></i>
+                                <span id="login_username "></span>
+                            </div>
+                            <div class="ui floating dropdown icon button user_button ">
+                                <i class="dropdown icon "></i>
+                                <div class="menu ">
+                                    <div class="item cloud_button ">
+                                        <i class="cloud icon "></i><span id="saved_tables_text ">云表格</span>
+                                    </div>
+                                    <div class="item cloud_square ">
+                                        <i class="users icon "></i><span id="share_center_text ">云广场</span>
+                                    </div>
+                                    <div class="item info_button ">
+                                        <i class="info icon "></i><span id="information_text ">信息</span>
+                                    </div>
+                                    <div class="item " id="logout_button ">
+                                        <i class="sign out icon "></i><span id="sign_out_text ">注销</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
 
 
 
 
-    <!-- 选择云表格 -->
-      <div class="topItem float_right " id="cloud_select " style="display: none;
+                    <!-- 选择云表格 -->
+                    <div class="topItem float_right " id="cloud_select " style="display: none;
 ">
-             <div class="ui buttons ">
-            <button class="ui orange button icon animated " tabindex="0 " id="choose_class ">
-              <div class="visible content ">&nbsp;<span id="select_category_text ">选择分类</span></div>
-              <div class="hidden content ">
-                <i class="list icon "></i>
-              </div>
-            </button>
-            <div class="or " data-text="或"></div>
-            <button class="ui positive button icon animated " tabindex="0 " id="choose_id ">
-              <div class="visible content ">&nbsp;&nbsp;<span id="select_table_text ">选择表格</span></div>
-              <div class="hidden content ">
-                <i class="ordered list icon "></i>
-              </div>
-             </button>
-          </div>
-      </div>
+                        <div class="ui buttons ">
+                            <button class="ui orange button icon animated " tabindex="0 " id="choose_class ">
+                                <div class="visible content ">&nbsp;<span id="select_category_text ">选择分类</span>
+                                </div>
+                                <div class="hidden content ">
+                                    <i class="list icon "></i>
+                                </div>
+                            </button>
+                            <div class="or " data-text="或"></div>
+                            <button class="ui positive button icon animated " tabindex="0 " id="choose_id ">
+                                <div class="visible content ">&nbsp;&nbsp;<span id="select_table_text ">选择表格</span>
+                                </div>
+                                <div class="hidden content ">
+                                    <i class="ordered list icon "></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
 
 
 
-        <!-- 右浮动 登录/注册按钮 -->
-        <div class="topItem float_right " id="login_or_register ">
-          <div class="ui buttons ">
-            <button id="login_button " class="ui red button icon animated " tabindex="0 ">
-              <div class="visible content ">&nbsp;&nbsp;<span id="denglu_text ">登录</span></div>
-              <div class="hidden content ">
-                <i class="user icon "></i>
-              </div>
-            </button>
-            <div class="or " data-text="或"></div>
-            <button id="signup_button " class="ui violet button icon animated " tabindex="0 ">
-              <div class="visible content ">&nbsp;&nbsp;<span id="zhuce_text ">注册</span></div>
-              <div class="hidden content ">
-                <i class="sign in icon "></i>
-              </div>
-            </button>
-          </div>
-        </div>
+                    <!-- 右浮动 登录/注册按钮 -->
+                    <div class="topItem float_right " id="login_or_register ">
+                        <div class="ui buttons ">
+                            <button id="login_button " class="ui red button icon animated " tabindex="0 ">
+                                <div class="visible content ">&nbsp;&nbsp;<span id="denglu_text ">登录</span>
+                                </div>
+                                <div class="hidden content ">
+                                    <i class="user icon "></i>
+                                </div>
+                            </button>
+                            <div class="or " data-text="或"></div>
+                            <button id="signup_button " class="ui violet button icon animated " tabindex="0 ">
+                                <div class="visible content ">&nbsp;&nbsp;<span id="zhuce_text ">注册</span>
+                                </div>
+                                <div class="hidden content ">
+                                    <i class="sign in icon "></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
 
-      </div>
-      <div class="ui divider "></div>
-      <!-- main 开始 -->
-      <div id="main ">
-      
-      
-      
-    <div id="main_header ">
-          <div id="please_login " class="float_right " style="margin - right: 20px;
+                </div>
+                <div class="ui divider "></div>
+                <!-- main 开始 -->
+                <div id="main ">
+
+
+
+                    <div id="main_header ">
+                        <div id="please_login " class="float_right " style="margin - right: 20px;
 display: none;
 ">
-            <h3 class="ui teal header ">
+                            <h3 class="ui teal header ">
               <i class="warning circle icon "></i>
               <div class="content " id="plz_log_in_text ">请登录以便在云端同步您的表格数据!</div>
             </h3>
-          </div>
-          
-          
+                        </div>
 
-          <div id="table_header " class="float_left " style="margin - left: 20px;
+
+
+                        <div id="table_header " class="float_left " style="margin - left: 20px;
 ">
-            <h3 class="ui purple header ">
+                            <h3 class="ui purple header ">
             <i class="table circle icon " id="table_circle_icon "></i>
             <div class="content "><span id="current_selected_table_text ">当前选定表格:</span></div>
           </h3>
-          </div>
-        </div>
-        <div id="main_content ">
-      
-      
-      
-          <div class="currentTable ">
-           <div class="table_content " id="scrollbar ">
-              <h3 class="prompt " style="color: #2185D0 " id="no_select_prompt ">
+                        </div>
+                    </div>
+                    <div id="main_content ">
+
+
+
+                        <div class="currentTable ">
+                            <div class="table_content " id="scrollbar ">
+                                <h3 class="prompt " style="color: #2185D0 " id="no_select_prompt ">
               <i class="info big circle icon blue " id="no_select_head "></i><span id="no_table_selected_text ">当前未选中表格</span></h3>
-           </div>
-           <div id="table_button " style="display: none;
+                            </div>
+                            <div id="table_button " style="display: none;
 ">
-             <button class="ui primary button disabled " id="save_to_cloud ">保存 </button>
-             <button class="ui button " style="margin - left: 50px;
-" id="discard_button ">放弃 </button>
-           </div>
-          </div>
+                                <button class="ui primary button disabled " id="save_to_cloud ">保存</button>
+                                <button class="ui button " style="margin - left: 50px;
+" id="discard_button ">放弃</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <!-- js脚本 -->
+            <script type="text / javascript " src="js / vendor / jquery.min.js "></script>
+            <script type="text / javascript " src="semantic_ui / semantic.min.js "></script>
+            <script type="text / javascript " src="js / popup.js "></script>
         </div>
-
-        </div>
-    </div>
+        <!-- Site content !-->
 
 
+    </body>
 
-    <!-- js脚本 -->
-      <script type="text / javascript " src="js / vendor / jquery.min.js "></script>
-      <script type="text / javascript " src="semantic_ui / semantic.min.js "></script>
-      <script type="text / javascript " src="js / popup.js "></script>
-    </div>
-      <!-- Site content !-->
-     
-     
-  </body>
-  </html>
-"
+    </html>
+    "
