@@ -2181,10 +2181,8 @@ var updateTablePreview = function(tableContent,on_cloud,tbl_id)
                             }
                         }
                 });
-            }
-            
+            }          
         });
-
         $(".cloud_share_button").unbind("click");
         $(".cloud_share_button").click(function(e){
             var share_detail = {}
@@ -2238,19 +2236,6 @@ var makeTableEditable = function()
 //      
 //
 //        // 初始化UI元素
-//        $(".dropdown").dropdown();
-//
-//
-//        // 事件注册
-//        // 单击注册按钮 事件注册
-//        $("#signup_button").click(function(){
-
-//            changeTo(signup_div);   // 切换页面
-
-//            var state1 = true,  // 三个表单输入字段正确与否
-
-//            state2 = true,
-
 
 //            state3 = true;
 //
@@ -2269,47 +2254,6 @@ var makeTableEditable = function()
 //                    // 设置错误信息
 //                      $("#username_errormsg").css("color","red");
 //                      $("#username_errormsg").text("请输入用户名!");
-//                      state1 = false;
-//                } 
-//                // 判断是否为3到20位的数字字母格式
-
-//                else if(!(/^\w{3,20}$/.test(username_input.val())))
-//                {
-//                      $("#username_errormsg").css("color","red");
-
-//                      $("#username_errormsg").text("用户名只能由3到20位的字母数字组成！");
-
-//                      state1 = false;
-
-//                }
-
-//                // ajax方式判断是否用户名已存在
-
-//                else
-
-//                {
-
-//                      $.ajax(
-
-//                          {
-
-//                              type: "post",
-
-//                              data: { username : username_input.val() },
-
-//                              url: remoteHost+"/is_name_valid",
-
-//                              success: // 回调函数
-
-//                                  function(result) {
-
-//                                    // 返回结果
-
-//                                      var res = JSON.parse(result);
-
-//                                      if(res.status === 'success')
-
-//                                    {
 
 //                                        // 验证成功
 
@@ -2319,28 +2263,10 @@ var makeTableEditable = function()
 
 //                                          state1 = true;
 
-//                                    }
-
-//                                    else
-
-//                                    {
-//                                        // 用户名已存在
 
 //                                          $("#username_errormsg").css("color","red");
 
 //                                          $("#username_errormsg").text("用户名已注册!")
 
 //                                          state1 = false;
-//                                    }
-//                                }
-//                        });
-//
-//                }
-//            };
-//            // 绑定失去焦点事件，失去焦点即检查表单
-
-//              (function(){
-
-//                  $("#username_input").blur(validate_username);
-
-//              })();
+//  
