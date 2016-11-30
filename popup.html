@@ -144,97 +144,98 @@
               <div class="item cloud_square">
                 <i class="users icon"></i><span id="share_center_text">云广场</span></div>
               <div class="item info_button">
-                <i class="info icon"></i><span id="information_text">信息</span></div>
-              <div class="item" id="logout_button">
-                <i class="sign out icon"></i><span id="sign_out_text">注销</span></div>
+                  <i class="info icon"></i><span id="information_text">信息</span></div>
+                <div class="item" id="logout_button">
+                  <i class="sign out icon"></i><span id="sign_out_text">注销</span></div>
+               </div>
             </div>
           </div>
+          
         </div>
+
+
+    <!-- 选择云表格 -->
+      <div class="topItem float_right" id="cloud_select" style="display: none;">
+             <div class="ui buttons">
+            <button class="ui orange button icon animated" tabindex="0" id="choose_class">
+              <div class="visible content">&nbsp;<span id="select_category_text">选择分类</span></div>
+              <div class="hidden content">
+                <i class="list icon"></i>
+              </div>
+            </button>
+            <div class="or" data-text="或"></div>
+            <button class="ui positive button icon animated" tabindex="0" id="choose_id">
+              <div class="visible content">&nbsp;&nbsp;<span id="select_table_text">选择表格</span></div>
+              <div class="hidden content">
+                <i class="ordered list icon"></i>
+              </div>
+             </button>
+          </div>
       </div>
 
 
-  <!-- 选择云表格 -->
-    <div class="topItem float_right" id="cloud_select" style="display: none;">
-           <div class="ui buttons">
-          <button class="ui orange button icon animated" tabindex="0" id="choose_class">
-            <div class="visible content">&nbsp;<span id="select_category_text">选择分类</span></div>
-            <div class="hidden content">
-              <i class="list icon"></i>
-            </div>
-          </button>
-          <div class="or" data-text="或"></div>
-          <button class="ui positive button icon animated" tabindex="0" id="choose_id">
-            <div class="visible content">&nbsp;&nbsp;<span id="select_table_text">选择表格</span></div>
-            <div class="hidden content">
-              <i class="ordered list icon"></i>
-            </div>
-          </button>
+        <!-- 右浮动 登录/注册按钮 -->
+        <div class="topItem float_right" id="login_or_register">
+          <div class="ui buttons">
+            <button id="login_button" class="ui red button icon animated" tabindex="0">
+              <div class="visible content">&nbsp;&nbsp;<span id="denglu_text">登录</span></div>
+              <div class="hidden content">
+                <i class="user icon"></i>
+              </div>
+            </button>
+            <div class="or" data-text="或"></div>
+            <button id="signup_button" class="ui violet button icon animated" tabindex="0">
+              <div class="visible content">&nbsp;&nbsp;<span id="zhuce_text">注册</span></div>
+              <div class="hidden content">
+                <i class="sign in icon"></i>
+              </div>
+            </button>
+          </div>
         </div>
-    </div>
 
-
-      <!-- 右浮动 登录/注册按钮 -->
-      <div class="topItem float_right" id="login_or_register">
-        <div class="ui buttons">
-          <button id="login_button" class="ui red button icon animated" tabindex="0">
-            <div class="visible content">&nbsp;&nbsp;<span id="denglu_text">登录</span></div>
-            <div class="hidden content">
-              <i class="user icon"></i>
-            </div>
-          </button>
-          <div class="or" data-text="或"></div>
-          <button id="signup_button" class="ui violet button icon animated" tabindex="0">
-            <div class="visible content">&nbsp;&nbsp;<span id="zhuce_text">注册</span></div>
-            <div class="hidden content">
-              <i class="sign in icon"></i>
-            </div>
-          </button>
-        </div>
       </div>
-
-    </div>
-    <div class="ui divider"></div>
-    <!-- main 开始 -->
-    <div id="main">
+      <div class="ui divider"></div>
+      <!-- main 开始 -->
+      <div id="main">
       
-  <div id="main_header">
-        <div id="please_login" class="float_right" style="margin-right: 20px;display: none;">
-          <h3 class="ui teal header">
-            <i class="warning circle icon"></i>
-            <div class="content" id="plz_log_in_text">请登录以便在云端同步您的表格数据!</div>
+    <div id="main_header">
+          <div id="please_login" class="float_right" style="margin-right: 20px;display: none;">
+            <h3 class="ui teal header">
+              <i class="warning circle icon"></i>
+              <div class="content" id="plz_log_in_text">请登录以便在云端同步您的表格数据!</div>
+            </h3>
+          </div>
+
+          <div id="table_header" class="float_left" style="margin-left: 20px;">
+            <h3 class="ui purple header">
+            <i class="table circle icon" id="table_circle_icon"></i>
+            <div class="content"><span id="current_selected_table_text">当前选定表格:</span></div>
           </h3>
+          </div>
         </div>
-
-        <div id="table_header" class="float_left" style="margin-left: 20px;">
-          <h3 class="ui purple header">
-          <i class="table circle icon" id="table_circle_icon"></i>
-          <div class="content"><span id="current_selected_table_text">当前选定表格:</span></div>
-        </h3>
-        </div>
-      </div>
-      <div id="main_content">
+        <div id="main_content">
       
-        <div class="currentTable">
-         <div class="table_content" id="scrollbar">
-            <h3 class="prompt" style="color:#2185D0" id="no_select_prompt">
-            <i class="info big circle icon blue" id="no_select_head"></i><span id="no_table_selected_text">当前未选中表格</span></h3>
-         </div>
-         <div id="table_button" style="display: none;">
-           <button class="ui primary button disabled" id="save_to_cloud">保存 </button>
-           <button class="ui button" style="margin-left: 50px;" id="discard_button">放弃 </button>
-         </div>
+          <div class="currentTable">
+           <div class="table_content" id="scrollbar">
+              <h3 class="prompt" style="color:#2185D0" id="no_select_prompt">
+              <i class="info big circle icon blue" id="no_select_head"></i><span id="no_table_selected_text">当前未选中表格</span></h3>
+           </div>
+           <div id="table_button" style="display: none;">
+             <button class="ui primary button disabled" id="save_to_cloud">保存 </button>
+             <button class="ui button" style="margin-left: 50px;" id="discard_button">放弃 </button>
+           </div>
+          </div>
         </div>
-      </div>
 
-      </div>
-  </div>
+        </div>
+    </div>
 
-  <!-- js脚本 -->
-    <script type="text/javascript" src="js/vendor/jquery.min.js"></script>
-    <script type="text/javascript" src="semantic_ui/semantic.min.js"></script>
-    <script type="text/javascript" src="js/popup.js"></script>
-  </div>
-    <!-- Site content !-->
+    <!-- js脚本 -->
+      <script type="text/javascript" src="js/vendor/jquery.min.js"></script>
+      <script type="text/javascript" src="semantic_ui/semantic.min.js"></script>
+      <script type="text/javascript" src="js/popup.js"></script>
+    </div>
+      <!-- Site content !-->
      
-</body>
-</html>
+  </body>
+  </html>
