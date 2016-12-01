@@ -27,14 +27,24 @@ function changeTo(target_div)
 
 // ---------------------------------------------------------------------------------
 // 页面HTML
+
+
 // ---------------------------------------------------------------------------------
 
+
 // 表格保存确认页面
+
+
 // 主页
+
+
 // 注册页面
+
+
 // 登录页面
 
 // 保存表格 确认页面
+
 var save_confirm_div = `
     <div id="save_confirm_div">
        
@@ -62,6 +72,8 @@ var save_confirm_div = `
     </div>
 `,
 // 空主页
+
+
     empty_div = `
     <div id="main_header">
             <div id="please_login" class="float_right" style="margin-right: 20px;">
@@ -88,6 +100,8 @@ var save_confirm_div = `
             </div>
       </div>
 `,
+
+
 // 主页
     home_div = `
         <div id="main_header">
@@ -120,6 +134,8 @@ var save_confirm_div = `
             </div>
       </div>
 `,
+
+
 // 注册页面
     signup_div = `
     <!-- 注册页面 开始 -->
@@ -158,6 +174,8 @@ var save_confirm_div = `
     </div>
     <!-- 注册页面 结束 -->
 `,
+
+
 // 登录页面
     login_div = `
     <!-- 登录页面 开始-->
@@ -188,6 +206,8 @@ var save_confirm_div = `
     </div> 
     <!-- 登录页面 结束 -->
 `;
+
+
 
 
 var person_info_div = `
@@ -230,6 +250,8 @@ var person_info_div = `
 
 
 
+
+
 var cloud_square_div = `
 <div id="share_square">
         <div>
@@ -247,6 +269,8 @@ var cloud_square_div = `
 </div>
 `;
 
+
+
 var share_event = `
 <div class="event">
     <div>
@@ -259,6 +283,8 @@ var share_event = `
     </div> 
 </div>
 `;
+
+
 
 var cloud_save_buttons = `
       <div id="cloud_table_button">
@@ -281,7 +307,10 @@ var cloud_save_buttons = `
           </button>
 
       </div>
+     
 `;
+
+
 // ---------------------------------------------------------------------------------
 // UI相关部分
 // ---------------------------------------------------------------------------------
@@ -1009,9 +1038,13 @@ var cloud_save_buttons = `
     });
  })(jQuery);
 
+
+
 // ---------------------------------------------------------------------------------
 // 与背景页面通信
 // ---------------------------------------------------------------------------------
+
+
 (function communicate($)
 {
     // 向标签页发送消息
@@ -1921,6 +1954,8 @@ var cloud_save_buttons = `
 
 
 
+
+
 var updateLang = function(lang)
 {
     if(typeof(lang) !== "undefined")
@@ -1936,6 +1971,7 @@ var updateLang = function(lang)
             break;
     }
 }
+
 
 
 // 更换语言为英语
@@ -2023,6 +2059,8 @@ var setLang0 = function()
 
 }
 
+
+
 // 更换语言为汉语
 var setLang1 = function()
 {
@@ -2106,6 +2144,8 @@ var setLang1 = function()
     $(".tian_ago").text(" 天以前");
 }
 
+
+
 var changeSkin = function(skinID)
 {
     console.log("换肤" + skinID);
@@ -2113,6 +2153,8 @@ var changeSkin = function(skinID)
     var theme = $("#theme");
     theme.attr("href",skinPath);
 } 
+
+
 
 // 更新表格预览
 var updateTablePreview = function(tableContent,on_cloud,tbl_id)
@@ -2221,6 +2263,8 @@ var updateTablePreview = function(tableContent,on_cloud,tbl_id)
     $(".table_content").html(tableContent);
 }
 
+
+
 // 使表格可编辑
 var makeTableEditable = function()
 {
@@ -2228,45 +2272,3 @@ var makeTableEditable = function()
     if(tbl) 
         tbl[0].contentEditable = true;
 }
-
-//(function UI_relative($)
-//{    
-//    // 初始化函数
-//    function init(){
-//      
-//
-//        // 初始化UI元素
-
-//            state3 = true;
-//
-//            // 表单验证部分
-//
-
-//            // 用户名验证函数
-
-//            var validate_username = function()
-
-//            {
-//                var username_input = $("#username_input");
-//                // 判断为空
-//                if(username_input.val().length === 0)
-//                {
-//                    // 设置错误信息
-//                      $("#username_errormsg").css("color","red");
-//                      $("#username_errormsg").text("请输入用户名!");
-
-//                                        // 验证成功
-
-//                                          $("#username_errormsg").css("color","green");
-
-//                                          $("#username_errormsg").text("用户名合法")
-
-//                                          state1 = true;
-
-
-//                                          $("#username_errormsg").css("color","red");
-
-//                                          $("#username_errormsg").text("用户名已注册!")
-
-//                                          state1 = false;
-//  
