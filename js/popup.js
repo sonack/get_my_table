@@ -2106,7 +2106,6 @@ var setLang1 = function()
     $(".tian_ago").text(" 天以前");
 }
 
-// 
 var changeSkin = function(skinID)
 {
     console.log("换肤" + skinID);
@@ -2118,8 +2117,6 @@ var changeSkin = function(skinID)
 // 更新表格预览
 var updateTablePreview = function(tableContent,on_cloud,tbl_id)
 {
-    // console.log("UPDATE TABLE PREVIEW");
-    // console.log(tableContent);
     if(!on_cloud)
     {
         $("#cloud_table_button").hide();
@@ -2160,7 +2157,6 @@ var updateTablePreview = function(tableContent,on_cloud,tbl_id)
         $("#cloud_reset").click(function()
         {
             console.log(tableContent);
-            // alert("恢复");
             $(".table_content").html(tableContent);
             return false;
         });
@@ -2248,15 +2244,23 @@ var makeTableEditable = function()
 //        // 事件注册
 //        // 单击注册按钮 事件注册
 //        $("#signup_button").click(function(){
+
 //            changeTo(signup_div);   // 切换页面
+
 //            var state1 = true,  // 三个表单输入字段正确与否
+
 //            state2 = true,
+
+
 //            state3 = true;
 //
 //            // 表单验证部分
 //
+
 //            // 用户名验证函数
+
 //            var validate_username = function()
+
 //            {
 //                var username_input = $("#username_input");
 //                // 判断为空
@@ -2271,22 +2275,39 @@ var makeTableEditable = function()
 //                else if(!(/^\w{3,20}$/.test(username_input.val())))
 //                {
 //                      $("#username_errormsg").css("color","red");
+
 //                      $("#username_errormsg").text("用户名只能由3到20位的字母数字组成！");
+
 //                      state1 = false;
+
 //                }
+
 //                // ajax方式判断是否用户名已存在
+
 //                else
+
 //                {
+
 //                      $.ajax(
+
 //                          {
+
 //                              type: "post",
+
 //                              data: { username : username_input.val() },
+
 //                              url: remoteHost+"/is_name_valid",
+
 //                              success: // 回调函数
+
 //                                  function(result) {
+
 //                                    // 返回结果
+
 //                                      var res = JSON.parse(result);
+
 //                                      if(res.status === 'success')
+
 //                                    {
 //                                        // 验证成功
 //                                          $("#username_errormsg").css("color","green");
