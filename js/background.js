@@ -1,6 +1,9 @@
 // 背景页面
 // 检查视图
+<<<<<<< HEAD
 
+=======
+>>>>>>> customize
 // 主要包括     "上下文菜单" (Context Menu)
 //             "消息传递机制"
 // 默认enabled=false
@@ -16,7 +19,11 @@ menu.selectRow = chrome.contextMenus.create({
     "parentId": menu.root,
     "enabled": false,
     "contexts": ctx,
+<<<<<<< HEAD
     "onclick": function() {
+=======
+    "onclick": function () {
+>>>>>>> customize
         menuClick("selectRow")
     }
 });
@@ -25,7 +32,11 @@ menu.selectColumn = chrome.contextMenus.create({
     "parentId": menu.root,
     "enabled": false,
     "contexts": ctx,
+<<<<<<< HEAD
     "onclick": function() {
+=======
+    "onclick": function () {
+>>>>>>> customize
         menuClick("selectColumn")
     }
 });
@@ -34,7 +45,11 @@ menu.selectTable = chrome.contextMenus.create({
     "parentId": menu.root,
     "enabled": false,
     "contexts": ctx,
+<<<<<<< HEAD
     "onclick": function() {
+=======
+    "onclick": function () {
+>>>>>>> customize
         menuClick("selectTable")
     }
 });
@@ -49,7 +64,11 @@ menu.findPrevTable = chrome.contextMenus.create({
     "parentId": menu.root,
     "enabled": false,
     "contexts": ctx,
+<<<<<<< HEAD
     "onclick": function() {
+=======
+    "onclick": function () {
+>>>>>>> customize
         menuClick("findPrevTable")
     }
 });
@@ -58,7 +77,11 @@ menu.findNextTable = chrome.contextMenus.create({
     "parentId": menu.root,
     "enabled": false,
     "contexts": ctx,
+<<<<<<< HEAD
     "onclick": function() {
+=======
+    "onclick": function () {
+>>>>>>> customize
         menuClick("findNextTable")
     }
 });
@@ -73,7 +96,11 @@ menu.copyRich = chrome.contextMenus.create({
     "parentId": menu.root,
     "enabled": false,
     "contexts": ctx,
+<<<<<<< HEAD
     "onclick": function() {
+=======
+    "onclick": function () {
+>>>>>>> customize
         menuClick("copyRich")
     }
 });
@@ -88,7 +115,11 @@ menu.copyHTML = chrome.contextMenus.create({
     "parentId": menu.copy,
     "enabled": false,
     "contexts": ctx,
+<<<<<<< HEAD
     "onclick": function() {
+=======
+    "onclick": function () {
+>>>>>>> customize
         menuClick("copyHTML")
     }
 });
@@ -97,7 +128,11 @@ menu.copyStyled = chrome.contextMenus.create({
     "parentId": menu.copy,
     "enabled": false,
     "contexts": ctx,
+<<<<<<< HEAD
     "onclick": function() {
+=======
+    "onclick": function () {
+>>>>>>> customize
         menuClick("copyStyled")
     }
 });
@@ -106,7 +141,11 @@ menu.copyCSV = chrome.contextMenus.create({
     "parentId": menu.copy,
     "enabled": false,
     "contexts": ctx,
+<<<<<<< HEAD
     "onclick": function() {
+=======
+    "onclick": function () {
+>>>>>>> customize
         menuClick("copyCSV")
     }
 });
@@ -115,7 +154,11 @@ menu.copyText = chrome.contextMenus.create({
     "parentId": menu.copy,
     "enabled": false,
     "contexts": ctx,
+<<<<<<< HEAD
     "onclick": function() {
+=======
+    "onclick": function () {
+>>>>>>> customize
         menuClick("copyText")
     }
 });
@@ -126,11 +169,16 @@ menu.copyText = chrome.contextMenus.create({
 //      broadcast 若为true, 则广播给所有tabs; 若为false, 只传递给当前窗口的活动标签页
 //      fn 指定回调函数，默认为空
 function sendCommand(cmd, broadcast, fn) {
+<<<<<<< HEAD
     var qry = broadcast ? {}: {
+=======
+    var qry = broadcast ? {} : {
+>>>>>>> customize
         active: true,
         currentWindow: true
     };
     chrome.tabs.query(qry,
+<<<<<<< HEAD
     function(tabs) {
         tabs.forEach(function(tab) {
             chrome.tabs.sendMessage(tab.id, {
@@ -138,8 +186,17 @@ function sendCommand(cmd, broadcast, fn) {
             },
             fn ||
             function(r) {});
+=======
+        function (tabs) {
+            tabs.forEach(function (tab) {
+                chrome.tabs.sendMessage(tab.id, {
+                        command: cmd
+                    },
+                    fn ||
+                    function (r) {});
+            });
+>>>>>>> customize
         });
-    });
 }
 
 // 点击上下文菜单，选择了某项操作，将其分发给tab，在content.js中继续处理
@@ -148,12 +205,16 @@ function menuClick(cmd) {
 }
 
 // 当tab被激活时，通知其消息
-chrome.tabs.onActivated.addListener(function() {
+chrome.tabs.onActivated.addListener(function () {
     sendCommand("activate");
 });
 
 // 处理来自content.js消息命令
+<<<<<<< HEAD
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+=======
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+>>>>>>> customize
     switch (message.command) {
 
     case "copyText":
@@ -232,7 +293,11 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     }
 });
 
+<<<<<<< HEAD
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+=======
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+>>>>>>> customize
     var popupPage = chrome.extension.getViews({
         type: "popup"
     });
