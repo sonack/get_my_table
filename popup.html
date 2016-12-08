@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
   
-  <head>
-    <meta charset="UTF-8">
-    <title>PopUp页面</title>
-    <!-- 样式表 -->
-    <link rel="stylesheet" type="text/css" href="css/vendor/reset.css">
-    <link rel="stylesheet" type="text/css" href="semantic_ui/semantic.min.css">
-    <link rel="stylesheet" type="text/css" href="css/popup.css">
-    <link rel="stylesheet" type="text/css" href="#" id="theme">
+    <head>
+      <meta charset="UTF-8">
+      <title>PopUp页面</title>
+      <!-- 样式表 -->
+      <link rel="stylesheet" type="text/css" href="css/vendor/reset.css">
+      <link rel="stylesheet" type="text/css" href="semantic_ui/semantic.min.css">
+      <link rel="stylesheet" type="text/css" href="css/popup.css">
+      <link rel="stylesheet" type="text/css" href="#" id="theme">
     
-    </head>
-  <body id="popup_body">
-  <div class="ui sidebar vertical menu" id="left_sidebar">
-    <a class="item" id="no_class_item">
-      当前没有类别
-    </a>
-  </div>
-  <div class="pusher">
+      </head>
+    <body id="popup_body">
+    <div class="ui sidebar vertical menu" id="left_sidebar">
+      <a class="item" id="no_class_item">
+        当前没有类别
+      </a>
+    </div>
+    <div class="pusher">
 
-    <div class="ui right sidebar inverted vertical menu" id="right_sidebar">
-    <a class="item" id="please_select_class_first">
-      请首先选择分类
-    </a>
-  </div>
-  <div class="pusher">
-    <!-- Site content !-->
-       <!-- 顶部工具栏 开始 -->
-    <div class="topBar">
-    <!-- 左浮动 表格上下定位  -->
+      <div class="ui right sidebar inverted vertical menu" id="right_sidebar">
+      <a class="item" id="please_select_class_first">
+        请首先选择分类
+      </a>
+    </div>
+    <div class="pusher">
+      <!-- Site content !-->
+         <!-- 顶部工具栏 开始 -->
+      <div class="topBar">
+      <!-- 左浮动 表格上下定位  -->
       
-      <div class="topItem float_left">
-        <div class="ui buttons">
-          <button class="ui orange button icon animated mFind" tabindex="0" cmd="findPrevTable" id="prev_button">
-            <div class="visible content" cmd="findPrevTable">&nbsp;<span id="previous_text">上一张</span></div>
-            <div class="hidden content" cmd="findPrevTable">
-              <i class="left arrow icon" cmd="findPrevTable"></i>
-            </div>
-          </button>
-          <div class="or" data-text="或"></div>
-          <button class="ui positive button icon animated mFind" tabindex="0" cmd="findNextTable" id="next_button">
-            <div class="visible content" cmd="findNextTable">&nbsp;&nbsp;&nbsp;<span id="next_text">下一张</span></div>
-            <div class="hidden content" cmd="findNextTable">
-              <i class="right arrow icon" cmd="findNextTable"></i>
-            </div>
-          </button>
+        <div class="topItem float_left">
+          <div class="ui buttons">
+            <button class="ui orange button icon animated mFind" tabindex="0" cmd="findPrevTable" id="prev_button">
+              <div class="visible content" cmd="findPrevTable">&nbsp;<span id="previous_text">上一张</span></div>
+              <div class="hidden content" cmd="findPrevTable">
+                <i class="left arrow icon" cmd="findPrevTable"></i>
+              </div>
+            </button>
+            <div class="or" data-text="或"></div>
+            <button class="ui positive button icon animated mFind" tabindex="0" cmd="findNextTable" id="next_button">
+              <div class="visible content" cmd="findNextTable">&nbsp;&nbsp;&nbsp;<span id="next_text">下一张</span></div>
+              <div class="hidden content" cmd="findNextTable">
+                <i class="right arrow icon" cmd="findNextTable"></i>
+              </div>
+            </button>
+          </div>
         </div>
-      </div>
       
-      <!-- 左浮动 拷贝下拉菜单 -->
-      <div class="topItem float_left">
+        <!-- 左浮动 拷贝下拉菜单 -->
+        <div class="topItem float_left">
         <div class="ui teal buttons">
           <div class="ui button animated mCopy" cmd="copyRich" id="copy_button">
             <div class="visible content" cmd="copyRich"><span id="copy_text">拷贝</span></div>

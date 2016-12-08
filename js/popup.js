@@ -2272,6 +2272,7 @@ var makeTableEditable = function()
 //                      state1 = false;
 //                } 
 //                // 判断是否为3到20位的数字字母格式
+
 //                else if(!(/^\w{3,20}$/.test(username_input.val())))
 //                {
 //                      $("#username_errormsg").css("color","red");
@@ -2309,16 +2310,26 @@ var makeTableEditable = function()
 //                                      if(res.status === 'success')
 
 //                                    {
+
 //                                        // 验证成功
+
 //                                          $("#username_errormsg").css("color","green");
+
 //                                          $("#username_errormsg").text("用户名合法")
+
 //                                          state1 = true;
+
 //                                    }
+
 //                                    else
+
 //                                    {
 //                                        // 用户名已存在
+
 //                                          $("#username_errormsg").css("color","red");
+
 //                                          $("#username_errormsg").text("用户名已注册!")
+
 //                                          state1 = false;
 //                                    }
 //                                }
@@ -2327,6 +2338,9 @@ var makeTableEditable = function()
 //                }
 //            };
 //            // 绑定失去焦点事件，失去焦点即检查表单
+
 //              (function(){
+
 //                  $("#username_input").blur(validate_username);
+
 //              })();
