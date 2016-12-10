@@ -1,4 +1,29 @@
 html,body#popup_body,.pusher
 {
-   background: url("../images/background7.jpg") !important;
+   background: url("../images/background11.jpg") no-repeat !important;
+}
+
+#current_selected_table_text
+{
+    color: #fff !important;
+}
+
+#table_circle_icon
+{
+    color: #fff !important;
+}
+th,td
+{
+  border: 2px solid white;
+  padding: 2px;
+}
+
+table *
+{
+    color: white !important;
+}
+
+#please_login h3
+{
+    color: yellow !important;
 }

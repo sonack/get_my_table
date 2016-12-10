@@ -234,7 +234,7 @@ var cloud_square_div = `
 <div id="share_square">
         <div>
           <h3 class="ui header blue" id="share_square_header">
-            <i class="users icon"></i>
+            <i class="users icon" id="shared_tables_text_icon"></i>
             <div class="content"><span id="shared_tables_text">动态广场</span> </div>
           </h3>  
         </div>
@@ -254,7 +254,7 @@ var share_event = `
     </div>
     <div class="content">
         <div class="summary" id="share_sum">
-            <span id="user"></span> 分享了表格 <img src="images/left_yinhao.png" id="l_y"> <a id="table"></a> <img src="images/right_yinhao.png" id="r_y">,并表示<span id="comm"></id> <div class="date" style="float:right; margin-right:20px;"> </div>
+            <span id="user"></span> <span class="has_shared_table">分享了表格</span> <img src="images/left_yinhao.png" id="l_y"> <a id="table"></a> <img src="images/right_yinhao.png" id="r_y"><span class="and_said">并表示</span> <img src="images/left_yinhao.png" id="l_y"> <span id="comm"></span> <img src="images/right_yinhao.png" id="r_y"> <div class="date" style="float:right; margin-right:20px;"></div>
         </div>
     </div> 
 </div>
@@ -908,21 +908,21 @@ var cloud_save_buttons = `
     var updateState = function(state) {
         if(!state)
         {
-            $("#modKey0").addClass("active");
-            $("#modKey1").removeClass("active");
+            // $("#modKey0").addClass("active");
+            // $("#modKey1").removeClass("active");
             $(".mCopy").addClass("disabled");
             $(".mFind").addClass("disabled");
             return;
         }
         if(state.modKey == 0)
         {
-            $("#modKey0").addClass("active");
-            $("#modKey1").removeClass("active");
+            // $("#modKey0").addClass("active");
+            // $("#modKey1").removeClass("active");
         }
         else if(state.modKey == 1)
         {
-            $("#modKey1").addClass("active");
-            $("#modKey0").removeClass("active");
+            // $("#modKey1").addClass("active");
+            // $("#modKey0").removeClass("active");
         }
 
         if(!state.canCopy)
@@ -1463,7 +1463,6 @@ var cloud_save_buttons = `
             $(".cloud_square").click(function(){
                 console.log("进入云广场");
                 changeTo(cloud_square_div);
-                
                 $("#choose_class").addClass("disabled");
                 $("#choose_id").addClass("disabled");
                 $(".mFind").addClass("disabled");
@@ -1489,19 +1488,19 @@ var cloud_save_buttons = `
                     var diff = now - ts;
                     if(diff < 60)
                     {
-                        res = diff + " 秒以前";
+                        res = diff + "<span class='miao_ago'> 秒以前</span>";
                     }
                     else if(diff < 3600)
                     {
-                        res = parseInt(diff / 60) + " 分钟以前";
+                        res = parseInt(diff / 60) + "<span class='fen_ago'> 分钟以前</span>";
                     }
                     else if(diff < 3600 * 24)
                     {
-                        res = parseInt(diff / 3600) + "小时以前";
+                        res = parseInt(diff / 3600) + "<span class='shi_ago'> 小时以前</span>";
                     }
                     else if(diff < 3600 * 24 * 7)
                     {
-                        res = parseInt(diff / ( 3600 * 24 )) + "天以前";
+                        res = parseInt(diff / ( 3600 * 24 )) + "<span class='tian_ago'> 天以前</span>";
                     }
                     else
                     {
@@ -1528,13 +1527,22 @@ var cloud_save_buttons = `
                                 var prt = $(".share_feed_div");
                                 if(items.length == 0)
                                 {
-                                    prt.append('<h2 style="margin-left:20px; line-height:180px;">还没有人分享过表格呢，快来分享吧!</h2>')
+                                    if(cur_lang)
+                                        prt.append('<h2 style="margin-left:20px; line-height:180px;">还没有人分享过表格呢，快来分享吧!</h2>')
+                                    else
+                                        prt.append('<h2 style="margin-left:20px; line-height:180px;">No Table ... </h2>')
                                 }
                                 else
                                 {
                                     prt.empty();
                                     $.each(items,function(idx,ele){
+                                        console.log(share_event);
                                         var evt = $(share_event);
+                                        if(cur_lang == 0)
+                                        {
+                                            evt.find("#has_shared_table").text("has shared the table");
+                                            evt.find("#and_said").text("and said");
+                                        }
                                         var username = evt.find("#user");
                                         var table = evt.find("#table");
                                         var date = evt.find(".date");
@@ -1583,7 +1591,7 @@ var cloud_save_buttons = `
                                         }}
                                         );
 
-                                        date.text(processTime(date_v));    
+                                        date.html(processTime(date_v));    
                                         prt.append(evt);
                                         table.click(function(){
                                             var tbl_id = $(this).attr("table_id");
@@ -1869,10 +1877,11 @@ var setLang0 = function()
     $("#langKey0").text("English");
     $("#langKey1").text("Chinese");
     $("#skin_text").text("Skin");
-    $("#skin0_text").text("Blank");
-    $("#skin1_text").text("Skin1");
-    $("#skin2_text").text("Skin2");
-    $("#skin3_text").text("Skin3");
+    $("#skin0_text").text("Pure");
+    $("#skin1_text").text("Elegant");
+    $("#skin2_text").text("Shine");
+    $("#skin3_text").text("Starlight");
+    $("#skin4_text").text("Spring");
     $("#saved_tables_text").text("Saved Tables");
     $("#information_text").text("Information");
     $("#sign_out_text").text("Sign Out");
@@ -1881,6 +1890,16 @@ var setLang0 = function()
     $("#be_classified_in_text").text("Category:"); 
     $("#zhuce_text").text("Sign Up");
     $("#share_center_text").text("Share Center");
+
+
+    $(".has_shared_table").text("has shared the table");
+    $(".and_said").text("and said");
+
+    $(".miao_ago").text(" seconds ago");
+    $(".fen_ago").text(" minutes ago");
+    $(".shi_ago").text(" hours ago");
+    $(".tian_ago").text(" days ago");
+
 }
 
 // 更换语言为汉语
@@ -1943,10 +1962,11 @@ var setLang1 = function()
     $("#langKey0").text("英文");
     $("#langKey1").text("中文");
     $("#skin_text").text("皮肤");
-    $("#skin0_text").text("无皮肤");
-    $("#skin1_text").text("皮肤1");
-    $("#skin2_text").text("皮肤2");
-    $("#skin3_text").text("皮肤3");
+    $("#skin0_text").text("纯净之白");
+    $("#skin1_text").text("清新淡雅");
+    $("#skin2_text").text("浮光掠影");
+    $("#skin3_text").text("星光灿烂");
+    $("#skin4_text").text("绿影婆娑");
     $("#saved_tables_text").text("云表格");
     $("#information_text").text("信息");
     $("#sign_out_text").text("注销");
@@ -1955,6 +1975,14 @@ var setLang1 = function()
     $("#be_classified_in_text").text("分类于:"); 
     $("#zhuce_text").text("注册");
     $("#share_center_text").text("云广场");
+
+    $(".has_shared_table").text("分享了表格");
+    $(".and_said").text("并表示");
+
+    $(".miao_ago").text(" 秒以前");
+    $(".fen_ago").text(" 分钟以前");
+    $(".shi_ago").text(" 小时以前");
+    $(".tian_ago").text(" 天以前");
 }
 
 // 

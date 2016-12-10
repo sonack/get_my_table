@@ -2,3 +2,8 @@ html,body#popup_body,.pusher
 {
    background: white !important;
 }
+
+#no_select_prompt,#no_select_head
+{
+    color: blue !important;
+}

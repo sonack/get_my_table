@@ -1,0 +1,55 @@
+html,body#popup_body,.pusher
+{
+    background: url("../images/background9.jpg") !important;
+}
+
+#prev_button
+{
+    background-color: #726DD1 !important;
+}
+
+#next_button
+{
+    background-color: #57D2F7 !important;
+}
+
+#copy_button,#copy_dropdown_icon
+{
+    background-color: #F44336 !important;
+}
+
+#current_selected_table_text
+{
+    color: #fff !important;
+}
+
+#table_circle_icon
+{
+    color: #fff !important;
+}
+
+#setting_button
+{
+    background-color: #C2A47A !important;
+}
+
+#ret_home_button
+{
+    background-color: #00FFAA !important;
+}
+
+th,td
+{
+  border: 2px inset #fff;
+  padding: 2px;
+}
+
+table *
+{
+    color: #fff !important;
+}
+
+#shared_tables_text,#shared_tables_text_icon
+{
+    color: #fff !important;
+}

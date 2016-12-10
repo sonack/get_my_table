@@ -218,7 +218,7 @@
     
     var options = {
         modKey: 0,           // 默认选取第一个，ctrl键
-        modLang: 0,          // 英文
+        modLang: 1,          // 默认中文
         modSkin: 1           // 默认皮肤
     };
 
@@ -253,14 +253,22 @@
             case 3:
                 chrome.runtime.sendMessage({popup_cmd:"setSkin3"});
                 break;
+            case 4:
+                chrome.runtime.sendMessage({popup_cmd:"setSkin4"});
+                break;
         }
     }
 
     // 获得chrome存储的选项信息
     var updateOptions = function(fn) {
+        console.log("get options as ")
         chrome.storage.local.get(null, function(opts) {
             if(Object.keys(opts).length)
+            {
                 options = opts;
+                console.log("as");
+                console.log(options);
+            }
             if(fn)
                 fn();
         });
@@ -270,20 +278,25 @@
 
     // 设置选项信息
     var setOption = function(key, val) {
-        console.log("update before...");
-        console.log(options);
-        options[key] = val;
-        console.log("update...");
-        console.log(options);
-        chrome.storage.local.set(options,function()
-        {
-            console.log(options);
-            // alert("设置成功!");
-        });
-        processLang();
-        processSkin();
-        chrome.storage.local.clear();
        
+       
+        updateOptions(function(){
+            console.log("update before...");
+            console.log(options);
+            options[key] = val;
+            console.log("update after...");
+            console.log(options);
+            chrome.storage.local.clear();
+            chrome.storage.local.set(options,function(){
+            console.log("存储成功");
+            chrome.storage.local.get(null, function(opts) {
+            console.log(opts);
+            processLang();
+            processSkin();
+            });
+        });
+       
+        });
     }
 
     // ---------------------------------------------------------------------------------
@@ -878,8 +891,11 @@
                     selectFinished();   // 向后台发送有选区
                 break;
             case "openPopup":
-                processLang();
-                processSkin();
+                console.log("打开PopUp页面");
+                updateOptions(function(){
+                    processLang();
+                    processSkin();
+                });
                 break;
             case "selectRow":
             case "selectColumn":
@@ -944,6 +960,9 @@
             case "setSkin3":
                 setOption("modSkin",3);
                 break;
+            case "setSkin4":
+                setOption("modSkin",4);
+                break;
 
             case "updateOptions":  // 获取选项信息
                 updateOptions();
@@ -979,11 +998,10 @@
     // '鼠标按下' - 初始化选区
     var onMouseDown = function(e) {
         lastEvent = e;
-        menuUpdate();       // 更新菜单状态
-
         if(!isValidClick(e))    // 不合法的点击
             return;
 
+        menuUpdate();       // 更新菜单状态
         selectionInit(e.target, e.shiftKey);    // 按住shift 实现扩展选择
         selection.selectAnchor = true;  // 选择锚点确定
         if(hasClass(selection.anchor, clsSelected)) {

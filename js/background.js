@@ -140,6 +140,9 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
         case "setSkin3":
             popupPage.changeSkin(3);
             break;
+        case "setSkin4":
+            popupPage.changeSkin(4);
+            break;
     }
 });
 
