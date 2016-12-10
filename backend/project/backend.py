@@ -19,6 +19,7 @@ def valid_username(un):
         return False;
     return True;
 
+
 @app.route("/is_name_valid",methods=["POST"])
 def is_name_valid():
     un = request.form['username']
@@ -27,6 +28,7 @@ def is_name_valid():
         return '{"status": "success"}'
     else:
         return '{"status": "failed"}'
+
 
 def valid_email(em):
     db = DBTools('root','liubixue','GetMyTable')
@@ -40,6 +42,7 @@ def valid_email(em):
         return False;
     return True;
 
+
 @app.route("/is_email_valid",methods=["POST"])
 def is_email_valid():
     em = request.form['email']
@@ -48,6 +51,7 @@ def is_email_valid():
         return '{"status": "success"}'
     else:
         return '{"status": "failed"}'
+
 
 def add_new_user(un,pw,em):
     db = DBTools('root','liubixue','GetMyTable')
@@ -73,6 +77,7 @@ def register():
 
 # 登录
 
+
 def exist_user(un,pw):
     db = DBTools('root','liubixue','GetMyTable')
     db.connect()
@@ -85,6 +90,7 @@ def exist_user(un,pw):
         return True;
     return False;
 
+
 @app.route("/login",methods=["POST"])
 def login():
     un = request.form['username']
@@ -95,12 +101,14 @@ def login():
     else:
         return '{"status": "failed"}'
 
+
 @app.route('/index',methods=['GET'])
 def index():
     if session.get('username',None):
         return '{"status": "success"}'
     else:
         return '{"status": "failed"}'
+
 
 @app.route('/online',methods=['GET'])
 def online():
@@ -110,12 +118,14 @@ def online():
     else:
         return '{"status": "failed"}'
 
+
 @app.route('/logout',methods=['GET'])
 def logout():
     if session.pop('username',None):
         return '{"status": "success"}'
     else:
         return '{"status": "failed"}'
+
 
 def save_table_to_DB(un,tbl,tbl_n,tbl_c):
     db = DBTools('root','liubixue','GetMyTable')
@@ -128,7 +138,6 @@ def save_table_to_DB(un,tbl,tbl_n,tbl_c):
     except Exception as e:
         print(e)
         return False
-
 
 
 @app.route('/save_table',methods=['POST'])
@@ -208,6 +217,7 @@ def get_all_table():
     res = cursor.fetchall()
     return json.dumps(res)
 
+
 @app.route('/get_table_by_id',methods=['POST'])
 def get_table_by_id():
     un = session.get('username',None)
@@ -228,6 +238,7 @@ def get_table_by_id():
     except Exception as e:
         return '{"status": "failed"}'
     
+
 
 
 if __name__ == '__main__':

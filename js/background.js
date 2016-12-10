@@ -115,7 +115,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
             if(popupPage)
             {
                 popupPage = popupPage[0];
-                popupPage.updateTablePreview(message.content);
+                popupPage.updateTablePreview(message.content,false);
                 popupPage.makeTableEditable();
             }
             break;

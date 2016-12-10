@@ -9,12 +9,17 @@ var remoteHost = "http://123.206.84.93:5000";
 // main元素
 var main = $("#main");
 
+
+// 当前是否为保存状态
+
+var save_status = false;
+var tableID;
 // 切换页面到target_div
 function changeTo(target_div)
 {
-    main.transition('fade down');   // 切换特效 消失
+    main.transition('fade');   // 切换特效 消失
     main.html(target_div);  // 改变html
-    main.transition('fade up'); // 切换特效 出现
+    main.transition('fade'); // 切换特效 出现
 }
 
 
@@ -62,12 +67,13 @@ var save_confirm_div = `
                     <i class="warning circle icon"></i>     <div class="content">请登录以便在云端同步您的表格数据!</div>
                 </h3>
             </div>
-
+           
             <div id="table_header" class="float_left" style="margin-left: 20px;">
                 <h3 class="ui purple header">
                     <i class="table circle icon"></i>
                     <div class="content">当前选定表格:</div>
                 </h3>
+                <!-- <img alt="Avatar" height="50px" width="50px" id="avatar" src="images/default_avatar.png"> -->
             </div>
         </div>
 
@@ -155,6 +161,67 @@ var save_confirm_div = `
 `;
 
 
+var person_info_div = `
+ <div>
+        <div id="left_info">
+          <img alt="Avatar" height="180px" width="180px" id="user_avatar" style="visible:hidden;">
+          <div class="ui form" style="width:70%;margin:auto;margin-top:10px;">
+          <div class="field" >
+                <input type="text" name="avatar_url" placeholder="请输入个性化头像的url" id="avatar_url">
+          </div>
+          </div>
+          <h2 id="username_info">sonack</h2>
+        </div>
+
+        <div id="right_info">
+          <form class="ui form" style="margin: auto;" id="register_form">  
+            <div class="field">
+                <label>电子邮箱：</label>
+                <input type="text" name="email" readonly="" placeholder="请输入email" id="email">
+            </div>
+
+            <div class="field">
+                <label>个人网址：</label>
+                <input type="text" name="person_net" placeholder="请输入个人网址" id="person_net">
+            </div>
+
+            <div class="field">
+                <label>简介：</label>
+                <textarea rows="4" name="intro" placeholder="快介绍一下自己吧~" id="intro"></textarea>
+            </div>
+
+             <button class="ui red button" id="info_confirm_button" style="margin-right: 50px; margin-left: 50px;">确定</button>
+            <button class="ui violet button" id="info_cancel_button">取消</button>
+        </form>
+        </div>
+    </div>
+
+
+`;
+
+
+var cloud_save_buttons = `
+    <div id="cloud_table_button">
+    
+        <div class="ui buttons">
+        <button class="ui primary button" id="cloud_save">保存 </button>
+        <div class="or" data-text="或"></div>
+        <button class="ui positive button" id="cloud_save_as">另存为 </button>
+        </div>
+
+        <div class="ui buttons" style="margin-left:25px;">
+         <button class="ui teal button" id="cloud_reset">恢复 </button>
+        <div class="or" data-text="或"></div>
+        <button class="ui red button" id="cloud_delete">删除 </button>
+        </div>
+
+
+        <button class="ui circular purple button icon cloud_share_button" tabindex="0" style="margin-left:60px; id="">
+            <div class="visible content "> <i class="share alternate icon"></i>&nbsp;分享... &nbsp;</div>
+        </button>
+
+    </div>
+`;
 // ---------------------------------------------------------------------------------
 // UI相关部分
 // ---------------------------------------------------------------------------------
@@ -463,7 +530,7 @@ var save_confirm_div = `
                     $.ajax({
                         type: "post",
                         data: $('#login_form').serialize(),
-                        url: "http://123.206.84.93:5000/login",
+                        url: remoteHost+"/login",
                         success:
                             function(result){
                                 var res = JSON.parse(result);
@@ -498,6 +565,7 @@ var save_confirm_div = `
                                                             alert("注销成功...");
                                                             // 更新状态信息
                                                             am_I_online = false;
+                                                            $("#cloud_select").hide();
                                                             // 显示登录或注册按钮组
                                                             $("#login_or_register").show();
                                                             // 显示提示信息
@@ -533,6 +601,17 @@ var save_confirm_div = `
         
         // 单击主页页面 绑定事件 
         $("#home_button").click(function(){
+            save_status = false;
+            var prt = $("#right_sidebar");
+            prt.empty();
+            prt.append('<a class="item" id="please_select_class_first">请首先选择分类</a>');
+            $("#please_select_class_first").click(function(){
+                $("#choose_class").click();
+            });
+            
+            $("#choose_class").removeClass("disabled");
+            $("#choose_id").removeClass("disabled");
+
             $.ajax(
                 {
                     type: "get", 
@@ -690,9 +769,27 @@ var save_confirm_div = `
                                                                     {
                                                                         alert("保存失败!");
                                                                     }
-                                                                    $("#home_button").click();
                                                                 }
                                                         });
+
+                                                    if(save_status)
+                                                         $.ajax({type:"post",data: '{"table_id":"' + tableID + '"}', url: remoteHost+"/delete_table_by_id", contentType:"application/json;charset=UTF-8", success:function(result)
+                                                                {
+                                                                    var res = JSON.parse(result);
+                                                                    console.log(res);
+                                                                    if(res.status === 'success')
+                                                                    {
+                                                                        console.log("删除成功");
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        console.log("删除失败...");
+                                                                    }
+                                                                }
+                                                        });
+
+                                                    $("#home_button").click();
+                                                    return false;
                                                 });
 
 
@@ -821,6 +918,8 @@ var save_confirm_div = `
                             // 显示用户管理区块
                             $("#user_div").css("display","block");
                             // 显示登录用户名
+                            if(res.log_username.length > 9)
+                                res.log_username = res.log_username.substr(0,6) + "...";   
                             $("#login_username").text(res.log_username);
 
                             // 绑定注销按钮事件
@@ -841,6 +940,7 @@ var save_confirm_div = `
                                                 {
                                                     alert("注销成功...");
                                                     am_I_online = false;
+                                                    $("#cloud_select").hide();
                                                     $("#login_or_register").show();
                                                     $("#please_login").css("display","block");
                                                     $("#user_div").css("display","none");
@@ -867,6 +967,7 @@ var save_confirm_div = `
             // 触发主页，绑定按钮事件
 
             (function(){
+                    save_status = false;
                     $.ajax({type:"get",url:remoteHost+"/index",success:function(result)
                     {
                         $("#cloud_select").fadeOut();
@@ -987,10 +1088,27 @@ var save_confirm_div = `
                                         {
                                             alert("保存失败!");
                                         }
-                                        // 保存完表格，回到预览主页
-                                        $("#home_button").click();
                                         }
                                     });
+
+                                    if(save_status)
+                                        $.ajax({type:"post",data: '{"table_id":"' + tableID + '"}', url: remoteHost+"/delete_table_by_id", contentType:"application/json;charset=UTF-8", success:function(result)
+                                            {
+                                                var res = JSON.parse(result);
+                                                console.log(res);
+                                                if(res.status === 'success')
+                                                {
+                                                    console.log("删除成功");
+                                                }
+                                                else
+                                                {
+                                                    console.log("删除失败...");
+                                                }
+                                            }
+                                    });
+                                    // 保存完表格，回到预览主页
+                                    $("#home_button").click();
+                                    return false;
                                 });
                                 
                                 // 取消保存 按钮
@@ -1017,15 +1135,50 @@ var save_confirm_div = `
                     var res = JSON.parse(result);
                     // 左侧类别
                     var prt = $("#left_sidebar");
-                    prt.empty();
+                    var no_item = true;
+                    if(res.length)
+                    {
+                        prt.empty();
+                        no_item = false;
+                    }
                     // 添加类别
                     $.each(res,function(idx,ele){
                         var opt = $("<a class='item'></a>");
                         opt.text(ele);
                         opt.attr("class_name",ele);
+                        opt.append("<img class='remove_button' src='images/remove.png'  height='20px' style='float:right; margin-right:10px;'/>")
                         prt.append(opt);
                         console.log("添加了类别" + ele);
                     });
+
+
+                    $("#left_sidebar a .remove_button").click(function(e){
+                        var class_name = $(this.parentNode).attr("class_name");
+                        
+                        var con = confirm("您确定要删除分类 [ " + class_name + " ] 吗？（注意！该分类下的所有表格都将被删除）");
+                        if(con)
+                        {
+                            $.ajax({type:"post",data: '{"class_name":"' + class_name + '"}', url: remoteHost+"/delete_class_name", contentType:"application/json;charset=UTF-8", success:function(result)
+                            {
+                                var res = JSON.parse(result);
+                                console.log(res);
+                                if(res.status === 'success')
+                                {
+                                    alert("删除成功!");
+                                    $("#home_button").click();
+                                }
+                                else
+                                {
+                                    alert("删除失败!");
+                                }
+                            }
+                            });
+                        }
+                        e.stopPropagation();
+                        
+                    });
+
+                    if(!no_item)
                     // 添加超链接事件
                     $("#left_sidebar a").click(function()
                     {
@@ -1054,7 +1207,7 @@ var save_confirm_div = `
                                         console.log(res);
                                         if(res.status === 'success')
                                         {
-                                            updateTablePreview(res.content);
+                                            updateTablePreview(res.content,true,tbl_id);
                                             makeTableEditable();
                                         }
                                         else
@@ -1063,7 +1216,7 @@ var save_confirm_div = `
                                         }
                                     }
                                 });
-                                $("#right_sidebar").sidebar('toggle');
+                                $("#right_sidebar").sidebar('setting', 'transition', 'overlay').sidebar('toggle');
                             });
                             // $("left_sidebar").sidebar('toggle');
                             // 选择表格
@@ -1072,10 +1225,23 @@ var save_confirm_div = `
                         });
                     }
                     );
+                    // no class item
+                    else
+                    {
+                        $("#no_class_item").unbind("click");
+                        $("#no_class_item").click(
+                            function()
+                            {
+                                $("#left_sidebar").sidebar('setting', 'transition', 'overlay').sidebar('toggle');
+                            }
+                        )
+                    }
 
                 }
                 });
             });
+
+
 
             $("#please_select_class_first").click(function(){
                 $("#choose_class").click();
@@ -1084,19 +1250,218 @@ var save_confirm_div = `
             // start 为云表格选取按钮绑定事件
 
             $("#choose_class").click(function(){
-                $("#left_sidebar").sidebar('toggle');
+                $("#left_sidebar").sidebar('setting', 'transition', 'overlay').sidebar('toggle');
             });
             $("#choose_id").click(function(){
-                $("#right_sidebar").sidebar('toggle');
+                $("#right_sidebar").sidebar('setting', 'transition', 'overlay').sidebar('toggle');
+            });
+
+            // 开始 *************************************************
+            $(".info_button").click(function(){
+                // alert("点击个人信息...");
+                changeTo(person_info_div);
+
+
+                var set_obj_un = $("#username_info");
+                var set_obj_ava = $("#user_avatar");
+                var set_obj_emi = $("#email");
+                var set_obj_pn = $("#person_net");
+                var set_obj_intr = $("#intro");
+                var input_ava_url = $("#avatar_url");
+
+                
+                $("#choose_class").addClass("disabled");
+                $("#choose_id").addClass("disabled");
+
+                $("#info_cancel_button").click(function(){
+                    $("#home_button").click();
+                    return false;
+                });
+
+                $("#info_confirm_button").click(function(e){
+                    e.preventDefault();
+                    var info_dict = {};
+
+                    info_dict['ava_url'] = input_ava_url.val();
+                    if(($.trim(input_ava_url.val())).length > 0)
+                        info_dict['ava_url'] = input_ava_url.val();
+                    else
+                        info_dict['ava_url'] = set_obj_ava.attr("src");
+                    
+                    if(($.trim(set_obj_pn.val())).length > 0)
+                        info_dict['person_net'] = set_obj_pn.val();
+                    else
+                        info_dict['person_net'] = '无';
+                    
+                    if(($.trim(set_obj_intr.val())).length > 0)
+                        info_dict['intro'] = set_obj_intr.val();
+                    else
+                        info_dict['intro'] = '无';
+                    
+                    console.log(info_dict);
+                    $.ajax(
+                            {
+                                type: "post",
+                                url: remoteHost+"/save_info",
+                                data: JSON.stringify(info_dict),
+                                contentType: 'application/json;charset=UTF-8',
+                                success: 
+                                    function(result){
+                                        var res = JSON.parse(result)
+                                        if(res.status === 'success')
+                                        {
+                                            alert("修改成功!");
+                                        }
+                                        else
+                                        {
+                                            alert("修改失败!");
+                                        }
+                                        $("#home_button").click();
+                                    }
+                            });
+
+                    return false;
+                });
+
+
+                $.ajax(
+                        {
+                            type: "get",
+                            url: remoteHost+"/get_info",
+                            success: 
+                                function(result){
+                                    var res = JSON.parse(result);
+                                    if(res.status === 'success')
+                                    {
+                                       
+                                        // alert("获取个人信息成功...");
+                                        var un = res.username,
+                                            ava = res.ava_url,
+                                            emi = res.email,
+                                            pn = res.person_net,
+                                            intr = res.intro;
+                                        set_obj_un.text(un);
+                                        set_obj_ava.attr('src',ava);
+                                        set_obj_emi.val(emi);
+                                        if(pn !== '无') set_obj_pn.val(pn);
+                                        if(intr !== '无')set_obj_intr.val(intr);
+                                        
+                                        var ava_dom =set_obj_ava[0];
+                                        ava_dom.onerror = function(){
+                                            // alert("Hello");
+                                            this.src="images/default_avatar.png";
+                                            set_obj_ava.show();
+                                            this.onerror = null;
+                                        }
+
+                                        set_obj_ava.show();
+                                    }
+                                    else
+                                    {
+                                        alert("获取个人信息失败!");
+                                        console.log(res);
+                                    }
+                                }   
+                        });
+                
             });
     });
 })(jQuery);
 
 // 更新表格预览
-var updateTablePreview = function(tableContent)
+var updateTablePreview = function(tableContent,on_cloud,tbl_id)
 {
-    $("#table_button").show();
-    $(".table_content").html(tableContent);
+    if(!on_cloud)
+    {
+        $("#cloud_table_button").hide();
+        $("#table_button").show();
+    }
+    else
+    {
+        if($("#cloud_table_button").length)
+        {
+            $("#table_button").hide();
+            $("#cloud_table_button").show();
+        }
+        else
+        {
+            $("#table_button").hide();
+            $("#table_button").after($(cloud_save_buttons));
+            $("#cloud_table_button").show();
+            $("#cloud_save").click(function()
+                {
+                    save_status = true;
+                    tableID = tbl_id;
+                    $("#save_to_cloud").click();
+                }
+            );
+            $("#cloud_save_as").click(function()
+                {
+                    $("#save_to_cloud").click();
+                    return false;
+                }
+            );
+
+            $("#cloud_reset").click(function()
+            {
+                $(".table_content").html(tableContent);
+                return false;
+            });
+
+            $("#cloud_delete").click(function(){
+                var con = confirm("您确定要删除这张表格吗?");
+                if(con)
+                {
+                      $.ajax({type:"post",data: '{"table_id":"' + tbl_id + '"}', url: remoteHost+"/delete_table_by_id", contentType:"application/json;charset=UTF-8", success:function(result)
+                            {
+                                var res = JSON.parse(result);
+                                console.log(res);
+                                if(res.status === 'success')
+                                {
+                                    alert("删除成功!");
+                                    $("#home_button").click();
+                                }
+                                else
+                                {
+                                    alert("删除失败!");
+                                }
+                            }
+                    });
+                }
+              
+            });
+
+
+            $(".cloud_share_button").click(function(e){
+                var share_detail = {}
+                share_detail['tbl_id'] = tbl_id;
+                share_detail['time'] = Date.parse(new Date())/1000;
+                $.ajax(
+                    {
+                        type: "post",
+                        url: remoteHost+"/new_share",
+                        data: JSON.stringify(share_detail),
+                        contentType: 'application/json;charset=UTF-8',
+                        success: 
+                            function(result){
+                                var res = JSON.parse(result)
+                                if(res.status === 'success')
+                                {
+                                    alert("分享成功!");
+                                }
+                                else
+                                {
+                                    alert("分享失败!");
+                                }
+                                $("#home_button").click();
+                            }
+                    });
+                
+            });
+        }
+        
+    }
+        $(".table_content").html(tableContent);
 }
 
 // 使表格可编辑

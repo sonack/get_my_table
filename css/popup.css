@@ -45,14 +45,14 @@ html,body
 
 .table_content
 {
-  height: 250px;
+  height: 270px;
   overflow: auto;
 }
 
 #main_header
 {
   height: 25px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .table_content .prompt
@@ -117,7 +117,68 @@ table a:link, table a:visited, table a:hover, table a:active
 #table_button
 {
   margin-left: 230px;
-  margin-top: 5px;
+  margin-top: 10px;
+}
+
+#cloud_table_button
+{
+  margin-top: 10px;
+  margin-left: 160px;
 }
 
 /* 表格样式 */
+
+
+/* 杂项 */
+span.remove_span
+{
+
+  background: url("../images/remove.png");
+}
+
+
+#user_avatar
+{
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  display: block;
+  margin: auto;
+  margin-top: 30px;
+  transition: all 2.0s;  
+}
+
+/*#avatar
+{
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  position: absolute;
+  z-index: 10;
+  right: 0px;
+  top: 0px;
+}*/
+
+#user_avatar:hover
+{  
+  transform: rotate(360deg); 
+}
+
+#left_info
+{
+  width: 50%;
+  float: left;
+  border-right: 2px dashed #ccc;
+}
+
+#right_info
+{
+  width: 50%;
+  float: right;
+  padding: 30px;
+}
+
+#username_info
+{
+  text-align: center;
+  /*color: purple;*/
+  margin-top: 10px;
+}
