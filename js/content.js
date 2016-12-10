@@ -801,7 +801,7 @@
     var menuState = function() {
         var n = document.body.getElementsByTagName("TABLE").length, // 当前页面的表格数量
             sel = lastEvent && canSelect(lastEvent.target); // 右键所在的单元格
-        console.log(lastEvent.target);
+        // console.log(lastEvent.target);
         return {
             hasSelection: !!selection,
             numTables:  n,
@@ -827,7 +827,7 @@
         switch(message.command) {
             case "anySelection":
                 if(selection)
-                    selectFinished();
+                    selectFinished();   // 向后台发送有选区
                 break;
             case "openPopup":
                 break;
