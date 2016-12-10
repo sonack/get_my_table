@@ -9,7 +9,6 @@ var main = $("#main");
 var save_status = false;
 var tableID;
 var cur_lang;
-// 切换页面到target_div
 
 function changeTo(target_div) {
     main.transition('fade'); // 切换特效 消失
