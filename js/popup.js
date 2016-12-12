@@ -1336,6 +1336,7 @@ var cloud_save_buttons = `
             // start 为云表格选取按钮绑定事件
 
             $("#choose_class").click(function(){
+            	updateLang();
                 $("#left_sidebar").sidebar('setting', 'transition', 'overlay').sidebar('toggle');
                 // $(".cloud_button").click();
             });
@@ -1824,19 +1825,19 @@ var setLang0 = function()
     $("#discard_button").text("Return");
     $("#sign_up_text").text("Sign Up");
     $("#after_sign_up_text ").text("You can save your tables after signing up!");
-    $("#username_input").text("Please Type In Your Username.");
+    $("#username_input").attr("placeholder","Please Type In Your Username.");
     $("#user_name_text").text("Username:");
     $("#password_text").text("Password:");
-    $("#password_input").text("Please Type In Your Password.");
+    $("#password_input").attr("placeholder","Please Type In Your Password.");
     $("#email_text").text("Email:");
-    $("#email_input").text("Please Type In Your Email.");
+    $("#email_input").attr("placeholder","Please Type In Your Email.");
     $("#register_button").text("Sign Up");
     $("#reset_text").text("Reset");
     $("#user_log_in_text").text("Log In");
     $("#no_account_text").text("If you don't have an account before, please sign up first.");
     $("#login_submit_button").text("Log In");
     $("#denglu_text").text("Log In");
-    $("#avatar_url").attr("placeholder","Url of the image:");
+    $("#avatar_url").attr("placeholder","Url Of The Image");
     $("#email").attr("placeholder","Please Type In Your Email.");
     $("#person_net").attr("placeholder","Please Type In Your Personal Net.");
     $("#intro").attr("placeholder","Please Introduce Yourself.");
@@ -1844,7 +1845,7 @@ var setLang0 = function()
     $("#introduction_text").text("Introduction:");
     $("#info_confirm_button").text("Submit");
     $("#info_cancel_button").text("Cancel");
-    $("#shared_tables_text").text("Shared Tables");
+    $("#shared_tables_text").text("Share Center");
     $("#cloud_save").text("Save");
     $("#cloud_save_as").text("Save as");
     $("#cloud_reset").text("Reset");
@@ -1853,11 +1854,11 @@ var setLang0 = function()
     $("#please_select_class_first").text("Plese Select A Category First!");
     $("#no_class_item").text("There is no category!");
     $("#text_text").text("Text");
-    $("#puretext_text").text("Puretext");
-    $("#richtext_text").text("Richtext");
-    $("#simplehtml_text").text("SimpleHTLM");
+    $("#puretext_text").text("Pure Text");
+    $("#richtext_text").text("Rich Text");
+    $("#simplehtml_text").text("Simple HTLM");
     $("#otherformat_text").text("Other Formats");
-    $("#hotkey_text").text("Hotkey");
+    $("#hotkey_text").text("Hot Key");
     $("#language_text").text("Language");
     $("#langKey0").text("English");
     $("#langKey1").text("Chinese");
@@ -1870,14 +1871,84 @@ var setLang0 = function()
     $("#information_text").text("Information");
     $("#sign_out_text").text("Sign Out");
     $("#select_category_text").text("Category");
-    $("#select_table_text").text("&nbsp;Table "); 
+    $("#select_table_text").text("　Table　"); 
     $("#be_classified_in_text").text("Category:"); 
+    $("#zhuce_text").text("Sign Up");
+    $("#share_center_text").text("Share Center");
 }
 
 // 更换语言为汉语
 var setLang1 = function()
 {
     console.log("汉语");
+    $("#previous_text").text("上一张");
+    $("#next_text").text("下一张");
+    $(".or").attr("data-text","或");
+    $("#copy_text").text("拷贝");
+    $("#complete_table_text").text("请完善表格信息");
+    $("#input_the_cate_text").text("输入分类");
+    $("#current_selected_table_text").text("当前选定表格：");
+    $("#no_table_selected_text").text("当前未选中表格");
+    $("#save_to_cloud").text("保存");
+    $("#add_new_class_button").text("新增一个类");
+    $("#confirm_button").text("确定");
+    $("#cancel_button").text("取消");
+    $("#plz_log_in_text").text("请登录以便在云端同步您的表格数据!");
+    $("#table_name_text").text("表格名称:");
+    $("#table_context_text").text("表格内容：");
+    $("#discard_button").text("返回");
+    $("#sign_up_text").text("用户注册");
+    $("#after_sign_up_text ").text("注册后，您就可以将表格保存到云端！");
+    $("#username_input").attr("placeholder","请输入用户名");
+    $("#user_name_text").text("用户名：");
+    $("#password_text").text("密码：");
+    $("#password_input").attr("placeholder","请输入密码");
+    $("#email_text").text("电子邮箱：");
+    $("#email_input").attr("placeholder","请输入email");
+    $("#register_button").text("注册");
+    $("#reset_text").text("重置");
+    $("#user_log_in_text").text("用户登录");
+    $("#no_account_text").text("还没有账号？请先注册用户");
+    $("#login_submit_button").text("登录");
+    $("#denglu_text").text("登录");
+    $("#avatar_url").attr("placeholder","请输入个性化头像的url");
+    $("#email").attr("placeholder","请输入email");
+    $("#person_net").attr("placeholder","请输入个人网址");
+    $("#intro").attr("placeholder","快介绍一下自己吧~");
+    $("#personal_net_text").text("个人网址：");
+    $("#introduction_text").text("简介：");
+    $("#info_confirm_button").text("确定");
+    $("#info_cancel_button").text("取消");
+    $("#shared_tables_text").text("动态广场");
+    $("#cloud_save").text("保存");
+    $("#cloud_save_as").text("另存为");
+    $("#cloud_reset").text("恢复");
+    $("#cloud_delete").text("删除");
+    $("#share_text").text("分享...");
+    $("#please_select_class_first").text("请首先选择分类");
+    $("#no_class_item").text("当前没有类别");
+    $("#text_text").text("文本");
+    $("#puretext_text").text("纯文本");
+    $("#richtext_text").text("富文本");
+    $("#simplehtml_text").text("简单HTML");
+    $("#otherformat_text").text("其他格式");
+    $("#hotkey_text").text("热键");
+    $("#language_text").text("语言");
+    $("#langKey0").text("英文");
+    $("#langKey1").text("中文");
+    $("#skin_text").text("皮肤");
+    $("#skin0_text").text("无皮肤");
+    $("#skin1_text").text("皮肤1");
+    $("#skin2_text").text("皮肤2");
+    $("#skin3_text").text("皮肤3");
+    $("#saved_tables_text").text("云表格");
+    $("#information_text").text("信息");
+    $("#sign_out_text").text("注销");
+    $("#select_category_text").text("选择分类");
+    $("#select_table_text").text("选择表格"); 
+    $("#be_classified_in_text").text("分类于:"); 
+    $("#zhuce_text").text("注册");
+    $("#share_center_text").text("云广场");
 }
 
 // 

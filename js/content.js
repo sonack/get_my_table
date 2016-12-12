@@ -232,8 +232,8 @@
                  chrome.runtime.sendMessage({popup_cmd:"setLang0"});  
                 break;
             case 1:
-                // alert("当前语言为中文");
-            break;
+            	chrome.runtime.sendMessage({popup_cmd:"setLang1"});  
+                break;
         }
     }
 
