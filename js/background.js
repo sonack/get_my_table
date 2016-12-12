@@ -107,17 +107,37 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 
 
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+    var popupPage = chrome.extension.getViews({
+                type: "popup"
+    });
+    if(!popupPage) return;
+    popupPage = popupPage[0];
+
+
     switch(message.popup_cmd) {
         case "hasSelected":
-            var popupPage = chrome.extension.getViews({
-                type: "popup"
-            });
-            if(popupPage)
-            {
-                popupPage = popupPage[0];
-                popupPage.updateTablePreview(message.content,false);
-                popupPage.makeTableEditable();
-            }
+            popupPage.updateTablePreview(message.content,false);
+            popupPage.makeTableEditable();
+            break;
+        case "setLang0":
+            popupPage.updateLang(0);
+            break;
+        case "setLang1":
+            popupPage.updateLang(1);
+            break;    
+
+
+        case "setSkin0":
+            popupPage.changeSkin(0);
+            break;
+        case "setSkin1":
+            popupPage.changeSkin(1);
+            break;
+        case "setSkin2":
+            popupPage.changeSkin(2);
+            break;
+        case "setSkin3":
+            popupPage.changeSkin(3);
             break;
     }
 });

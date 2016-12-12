@@ -14,11 +14,13 @@ var main = $("#main");
 
 var save_status = false;
 var tableID;
+var cur_lang;
 // 切换页面到target_div
 function changeTo(target_div)
 {
     main.transition('fade');   // 切换特效 消失
     main.html(target_div);  // 改变html
+    updateLang();
     main.transition('fade'); // 切换特效 出现
 }
 
@@ -37,7 +39,7 @@ var save_confirm_div = `
     <div id="save_confirm_div">
        
        <h3 class="ui header purple" style="margin-left: 30px;">
-            <i class="plug icon"></i>   <div class="content">请完善表格信息 </div>
+            <i class="plug icon"></i>   <div class="content"><span id="complete_table_text">请完善表格信息 </span></div>
        </h3>
 
         <div class="ui form" style="margin-left: 200px; margin-top: 40px;">
@@ -47,7 +49,7 @@ var save_confirm_div = `
             <div class="seven wide field" >
                 <label>分类于:</label>     
                 <select class="ui search dropdown" id="all_class">
-                    <option value="">输入分类</option>
+                    <option value="" id="input_the_cate_text">输入分类</option>
                 </select>
             </div>
             <div id="save_confirm_div_button" style="margin-top: 30px;">
@@ -1779,11 +1781,58 @@ var cloud_save_buttons = `
     });
 })(jQuery);
 
+
+
+var updateLang = function(lang)
+{
+    if(typeof(lang) !== "undefined")
+        cur_lang = lang;
+    console.log("当前语言" + cur_lang);
+    switch(cur_lang)
+    {
+        case 0:
+            setLang0();
+            break;
+        case 1:
+            setLang1();
+            break;
+    }
+}
+
+
+// 更换语言为英语
+var setLang0 = function()
+{
+    console.log("语言更换为英语");
+    $("#previous_text").text("Prev");
+    $("#next_text").text("Next");
+    $(".or").attr("data-text","OR");
+    $("#copy_text").text("Copy");
+    $("#current_selected_table_text").text("Selected Table Preview:");
+    $("#complete_table_text").text("Please Complete Table Info:");
+    $("#input_the_cate_text").text("Type In Category ... ")
+}
+
+// 更换语言为汉语
+var setLang1 = function()
+{
+    console.log("汉语");
+}
+
+// 
+var changeSkin = function(skinID)
+{
+    console.log("换肤" + skinID);
+    var skinPath = "skins/skin"+skinID+".css";
+    var theme = $("#theme");
+    theme.attr("href",skinPath);
+} 
+
 // 更新表格预览
 var updateTablePreview = function(tableContent,on_cloud,tbl_id)
 {
-    console.log("UPDATE TABLE PREVIEW");
-    console.log(tableContent);
+    // console.log("UPDATE TABLE PREVIEW");
+    // console.log(tableContent);
     if(!on_cloud)
     {
         $("#cloud_table_button").hide();

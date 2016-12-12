@@ -1,0 +1,14 @@
+html,body#popup_body,.pusher
+{
+    background: url("../images/background.jpg") !important;
+}
+#prev_button
+{
+    background-color: blue !important;
+    color: red !important;
+}
+
+#current_selected_table_text
+{
+    color: #99A2D9 !important;
+}

@@ -7,7 +7,10 @@
     <!-- 样式表 -->
     <link rel="stylesheet" type="text/css" href="css/vendor/reset.css">
     <link rel="stylesheet" type="text/css" href="semantic_ui/semantic.min.css">
-    <link rel="stylesheet" type="text/css" href="css/popup.css"></head>
+    <link rel="stylesheet" type="text/css" href="css/popup.css">
+    <link rel="stylesheet" type="text/css" href="#" id="theme">
+    
+    </head>
   <body id="popup_body">
   <div class="ui sidebar vertical menu" id="left_sidebar">
     <a class="item" id="no_class_item">
@@ -29,15 +32,15 @@
       
       <div class="topItem float_left">
         <div class="ui buttons">
-          <button class="ui orange button icon animated mFind" tabindex="0" cmd="findPrevTable">
-            <div class="visible content" cmd="findPrevTable">&nbsp;上一张</div>
+          <button class="ui orange button icon animated mFind" tabindex="0" cmd="findPrevTable" id="prev_button">
+            <div class="visible content" cmd="findPrevTable">&nbsp;<span id="previous_text">上一张</span></div>
             <div class="hidden content" cmd="findPrevTable">
               <i class="left arrow icon" cmd="findPrevTable"></i>
             </div>
           </button>
           <div class="or" data-text="或"></div>
           <button class="ui positive button icon animated mFind" tabindex="0" cmd="findNextTable">
-            <div class="visible content" cmd="findNextTable">&nbsp;&nbsp;&nbsp;下一张</div>
+            <div class="visible content" cmd="findNextTable">&nbsp;&nbsp;&nbsp;<span id="next_text">下一张</span></div>
             <div class="hidden content" cmd="findNextTable">
               <i class="right arrow icon" cmd="findNextTable"></i>
             </div>
@@ -49,7 +52,7 @@
       <div class="topItem float_left">
         <div class="ui teal buttons">
           <div class="ui button animated mCopy" cmd="copyRich">
-            <div class="visible content" cmd="copyRich">拷贝</div>
+            <div class="visible content" cmd="copyRich"><span id="copy_text">拷贝</span></div>
             <div class="hidden content" cmd="copyRich">
               <i class="paint brush icon" cmd="copyRich"></i>
             </div>
@@ -108,9 +111,9 @@
               </div>
               <div class="menu">
                 <a class="item" cmd="setSkin0">无皮肤</a>
-                <a class="item cmd="setSkin1">皮肤1</a>
-                <a class="item">皮肤2</a>
-                <a class="item">皮肤3</a>
+                <a class="item" cmd="setSkin1">皮肤1</a>
+                <a class="item" cmd="setSkin2">皮肤2</a>
+                <a class="item" cmd="setSkin3">皮肤3</a>
               </div>
             </div>
             
@@ -204,7 +207,7 @@
         <div id="table_header" class="float_left" style="margin-left: 20px;">
           <h3 class="ui purple header">
           <i class="table circle icon"></i>
-          <div class="content">当前选定表格:</div>
+          <div class="content"><span id="current_selected_table_text">当前选定表格:</span></div>
         </h3>
         </div>
       </div>
@@ -223,11 +226,8 @@
       </div>
 
       </div>
-
-      
-     
-
   </div>
+
   <!-- js脚本 -->
     <script type="text/javascript" src="js/vendor/jquery.min.js"></script>
     <script type="text/javascript" src="semantic_ui/semantic.min.js"></script>

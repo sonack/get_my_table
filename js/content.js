@@ -223,6 +223,39 @@
     };
 
 
+
+    var processLang = function()
+    {
+        switch(options.modLang)
+        {
+            case 0:
+                 chrome.runtime.sendMessage({popup_cmd:"setLang0"});  
+                break;
+            case 1:
+                // alert("当前语言为中文");
+            break;
+        }
+    }
+
+    var processSkin = function()
+    {
+        switch(options.modSkin)
+        {
+            case 0:
+                chrome.runtime.sendMessage({popup_cmd:"setSkin0"});
+                break;
+            case 1:
+                chrome.runtime.sendMessage({popup_cmd:"setSkin1"});
+                break;
+            case 2:
+                chrome.runtime.sendMessage({popup_cmd:"setSkin2"});
+                break;
+            case 3:
+                chrome.runtime.sendMessage({popup_cmd:"setSkin3"});
+                break;
+        }
+    }
+
     // 获得chrome存储的选项信息
     var updateOptions = function(fn) {
         chrome.storage.local.get(null, function(opts) {
@@ -231,14 +264,26 @@
             if(fn)
                 fn();
         });
-        console.log("选项" + options);
     }
+
+   
 
     // 设置选项信息
     var setOption = function(key, val) {
+        console.log("update before...");
+        console.log(options);
         options[key] = val;
+        console.log("update...");
+        console.log(options);
+        chrome.storage.local.set(options,function()
+        {
+            console.log(options);
+            // alert("设置成功!");
+        });
+        processLang();
+        processSkin();
         chrome.storage.local.clear();
-        chrome.storage.local.set(options);
+       
     }
 
     // ---------------------------------------------------------------------------------
@@ -833,6 +878,8 @@
                     selectFinished();   // 向后台发送有选区
                 break;
             case "openPopup":
+                processLang();
+                processSkin();
                 break;
             case "selectRow":
             case "selectColumn":
@@ -875,6 +922,29 @@
             case "setModKey1":
                 setOption("modKey", 1);
                 break;
+
+            case "setLang0":            // 设置语言
+                // alert("设置语言为英语");
+                setOption("modLang",0);
+                break;
+            case "setLang1":
+                // alert("设置语言为中文");
+                setOption("modLang",1);
+                break;
+            
+            case "setSkin0":            // 设置皮肤
+                setOption("modSkin",0);
+                break;
+            case "setSkin1":
+                setOption("modSkin",1);
+                break;
+            case "setSkin2":
+                setOption("modSkin",2);
+                break;
+            case "setSkin3":
+                setOption("modSkin",3);
+                break;
+
             case "updateOptions":  // 获取选项信息
                 updateOptions();
                 break;
