@@ -119,14 +119,15 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
             popupPage.updateTablePreview(message.content,false);
             popupPage.makeTableEditable();
             break;
+        // 语言设置
         case "setLang0":
             popupPage.updateLang(0);
             break;
         case "setLang1":
             popupPage.updateLang(1);
-            break;    
-
-
+            break;
+            
+        // 皮肤设置
         case "setSkin0":
             popupPage.changeSkin(0);
             break;

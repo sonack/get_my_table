@@ -1,4 +1,57 @@
 html,body#popup_body,.pusher
 {
-    background: url("../images/background.jpg") !important;
+    background: url("../images/background10.jpg") !important;
+}
+
+#current_selected_table_text
+{
+    color: #fff !important;
+}
+
+#table_circle_icon
+{
+    color: #fff !important;
+}
+
+#prev_button
+{
+    background-color: #322 !important;
+    color: pink !important;
+}
+
+#next_button
+{
+    background-color: #233 !important;
+    color: yellow !important;
+}
+
+#copy_button,#copy_dropdown_icon
+{
+    background-color: black !important;
+}
+
+#setting_button
+{
+    background-color: #567 !important;
+}
+
+#ret_home_button
+{
+    background-color: #765 !important;
+}
+
+th,td
+{
+  border: 2px inset #fff;
+  padding: 2px;
+}
+
+table *
+{
+    color: #fff !important;
+}
+
+.user_button
+{
+    background-color: #999 !important;
 }

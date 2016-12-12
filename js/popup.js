@@ -99,8 +99,8 @@ var save_confirm_div = `
            
             <div id="table_header" class="float_left" style="margin-left: 20px;">
                 <h3 class="ui purple header">
-                    <i class="table circle icon"></i>
-                    <div class="content">当前选定表格:</div>
+                    <i class="table circle icon" id="table_circle_icon"></i>
+                    <div class="content"><span id="current_selected_table_text">当前选定表格:</span></div>
                 </h3>
                 <!-- <img alt="Avatar" height="50px" width="50px" id="avatar" src="images/default_avatar.png"> -->
             </div>
@@ -109,8 +109,8 @@ var save_confirm_div = `
         <div id="main_content">
             <div class="currentTable">
                 <div class="table_content" id="scrollbar">
-                    <h3 class="prompt" style="color:#2185D0">
-                        <i class="info big circle icon blue"></i>   当前未选中表格
+                    <h3 class="prompt" style="color:#2185D0" id="no_select_prompt">
+                        <i class="info big circle icon blue" id="no_select_head"></i>   当前未选中表格
                     </h3>
                 </div>
                 <div id="table_button" style="display: none;">
@@ -253,8 +253,8 @@ var share_event = `
         <img src="images/default_avatar.png" id='ava'>
     </div>
     <div class="content">
-        <div class="summary">
-            <span id="user"></span> 分享了表格 "<a id="table"></a>",并表示鸭梨很大... <div class="date" style="float:right; margin-right:20px;"> </div>
+        <div class="summary" id="share_sum">
+            <span id="user"></span> 分享了表格 <img src="images/left_yinhao.png" id="l_y"> <a id="table"></a> <img src="images/right_yinhao.png" id="r_y">,并表示<span id="comm"></id> <div class="date" style="float:right; margin-right:20px;"> </div>
         </div>
     </div> 
 </div>
@@ -687,7 +687,7 @@ var cloud_save_buttons = `
                             changeTo(home_div);
                             // 云端表格选择按钮组 隐藏
                             // $("#cloud_select").slideUp();
-                            $("#cloud_select").fadeOut();                            
+                            // $("#cloud_select").fadeOut();                            
                             var res = JSON.parse(result);
                             if(res.status === 'success')
                             {
@@ -1206,7 +1206,9 @@ var cloud_save_buttons = `
             
             // 点击云表格按钮
             $(".cloud_button").click(function(){
+                $("#home_button").click();
                 $("#cloud_select").fadeIn();
+                
                 $.ajax({type:"get", url:remoteHost+"/get_all_class", success:function(result)
                 {
                     var res = JSON.parse(result);
@@ -1534,13 +1536,17 @@ var cloud_save_buttons = `
                                         var table = evt.find("#table");
                                         var date = evt.find(".date");
                                         var ava = evt.find("#ava"); 
+                                        var com = evt.find("#comm");
+
 
                                         var username_v = ele[0];
                                         var table_v = ele[2];
                                         var date_v = ele[1];
-                                        
-                                        username.text(username_v);
+                                        var comm = ele[3];
 
+
+                                        username.text(username_v);
+                                        com.text(comm);
                                         $.ajax({type:"post",data: '{"table_id":"' + table_v + '"}', url: remoteHost+"/get_table_name", contentType:"application/json;charset=UTF-8", success:function(result)
                                             {
                                                 var res = JSON.parse(result);
@@ -1907,6 +1913,12 @@ var updateTablePreview = function(tableContent,on_cloud,tbl_id)
             var share_detail = {}
             share_detail['tbl_id'] = tbl_id;
             share_detail['time'] = Date.parse(new Date())/1000;
+            share_detail['comment'] = prompt("说点什么吧~","赞爆了!!");
+            if($.trim(share_detail['comment']).length == 0)
+            {
+                share_detail['comment'] = "不想和你说话...";
+            }
+
             $.ajax(
                 {
                     type: "post",

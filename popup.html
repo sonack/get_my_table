@@ -39,7 +39,7 @@
             </div>
           </button>
           <div class="or" data-text="或"></div>
-          <button class="ui positive button icon animated mFind" tabindex="0" cmd="findNextTable">
+          <button class="ui positive button icon animated mFind" tabindex="0" cmd="findNextTable" id="next_button">
             <div class="visible content" cmd="findNextTable">&nbsp;&nbsp;&nbsp;<span id="next_text">下一张</span></div>
             <div class="hidden content" cmd="findNextTable">
               <i class="right arrow icon" cmd="findNextTable"></i>
@@ -51,13 +51,13 @@
       <!-- 左浮动 拷贝下拉菜单 -->
       <div class="topItem float_left">
         <div class="ui teal buttons">
-          <div class="ui button animated mCopy" cmd="copyRich">
+          <div class="ui button animated mCopy" cmd="copyRich" id="copy_button">
             <div class="visible content" cmd="copyRich"><span id="copy_text">拷贝</span></div>
             <div class="hidden content" cmd="copyRich">
               <i class="paint brush icon" cmd="copyRich"></i>
             </div>
           </div>
-          <div class="ui floating dropdown icon button mCopy">
+          <div class="ui floating dropdown icon button mCopy" id="copy_dropdown_icon">
             <i class="dropdown icon"></i>
             <div class="menu">
               <div class="header">
@@ -83,7 +83,7 @@
       
       <!-- 左浮动 设置按钮 -->
       <div class="topItem float_left" style="margin-left: 0px; margin-right: 0px ;">
-        <div class="item ui floating icon dropdown button blue circular large">
+        <div class="item ui floating icon dropdown button blue circular large" id="setting_button">
           <i class="settings icon"></i>
           <div class="menu">
             <div class="ui dropdown item">
@@ -123,7 +123,7 @@
       
       <!-- 左浮动 主页按钮 -->
       <div class="topItem float_left" id="home_button">
-      <div  class="ui button icon brown circular large">
+      <div  class="ui button icon brown circular large" id="ret_home_button">
         <i class="home icon"></i></div>
       </div>
 
@@ -131,11 +131,11 @@
       <!-- 右浮动 用户按钮 -->
      <div class="topItem float_right" style="display: none;" id="user_div">
         <div class="ui teal buttons">
-          <div class="ui icon button cloud_button">
+          <div class="ui icon button cloud_button user_button">
               <i class="user icon"></i>
               <span id="login_username"></span>
           </div>
-          <div class="ui floating dropdown icon button">
+          <div class="ui floating dropdown icon button user_button">
             <i class="dropdown icon"></i>
             <div class="menu">
               <div class="item cloud_button">
@@ -206,7 +206,7 @@
 
         <div id="table_header" class="float_left" style="margin-left: 20px;">
           <h3 class="ui purple header">
-          <i class="table circle icon"></i>
+          <i class="table circle icon" id="table_circle_icon"></i>
           <div class="content"><span id="current_selected_table_text">当前选定表格:</span></div>
         </h3>
         </div>
@@ -215,8 +215,8 @@
       
         <div class="currentTable">
          <div class="table_content" id="scrollbar">
-            <h3 class="prompt" style="color:#2185D0">
-            <i class="info big circle icon blue"></i>当前未选中表格</h3>
+            <h3 class="prompt" style="color:#2185D0" id="no_select_prompt">
+            <i class="info big circle icon blue" id="no_select_head"></i>当前未选中表格</h3>
          </div>
          <div id="table_button" style="display: none;">
            <button class="ui primary button disabled" id="save_to_cloud">保存到云端... </button>
