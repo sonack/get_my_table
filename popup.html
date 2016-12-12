@@ -61,19 +61,19 @@
             <i class="dropdown icon"></i>
             <div class="menu">
               <div class="header">
-                <i class="tags icon"></i>文本</div>
+                <i class="tags icon"></i><span id="text_text">文本</span></div>
               <div class="item" cmd="copyText">
-                <i class="file text outline icon"></i>纯文本</div>
+                <i class="file text outline icon"></i><span id="puretext_text">纯文本</span></div>
               <div class="item" cmd="copyRich">
-                <i class="file word outline icon"></i>富文本</div>
+                <i class="file word outline icon"></i><span id="richtext_text">富文本</span></div>
               <div class="header">
                 <i class="tags icon"></i>HTML</div>
               <div class="item" cmd="copyHTML">
-                <i class="html5 icon"></i>简单HTML</div>
+                <i class="html5 icon"></i><span id="simplehtml_text">简单HTML</span></div>
               <div class="item" cmd="copyStyled">
                 <i class="css3 icon"></i>HTML+CSS</div>
               <div class="header">
-                <i class="tags icon"></i>其他格式</div>
+                <i class="tags icon"></i><span id="otherformat_text">其他格式</span></div>
               <div class="item" cmd="copyCSV">
                 <i class="table icon"></i>CSV</div>
             </div>
@@ -88,7 +88,7 @@
           <div class="menu">
             <div class="ui dropdown item">
             <div class="header">
-              <i class="keyboard icon"></i>热键</div>
+              <i class="keyboard icon"></i><span id="hotkey_text">热键</span></div>
               <div class="menu">
                   <div class="item" id="modKey0" cmd="setModKey0">Ctrl</div>
                   <div class="item" id="modKey1" cmd="setModKey1">Alt</div>
@@ -96,7 +96,7 @@
             </div>
             <div class="ui dropdown item">
               <div class="header">
-              <i class="tags icon"></i>语言</div>
+              <i class="tags icon"></i><span id="language_text">语言</span></div>
               <div class="menu">
                 <div class="item" id="langKey0" cmd="setLang0">英文</div>
                 <div class="item" id="langKey1" cmd="setLang1">中文</div>
@@ -107,13 +107,13 @@
             
             <div class="ui dropdown item">  
               <div class="header">
-              <i class="diamond icon"></i>皮肤
+              <i class="diamond icon"></i><span id="skin_text">皮肤</span>
               </div>
               <div class="menu">
-                <a class="item" cmd="setSkin0">无皮肤</a>
-                <a class="item" cmd="setSkin1">皮肤1</a>
-                <a class="item" cmd="setSkin2">皮肤2</a>
-                <a class="item" cmd="setSkin3">皮肤3</a>
+                <a class="item" cmd="setSkin0" id="skin0_text">无皮肤</a>
+                <a class="item" cmd="setSkin1" id="skin1_text">皮肤1</a>
+                <a class="item" cmd="setSkin2" id="skin2_text">皮肤2</a>
+                <a class="item" cmd="setSkin3" id="skin3_text">皮肤3</a>
               </div>
             </div>
             
@@ -139,13 +139,13 @@
             <i class="dropdown icon"></i>
             <div class="menu">
               <div class="item cloud_button">
-                <i class="cloud icon"></i>云表格</div>
+                <i class="cloud icon"></i><span id="saved_tables_text">云表格</span></div>
               <div class="item cloud_square">
-                <i class="users icon"></i>云广场</div>
+                <i class="users icon"></i><span id="share_center_text">云广场</span></div>
               <div class="item info_button">
-                <i class="info icon"></i>信息</div>
+                <i class="info icon"></i><span id="information_text">信息</span></div>
               <div class="item" id="logout_button">
-                <i class="sign out icon"></i>注销</div>
+                <i class="sign out icon"></i><span id="sign_out_text">注销</span></div>
             </div>
           </div>
         </div>
@@ -156,14 +156,14 @@
     <div class="topItem float_right" id="cloud_select" style="display: none;">
            <div class="ui buttons">
           <button class="ui orange button icon animated" tabindex="0" id="choose_class">
-            <div class="visible content">&nbsp;选择分类</div>
+            <div class="visible content">&nbsp;<span id="select_category_text">选择分类</span></div>
             <div class="hidden content">
               <i class="list icon"></i>
             </div>
           </button>
           <div class="or" data-text="或"></div>
           <button class="ui positive button icon animated" tabindex="0" id="choose_id">
-            <div class="visible content">&nbsp;&nbsp;选择表格</div>
+            <div class="visible content">&nbsp;&nbsp;<span id="select_table_text">选择表格</span></div>
             <div class="hidden content">
               <i class="ordered list icon"></i>
             </div>
@@ -176,14 +176,14 @@
       <div class="topItem float_right" id="login_or_register">
         <div class="ui buttons">
           <button id="login_button" class="ui red button icon animated" tabindex="0">
-            <div class="visible content">&nbsp;&nbsp;登录</div>
+            <div class="visible content">&nbsp;&nbsp;<span id="denglu_text">登录</span></div>
             <div class="hidden content">
               <i class="user icon"></i>
             </div>
           </button>
           <div class="or" data-text="或"></div>
           <button id="signup_button" class="ui violet button icon animated" tabindex="0">
-            <div class="visible content">&nbsp;&nbsp;注册</div>
+            <div class="visible content">&nbsp;&nbsp;<span id="zhuce_text">注册</span></div>
             <div class="hidden content">
               <i class="sign in icon"></i>
             </div>
@@ -200,7 +200,7 @@
         <div id="please_login" class="float_right" style="margin-right: 20px;display: none;">
           <h3 class="ui teal header">
             <i class="warning circle icon"></i>
-            <div class="content">请登录以便在云端同步您的表格数据!</div>
+            <div class="content" id="plz_log_in_text">请登录以便在云端同步您的表格数据!</div>
           </h3>
         </div>
 
@@ -216,10 +216,12 @@
         <div class="currentTable">
          <div class="table_content" id="scrollbar">
             <h3 class="prompt" style="color:#2185D0" id="no_select_prompt">
-            <i class="info big circle icon blue" id="no_select_head"></i>当前未选中表格</h3>
+            <i class="info big circle icon blue" id="no_select_head"></i><span id="no_table_selected_text">当前未选中表格</span></h3>
+            <h3 class="prompt" style="color:#2185D0">
+            <i class="info big circle icon blue"></i>当前未选中表格</span></h3>
          </div>
          <div id="table_button" style="display: none;">
-           <button class="ui primary button disabled" id="save_to_cloud">保存到云端... </button>
+           <button class="ui primary button disabled" id="save_to_cloud">保存 </button>
            <button class="ui button" style="margin-left: 50px;" id="discard_button">放弃 </button>
          </div>
         </div>
