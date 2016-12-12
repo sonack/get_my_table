@@ -44,10 +44,10 @@ var save_confirm_div = `
 
         <div class="ui form" style="margin-left: 200px; margin-top: 40px;">
             <div class="seven wide required field">
-                <label>表格名称:</label>    <input type="text" id="table_name_input">
+                <label><span id="table_name_text">表格名称:</span></label>    <input type="text" id="table_name_input">
             </div>
             <div class="seven wide field" >
-                <label>分类于:</label>     
+                <label><span id = "be_classified_in_text">分类于:</span></label>     
                 <select class="ui search dropdown" id="all_class">
                     <option value="" id="input_the_cate_text">输入分类</option>
                 </select>
@@ -70,7 +70,7 @@ var save_confirm_div = `
             <div id="table_header" class="float_left" style="margin-left: 20px;">
                 <h3 class="ui purple header">
                     <i class="table circle icon"></i>
-                    <div class="content">表格内容:</div>
+                    <div class="content"><span id = "table_context_text">表格内容:</span></div>
                 </h3>
                 <!-- <img alt="Avatar" height="50px" width="50px" id="avatar" src="images/default_avatar.png"> -->
             </div>
@@ -93,14 +93,14 @@ var save_confirm_div = `
         <div id="main_header">
             <div id="please_login" class="float_right" style="margin-right: 20px;">
                 <h3 class="ui teal header">
-                    <i class="warning circle icon"></i>     <div class="content">请登录以便在云端同步您的表格数据!</div>
+                    <i class="warning circle icon"></i>     <div class="content"><span id = "plz_log_in_text">请登录以便在云端同步您的表格数据!</span></div>
                 </h3>
             </div>
            
             <div id="table_header" class="float_left" style="margin-left: 20px;">
                 <h3 class="ui purple header">
                     <i class="table circle icon"></i>
-                    <div class="content">当前选定表格:</div>
+                    <div class="content"><span id = "current_selected_table_text">当前选定表格:</span></div>
                 </h3>
                 <!-- <img alt="Avatar" height="50px" width="50px" id="avatar" src="images/default_avatar.png"> -->
             </div>
@@ -109,13 +109,13 @@ var save_confirm_div = `
         <div id="main_content">
             <div class="currentTable">
                 <div class="table_content" id="scrollbar">
-                    <h3 class="prompt" style="color:#2185D0">
-                        <i class="info big circle icon blue"></i>   当前未选中表格
+                    <h3 class="prompt" style="color:#2185D0" >
+                        <i class="info big circle icon blue"></i> <span id="no_table_selected_text">当前未选中表格</span>
                     </h3>
                 </div>
                 <div id="table_button" style="display: none;">
-                    <button class="ui primary button disabled" id="save_to_cloud">保存到云端... </button>
-                    <button class="ui button" style="margin-left: 50px;" id="discard_button">放弃 </button>
+                    <button class="ui primary button disabled" id="save_to_cloud">保存 </button>
+                    <button class="ui button" style="margin-left: 50px;" id="discard_button">返回 </button>
                 </div>
             </div>
       </div>
@@ -126,8 +126,8 @@ var save_confirm_div = `
     <div id="signup_div">
         <h3 class="ui blue header" style="margin-left: 10%;">
             <i class="add square icon"></i>
-            <div class="content">用户注册
-                <div class="sub header">注册后，您就可以将表格保存到云端！</div>
+            <div class="content"><span id="sign_up_text">用户注册</span>
+                <div class="sub header"><span id="after_sign_up_text">注册后，您就可以将表格保存到云端！</span></div>
             </div>
         </h3>
         
@@ -136,24 +136,24 @@ var save_confirm_div = `
         <form class="ui form" style="width: 300px; margin: auto;" id="register_form">
             <!-- 用户名 必需 -->
             <div class="required field">
-                <label>用户名：<span id="username_errormsg" style='float:right'></span> </label>
+                <label><span id="user_name_text">用户名：</span><span id="username_errormsg" style='float:right'></span> </label>
                 <input type="text" name="username" placeholder="请输入用户名" id="username_input">
             </div>
 
             <!-- 密码 必需 -->
             <div class="required field">
-                <label>密码：<span id="password_errormsg" style='float:right'></span></label>
+                <label><span id = "password_text">密码：<\span><span id="password_errormsg" style='float:right'></span></label>
                 <input type="password" name="password" placeholder="请输入密码" id="password_input">
             </div>
             
             <!-- 电子邮箱 必需 -->
             <div class="required field">
-                <label>电子邮箱：<span id="email_errormsg" style='float:right'></span></label>
+                <label><span id = "email_text">电子邮箱：</span><span id="email_errormsg" style='float:right'></span></label>
                 <input type="text" name="email" placeholder="请输入email" id="email_input">
             </div>
 
             <button class="ui red button" id="register_button" style="margin-right: 50px; margin-left: 50px;">注册</button>
-            <button class="ui violet button" type="reset">重置</button>
+            <button class="ui violet button" type="reset"><span id = "reset_text">重置</span></button>
         </form>
     </div>
     <!-- 注册页面 结束 -->
@@ -164,8 +164,8 @@ var save_confirm_div = `
     <div id="login_div">
         <h3 class="ui brown header" style="margin-left: 10%;">
             <i class="home icon"></i>
-            <div class="content">用户登录
-                <div class="sub header">还没有账号？请先注册用户</div>
+            <div class="content"><span id="user_log_in_text">用户登录</span>
+                <div class="sub header"><span id="no_account_text">还没有账号？请先注册用户</span></div>
             </div>
         </h3>
 
@@ -174,16 +174,16 @@ var save_confirm_div = `
         <form class="ui form" style="width: 300px; margin: auto;" id="login_form">
     
             <div class="required field">
-                <label>用户名：<span id="username_errormsg" style='float:right'></span></label>
+                <label><span id="user_name_text">用户名：</span><span id="username_errormsg" style='float:right'></span></label>
                 <input type="text" name="username" placeholder="请输入用户名" id="username_input">
             </div>
 
             <div class="required field">
-                <label>密码：<span id="password_errormsg" style='float:right'></span></label>
+                <label><span id="password_text">密码：</span><span id="password_errormsg" style='float:right'></span></label>
                 <input type="password" name="password" placeholder="请输入密码" id="password_input">
             </div>
 
-            <button class="ui red button" id="login_submit_button" style="margin-left:100px; margin-top: 25px;">登录</button>
+            <button class="ui red button" id="login_submit_button" style="margin-left:100px; margin-top: 25px;"><span id="denglu_text">登录</span></button>
         </form>
     </div> 
     <!-- 登录页面 结束 -->
@@ -205,17 +205,17 @@ var person_info_div = `
         <div id="right_info">
           <form class="ui form" style="margin: auto;" id="register_form">  
             <div class="field">
-                <label>电子邮箱：</label>
+                <label><span id="email_text">电子邮箱：</span></label>
                 <input type="text" name="email" readonly="" placeholder="请输入email" id="email">
             </div>
 
             <div class="field">
-                <label>个人网址：</label>
+                <label><span id="personal_net_text">个人网址：</span></label>
                 <input type="text" name="person_net" placeholder="请输入个人网址" id="person_net">
             </div>
 
             <div class="field">
-                <label>简介：</label>
+                <label><span id="introduction_text">简介：</span></label>
                 <textarea rows="4" name="intro" placeholder="快介绍一下自己吧~" id="intro"></textarea>
             </div>
 
@@ -235,7 +235,7 @@ var cloud_square_div = `
         <div>
           <h3 class="ui header blue" id="share_square_header">
             <i class="users icon"></i>
-            <div class="content">动态广场 </div>
+            <div class="content"><span id="shared_tables_text">动态广场</span> </div>
           </h3>  
         </div>
 
@@ -277,7 +277,7 @@ var cloud_save_buttons = `
 
 
         <button class="ui circular purple button icon cloud_share_button" tabindex="0" style="margin-left:60px; id="">
-            <div class="visible content "> <i class="share alternate icon"></i>&nbsp;分享... &nbsp;</div>
+            <div class="visible content "> <i class="share alternate icon"></i>&nbsp;<span id="share_text">分享... </span>&nbsp;</div>
         </button>
 
     </div>
@@ -1284,6 +1284,7 @@ var cloud_save_buttons = `
                             });
 
                             $("#right_sidebar a").click(function(){
+                            	
                                 var tbl_id = $(this).attr("table_id");
                                 $.ajax({type:"post",data: '{"table_id":"' + tbl_id + '"}', url: remoteHost+"/get_table_by_id", contentType:"application/json;charset=UTF-8", success:function(result)
                                     {
@@ -1292,6 +1293,7 @@ var cloud_save_buttons = `
                                         if(res.status === 'success')
                                         {
                                             updateTablePreview(res.content,true,tbl_id);
+                                            updateLang();
                                             makeTableEditable();
                                         }
                                         else
@@ -1808,9 +1810,68 @@ var setLang0 = function()
     $("#next_text").text("Next");
     $(".or").attr("data-text","OR");
     $("#copy_text").text("Copy");
-    $("#current_selected_table_text").text("Selected Table Preview:");
     $("#complete_table_text").text("Please Complete Table Info:");
-    $("#input_the_cate_text").text("Type In Category ... ")
+    $("#input_the_cate_text").text("Type In Category ... ");
+    $("#current_selected_table_text").text("Currently Selected Table:");
+    $("#no_table_selected_text").text("No Table Selected");
+    $("#save_to_cloud").text("Save");
+    $("#add_new_class_button").text("Add New Class");
+    $("#confirm_button").text("Submit");
+    $("#cancel_button").text("Cancel");
+    $("#plz_log_in_text").text("Please Log In!");
+    $("#table_name_text").text("Table Name:");
+    $("#table_context_text").text("Table Context:");
+    $("#discard_button").text("Return");
+    $("#sign_up_text").text("Sign Up");
+    $("#after_sign_up_text ").text("You can save your tables after signing up!");
+    $("#username_input").text("Please Type In Your Username.");
+    $("#user_name_text").text("Username:");
+    $("#password_text").text("Password:");
+    $("#password_input").text("Please Type In Your Password.");
+    $("#email_text").text("Email:");
+    $("#email_input").text("Please Type In Your Email.");
+    $("#register_button").text("Sign Up");
+    $("#reset_text").text("Reset");
+    $("#user_log_in_text").text("Log In");
+    $("#no_account_text").text("If you don't have an account before, please sign up first.");
+    $("#login_submit_button").text("Log In");
+    $("#denglu_text").text("Log In");
+    $("#avatar_url").attr("placeholder","Url of the image:");
+    $("#email").attr("placeholder","Please Type In Your Email.");
+    $("#person_net").attr("placeholder","Please Type In Your Personal Net.");
+    $("#intro").attr("placeholder","Please Introduce Yourself.");
+    $("#personal_net_text").text("Personal Net:");
+    $("#introduction_text").text("Introduction:");
+    $("#info_confirm_button").text("Submit");
+    $("#info_cancel_button").text("Cancel");
+    $("#shared_tables_text").text("Shared Tables");
+    $("#cloud_save").text("Save");
+    $("#cloud_save_as").text("Save as");
+    $("#cloud_reset").text("Reset");
+    $("#cloud_delete").text("Delete");
+    $("#share_text").text("Share");
+    $("#please_select_class_first").text("Plese Select A Category First!");
+    $("#no_class_item").text("There is no category!");
+    $("#text_text").text("Text");
+    $("#puretext_text").text("Puretext");
+    $("#richtext_text").text("Richtext");
+    $("#simplehtml_text").text("SimpleHTLM");
+    $("#otherformat_text").text("Other Formats");
+    $("#hotkey_text").text("Hotkey");
+    $("#language_text").text("Language");
+    $("#langKey0").text("English");
+    $("#langKey1").text("Chinese");
+    $("#skin_text").text("Skin");
+    $("#skin0_text").text("Blank");
+    $("#skin1_text").text("Skin1");
+    $("#skin2_text").text("Skin2");
+    $("#skin3_text").text("Skin3");
+    $("#saved_tables_text").text("Saved Tables");
+    $("#information_text").text("Information");
+    $("#sign_out_text").text("Sign Out");
+    $("#select_category_text").text("Category");
+    $("#select_table_text").text("&nbsp;Table "); 
+    $("#be_classified_in_text").text("Category:"); 
 }
 
 // 更换语言为汉语
