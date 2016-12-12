@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/vendor/reset.css">
     <link rel="stylesheet" type="text/css" href="semantic_ui/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css"></head>
-  <body>
+  <body id="popup_body">
   <div class="ui sidebar vertical menu" id="left_sidebar">
     <a class="item" id="no_class_item">
       当前没有类别
@@ -79,20 +79,48 @@
       </div>
       
       <!-- 左浮动 设置按钮 -->
-      <div class="topItem float_left">
-        <div class="item ui floating icon dropdown button blue">
+      <div class="topItem float_left" style="margin-left: 0px; margin-right: 0px ;">
+        <div class="item ui floating icon dropdown button blue circular large">
           <i class="settings icon"></i>
           <div class="menu">
+            <div class="ui dropdown item">
             <div class="header">
-              <i class="tags icon"></i>热键</div>
-            <div class="item" id="modKey0" cmd="setModKey0">Ctrl</div>
-            <div class="item" id="modKey1" cmd="setModKey1">Alt</div></div>
+              <i class="keyboard icon"></i>热键</div>
+              <div class="menu">
+                  <div class="item" id="modKey0" cmd="setModKey0">Ctrl</div>
+                  <div class="item" id="modKey1" cmd="setModKey1">Alt</div>
+              </div>
+            </div>
+            <div class="ui dropdown item">
+              <div class="header">
+              <i class="tags icon"></i>语言</div>
+              <div class="menu">
+                <div class="item" id="langKey0" cmd="setLang0">英文</div>
+                <div class="item" id="langKey1" cmd="setLang1">中文</div>
+              </div>
+
+            </div>
+          
+            
+            <div class="ui dropdown item">  
+              <div class="header">
+              <i class="diamond icon"></i>皮肤
+              </div>
+              <div class="menu">
+                <a class="item" cmd="setSkin0">无皮肤</a>
+                <a class="item cmd="setSkin1">皮肤1</a>
+                <a class="item">皮肤2</a>
+                <a class="item">皮肤3</a>
+              </div>
+            </div>
+            
+            </div>
         </div>
       </div>
       
       <!-- 左浮动 主页按钮 -->
       <div class="topItem float_left" id="home_button">
-      <div  class="ui button icon brown">
+      <div  class="ui button icon brown circular large">
         <i class="home icon"></i></div>
       </div>
 
@@ -132,7 +160,7 @@
           </button>
           <div class="or" data-text="或"></div>
           <button class="ui positive button icon animated" tabindex="0" id="choose_id">
-            <div class="visible content">&nbsp;&nbsp;&nbsp;选择表格</div>
+            <div class="visible content">&nbsp;&nbsp;选择表格</div>
             <div class="hidden content">
               <i class="ordered list icon"></i>
             </div>
@@ -196,6 +224,7 @@
 
       </div>
 
+      
      
 
   </div>

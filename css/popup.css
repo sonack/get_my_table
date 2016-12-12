@@ -1,11 +1,22 @@
 /* 布局样式 */
 
-html,body
+*
+{
+  font: "微软雅黑";
+}
+html,body#popup_body
 {
   width: 700px;
   height: 420px;
-  background: white !important;
+  /*background: white !important;*/
+  background: url("../images/background.jpg") !important;
+  filter:alpha(opacity=90);
   overflow: hidden;
+}
+
+.pusher
+{
+  background: url("../images/background.jpg") !important;
 }
 
 .topBar
@@ -95,7 +106,7 @@ html,body
 
 th,td
 {
-  border: 3px solid #333333;
+  border: 2px inset #333333;
   padding: 2px;
 }
 
@@ -117,12 +128,12 @@ table a:link, table a:visited, table a:hover, table a:active
 #table_button
 {
   margin-left: 230px;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 #cloud_table_button
 {
-  margin-top: 10px;
+  margin-top: 8px;
   margin-left: 160px;
 }
 
@@ -181,4 +192,40 @@ span.remove_span
   text-align: center;
   /*color: purple;*/
   margin-top: 10px;
+}
+
+/*动态*/
+#share_square_header
+{
+  margin-left: 280px;
+
+}
+
+#share_square_content_div
+{
+  width: 450px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.share_feed_div
+{
+  overflow: auto;
+  height: 280px;
+}
+
+.event
+{
+  border-bottom: 1px dashed #fff;
+  padding-bottom: 5px !important;
+  padding-top: 5px !important;
+}
+
+#ava
+{
+  border-radius: 50% !important;
+  border: 1px solid #ccc !important;
+  height: 40px;
+  width: 40px;
+  margin-right: 20px;
 }
