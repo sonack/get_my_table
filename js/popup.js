@@ -2160,7 +2160,7 @@ var updateTablePreview = function(tableContent,on_cloud,tbl_id)
         $("#cloud_reset").click(function()
         {
             console.log(tableContent);
-            alert("恢复");
+            // alert("恢复");
             $(".table_content").html(tableContent);
             return false;
         });
