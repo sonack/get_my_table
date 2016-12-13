@@ -32,12 +32,8 @@
     var clsHighlight = "__copytables__D__";
 
     // 修改热键，ctrl/command或者alt
-<<<<<<< HEAD
     var modKeys = [(navigator.userAgent.indexOf("Macintosh") > 0) ? "metaKey" : "ctrlKey","altKey"];
 
-=======
-    var modKeys = [(navigator.userAgent.indexOf("Macintosh") > 0) ? "metaKey": "ctrlKey", "altKey"];
->>>>>>> customize
 
     // ---------------------------------------------------------------------------------
     // 工具方法
@@ -121,17 +117,17 @@
 
     // 给元素el添加类cls
     var addClass = function(el, cls) {
-        if (el) {
+        if(el) {
             var c = $W(el.className);
-            if (c.indexOf(cls) < 0) // 没有出现过，则添加
-            c.push(cls);
+            if(c.indexOf(cls) < 0)          // 没有出现过，则添加
+                c.push(cls);
             el.className = c.join(" ");
         }
     };
 
     // 从元素el中移除类cls
     var removeClass = function(el, cls) {
-        if (el && el.className) {
+        if(el && el.className) {
             var cname = $W(el.className).filter(function(x) {
                 return x != cls;
             }).join(" ");               // 过滤掉要被移除的class名
@@ -149,12 +145,8 @@
 
     // 如果元素能够被滚动(scrollable)，则返回true
     var isScrollable = function(el) {
-<<<<<<< HEAD
         if(!el || el == document || el == document.body)
             return false;
-=======
-        if (!el || el == document || el == document.body) return false;
->>>>>>> customize
         var css = document.defaultView.getComputedStyle(el);
         if(!css.overflowX.match(/scroll|auto/) && !css.overflowY.match(/scroll|auto/))
             return false;
@@ -163,14 +155,9 @@
 
     // el的最近可滚动父元素
     var closestScrollable = function(el) {
-<<<<<<< HEAD
         while(el) {
             if(isScrollable(el))
                 return el;
-=======
-        while (el) {
-            if (isScrollable(el)) return el;
->>>>>>> customize
             el = el.parentNode;
         }
         return null;
@@ -195,7 +182,6 @@
 
     // 如果矩形a和b相交，则返回true，注意这里的矩形的边都是平行于坐标轴的，边的重叠不算相交
     var intersect = function(a, b) {
-<<<<<<< HEAD
         return !(a[0] >= b[2] || a[2] <= b[0] || a[1] >= b[3] || a[3] <= b[1])
     };
 
@@ -203,14 +189,6 @@
     var transpose = function (m) {
         if(!m || !m[0])
             return m;
-=======
-        return ! (a[0] >= b[2] || a[2] <= b[0] || a[1] >= b[3] || a[3] <= b[1])
-    };
-
-    // 转置一个矩阵
-    var transpose = function(m) {
-        if (!m || !m[0]) return m;
->>>>>>> customize
         return m[0].map(function(_, c) {
             return m.map(function(row) {
                 return row[c];
@@ -221,13 +199,7 @@
     // 移除矩阵中不满足keep函数的行或列
     var trimMatrix = function(mat, keep) {
         var fun = function(row) {
-<<<<<<< HEAD
             return row.some(function(cell) { return keep(cell) });
-=======
-            return row.some(function(cell) {
-                return keep(cell)
-            });
->>>>>>> customize
         };
         mat = mat.filter(fun);
         mat = transpose(mat).filter(fun);
@@ -235,22 +207,10 @@
     };
 
     // 移除字符串两端多余的空白
-<<<<<<< HEAD
     var lstrip = function(s) { return s.replace(/^\s+/, "") };
     var rstrip = function(s) { return s.replace(/\s+$/, "") };
     var strip  = function(s) { return lstrip(rstrip(s)) };
 
-=======
-    var lstrip = function(s) {
-        return s.replace(/^\s+/, "")
-    };
-    var rstrip = function(s) {
-        return s.replace(/\s+$/, "")
-    };
-    var strip = function(s) {
-        return lstrip(rstrip(s))
-    };
->>>>>>> customize
 
     // ---------------------------------------------------------------------------------
     // 选项
@@ -262,7 +222,6 @@
         modSkin: 1           // 默认皮肤
     };
 
-<<<<<<< HEAD
 
 
     var processLang = function()
@@ -297,77 +256,19 @@
             case 4:
                 chrome.runtime.sendMessage({popup_cmd:"setSkin4"});
                 break;
-=======
-    var processLang = function() {
-        switch (options.modLang) {
-        case 0:
-            chrome.runtime.sendMessage({
-                popup_cmd:
-                "setLang0"
-            });
-            break;
-        case 1:
-            chrome.runtime.sendMessage({
-                popup_cmd:
-                "setLang1"
-            });
-            break;
-        }
-    }
-
-    var processSkin = function() {
-        switch (options.modSkin) {
-        case 0:
-            chrome.runtime.sendMessage({
-                popup_cmd:
-                "setSkin0"
-            });
-            break;
-        case 1:
-            chrome.runtime.sendMessage({
-                popup_cmd:
-                "setSkin1"
-            });
-            break;
-        case 2:
-            chrome.runtime.sendMessage({
-                popup_cmd:
-                "setSkin2"
-            });
-            break;
-        case 3:
-            chrome.runtime.sendMessage({
-                popup_cmd:
-                "setSkin3"
-            });
-            break;
-        case 4:
-            chrome.runtime.sendMessage({
-                popup_cmd:
-                "setSkin4"
-            });
-            break;
->>>>>>> customize
         }
     }
 
     // 获得chrome存储的选项信息
     var updateOptions = function(fn) {
-<<<<<<< HEAD
         console.log("get options as ")
         chrome.storage.local.get(null, function(opts) {
             if(Object.keys(opts).length)
             {
-=======
-        console.log("get options as ") chrome.storage.local.get(null,
-        function(opts) {
-            if (Object.keys(opts).length) {
->>>>>>> customize
                 options = opts;
                 console.log("as");
                 console.log(options);
             }
-<<<<<<< HEAD
             if(fn)
                 fn();
         });
@@ -380,23 +281,12 @@
        
        
         updateOptions(function(){
-=======
-            if (fn) fn();
-        });
-    }
-
-    // 设置选项信息
-    var setOption = function(key, val) {
-
-        updateOptions(function() {
->>>>>>> customize
             console.log("update before...");
             console.log(options);
             options[key] = val;
             console.log("update after...");
             console.log(options);
             chrome.storage.local.clear();
-<<<<<<< HEAD
             chrome.storage.local.set(options,function(){
             console.log("存储成功");
             chrome.storage.local.get(null, function(opts) {
@@ -406,19 +296,6 @@
             });
         });
        
-=======
-            chrome.storage.local.set(options,
-            function() {
-                console.log("存储成功");
-                chrome.storage.local.get(null,
-                function(opts) {
-                    console.log(opts);
-                    processLang();
-                    processSkin();
-                });
-            });
-
->>>>>>> customize
         });
     }
 
@@ -440,7 +317,6 @@
     // 将一个表格转换为矩阵. 矩阵中的元素，要么是代表一个真实存在的数据单元格，表示为`{td:some-cell}`),
     // 要么是一个虚拟单元格，表示为 (`{colRef:other, rowRef:other}`)
     var tableMatrix = function(table) {
-<<<<<<< HEAD
         var tds = {}, rows = {}, cols = {};
 
         each("TD TH", table, function(td) {
@@ -459,48 +335,13 @@
                 return tds[r + "/" + c] ?
                 { td: tds[r + "/" + c] } :
                 { colRef: null, rowRef: null }
-=======
-        var tds = {},
-        rows = {},
-        cols = {};
-
-        each("TD TH", table,
-        function(td) {
-            var b = bounds(td);
-            var c = b[0],
-            r = b[1];
-            cols[c] = rows[r] = 1;
-            tds[r + "/" + c] = td;
-        });
-
-        // 按行从上到下，按列从左到右
-        rows = Object.keys(rows).sort(function(x, y) {
-            return x - y
-        });
-        cols = Object.keys(cols).sort(function(x, y) {
-            return x - y
-        });
-
-        var mat = rows.map(function(r) {
-            return cols.map(function(c) {
-                return tds[r + "/" + c] ? {
-                    td: tds[r + "/" + c]
-                }: {
-                    colRef: null,
-                    rowRef: null
-                }
->>>>>>> customize
             });
         });
 
         mat.forEach(function(row, r) {
             row.forEach(function(cell, c) {
-<<<<<<< HEAD
                 if(!cell.td)
                     return;
-=======
-                if (!cell.td) return;
->>>>>>> customize
 
                 // 处理存在行或列合并的情况
                 var rs = parseInt(cell.td.rowSpan) || 1;
@@ -524,22 +365,13 @@
     var trimTable = function(table) {
         var mat = tableMatrix(table);
 
-<<<<<<< HEAD
         mat = trimMatrix(mat, function(cell) {
-=======
-        mat = trimMatrix(mat,
-        function(cell) {
->>>>>>> customize
             return cell.td && isSelected(cell.td);
         });
 
         mat.forEach(function(row) {
             row.forEach(function(cell) {
-<<<<<<< HEAD
                 if(cell.td) {
-=======
-                if (cell.td) {
->>>>>>> customize
                     cell.td._keep_ = 1;
                     cell.colSpan = cell.rowSpan = 0;
                 }
@@ -548,62 +380,37 @@
 
         var remove = [];
 
-<<<<<<< HEAD
         each("TD TH", table, function(td) {
             if(td._keep_ != 1)
                 remove.push(td);
             else if(!isSelected(td))        //没有选中的单元格，内容置空
                 td.innerHTML = "";
-=======
-        each("TD TH", table,
-        function(td) {
-            if (td._keep_ != 1) remove.push(td);
-            else if (!isSelected(td)) //没有选中的单元格，内容置空
-            td.innerHTML = "";
->>>>>>> customize
         });
 
         removeAll(remove);
         remove = [];
 
-<<<<<<< HEAD
         each("TR", table, function(tr) {    // 移除无用的tr
             if(!$$("TD TH", tr).length)
                 remove.push(tr);
-=======
-        each("TR", table,
-        function(tr) { // 移除无用的tr
-            if (!$$("TD TH", tr).length) remove.push(tr);
->>>>>>> customize
         });
 
         removeAll(remove);
         remove = [];
 
-<<<<<<< HEAD
         mat.forEach(function(row) {     // 处理行或列合并
             row.forEach(function(cell) {
                 if(cell.colRef)
                     cell.colRef.colSpan++;
                 if(cell.rowRef)
                     cell.rowRef.rowSpan++;
-=======
-        mat.forEach(function(row) { // 处理行或列合并
-            row.forEach(function(cell) {
-                if (cell.colRef) cell.colRef.colSpan++;
-                if (cell.rowRef) cell.rowRef.rowSpan++;
->>>>>>> customize
             });
         });
 
         mat.forEach(function(row) {
             row.forEach(function(cell) {
-<<<<<<< HEAD
                 if(!cell.td)
                     return;
-=======
-                if (!cell.td) return;
->>>>>>> customize
                 cell.td.removeAttribute("colSpan");
                 cell.td.removeAttribute("rowSpan");
                 if(cell.colSpan) cell.td.colSpan = cell.colSpan + 1;
@@ -616,7 +423,6 @@
     var selectedTextMatrix = function(table, all) {
         var m = tableMatrix(table).map(function(row) {
             return row.map(function(cell) {
-<<<<<<< HEAD
                 if(cell.td && (all || isSelected(cell.td)))
                     return strip(cell.td.innerText.replace(/[\r\n]+/g, " "));   // 替换换行符为空格符
                 return "";  // 空内容
@@ -624,15 +430,6 @@
         });
 
         return trimMatrix(m, function(cell) {
-=======
-                if (cell.td && (all || isSelected(cell.td))) return strip(cell.td.innerText.replace(/[\r\n]+/g, " ")); // 替换换行符为空格符
-                return ""; // 空内容
-            });
-        });
-
-        return trimMatrix(m,
-        function(cell) {
->>>>>>> customize
             return cell.length > 0;
         });
     };
@@ -641,17 +438,10 @@
     var fixRelativeLinks = function(el) {
 
         function fix(tags, attrs) {
-<<<<<<< HEAD
             each(tags, el, function(e) {
                 $W(attrs).forEach(function(attr) {
                     if(e.hasAttribute(attr))
                         e[attr] = e[attr]; // 强制chrome使用绝对路径
-=======
-            each(tags, el,
-            function(e) {
-                $W(attrs).forEach(function(attr) {
-                    if (e.hasAttribute(attr)) e[attr] = e[attr]; // 强制chrome使用绝对路径
->>>>>>> customize
                 });
             });
         }
@@ -724,18 +514,13 @@
     // 获得元素el实际的样式信息
     var getStyle = function(el) {
         var computed = window.getComputedStyle(el),
-        style = [];
+            style = [];
 
         defaultStyleProps.forEach(function(p) {
             var val = computed[p];
 
             // 对小数像素值四舍五入取整
-<<<<<<< HEAD
             val = val.replace(/\b([\d.]+)px\b/g, function(_, $1) {
-=======
-            val = val.replace(/\b([\d.]+)px\b/g,
-            function(_, $1) {
->>>>>>> customize
                 return Math.round(parseFloat($1)) + "px";
             });
 
@@ -753,26 +538,15 @@
     // 如果withCSS为true，则带样式，否则为简单HTML
     var selectedHTML = function(table, withCSS, all) {
 
-<<<<<<< HEAD
         each("TD TH", table, function(td) {
             if(hasClass(td, clsSelected)) {
-=======
-        each("TD TH", table,
-        function(td) {
-            if (hasClass(td, clsSelected)) {
->>>>>>> customize
                 removeClass(td, clsSelected);
                 addClass(td, clsSelectedMark);
             }
         });
 
         var styles = [];
-<<<<<<< HEAD
         walk(table, function(el) {
-=======
-        walk(table,
-        function(el) {
->>>>>>> customize
             styles.push(getStyle(el));
         });
 
@@ -788,30 +562,17 @@
 
         var ftable = fdoc.body.lastChild;
 
-<<<<<<< HEAD
         walk(ftable, function(el) {
             if(withCSS)         // 加样式
                 el.style.cssText = styles.shift();
             else
                 el.style = "";
-=======
-        walk(ftable,
-        function(el) {
-            if (withCSS) // 加样式
-            el.style.cssText = styles.shift();
-            else el.style = "";
->>>>>>> customize
         });
 
         if(!all)
             trimTable(ftable);
 
-<<<<<<< HEAD
         each("TD TH", ftable, function(td) {
-=======
-        each("TD TH", ftable,
-        function(td) {
->>>>>>> customize
             removeClass(td, clsSelectedMark);
         });
 
@@ -820,14 +581,8 @@
 
         var html = fdoc.body.innerHTML;
 
-<<<<<<< HEAD
         each("TD TH", table, function(td) {
             if(hasClass(td, clsSelectedMark)) {
-=======
-        each("TD TH", table,
-        function(td) {
-            if (hasClass(td, clsSelectedMark)) {
->>>>>>> customize
                 removeClass(td, clsSelectedMark);
                 addClass(td, clsSelected);
             }
@@ -848,12 +603,8 @@
 
     // 滚动
     var scrollWatch = function() {
-<<<<<<< HEAD
         if(!selection)
             return;
-=======
-        if (!selection) return;
->>>>>>> customize
 
         function adjust(sx, sy, ww, hh, cx, cy) {
             if(cx < scrollAmount)      sx -= scrollAmount;
@@ -902,12 +653,8 @@
 
     // 重置滚动速度
     var scrollReset = function() {
-<<<<<<< HEAD
         if(!selection)
             return;
-=======
-        if (!selection) return;
->>>>>>> customize
         selection.scrollSpeed = scrollMinSpeed;
     };
 
@@ -922,31 +669,18 @@
     // ---------------------------------------------------------------------------------
 
     // 向背景视图发送选择操作结束消息      Debug1
-<<<<<<< HEAD
     var selectFinished = function(){
         chrome.runtime.sendMessage({popup_cmd:"hasSelected", content:contentForCopy("copyHTML")});  
-=======
-    var selectFinished = function() {
-        chrome.runtime.sendMessage({
-            popup_cmd: "hasSelected",
-            content: contentForCopy("copyHTML")
-        });
->>>>>>> customize
     }
 
     // 检查元素el是否可以选择，即el包含在table中，且el不包含在a\input\button中
     var canSelect = function(el) {
-<<<<<<< HEAD
         return !!(el &&  closest(el, "TABLE") && !closest(el, "A INPUT BUTTON"));
-=======
-        return !! (el && closest(el, "TABLE") && !closest(el, "A INPUT BUTTON"));
->>>>>>> customize
     }
 
     // 初始化选区
     var selectionInit = function(el, extend) {
 
-<<<<<<< HEAD
         var td = closest(el, "TH TD"),          // 最近的单元格
             table = closest(td, "TABLE");       // 最近的表格
 
@@ -960,20 +694,6 @@
 
         if(!extend)     // 如果不是extend，清空选区
             selection = null;
-=======
-        var td = closest(el, "TH TD"),
-        // 最近的单元格
-        table = closest(td, "TABLE"); // 最近的表格
-        if (!table) // 不存在表格，返回false
-        return false;
-
-        window.getSelection().removeAllRanges(); // 清空选区
-        if (selection && selection.table != table) // 改变表格，重置选区
-        selectionReset();
-
-        if (!extend) // 如果不是extend，清空选区
-        selection = null;
->>>>>>> customize
 
         scrollReset();  // 滚动复位
 
@@ -1004,11 +724,7 @@
 
     // 更新当前选区
     var selectionUpdate = function(e) {
-<<<<<<< HEAD
         var cx = e.clientX;     // 当前鼠标指针位置
-=======
-        var cx = e.clientX; // 当前鼠标指针位置
->>>>>>> customize
         var cy = e.clientY;
 
         var ax = selection.x;       // anchor的client rect
@@ -1035,15 +751,9 @@
         });
 
         // 添加拖拽类
-<<<<<<< HEAD
         each("TD TH", selection.table, function(td) {
             if(intersect(bounds(td), rect))
                 addClass(td, clsDragover);
-=======
-        each("TD TH", selection.table,
-        function(td) {
-            if (intersect(bounds(td), rect)) addClass(td, clsDragover);
->>>>>>> customize
         });
 
         if(!selection.selectAnchor)
@@ -1053,17 +763,8 @@
     // 重置选区，移除旧的listener
     var selectionReset = function() {
         // 清除标志
-<<<<<<< HEAD
         $C(clsSelected).forEach(function(td) { removeClass(td, clsSelected) });
         $C(clsDragover).forEach(function(td) { removeClass(td, clsDragover) });
-=======
-        $C(clsSelected).forEach(function(td) {
-            removeClass(td, clsSelected)
-        });
-        $C(clsDragover).forEach(function(td) {
-            removeClass(td, clsDragover)
-        });
->>>>>>> customize
 
         document.removeEventListener("mousemove", onMouseMove);
         document.removeEventListener("mouseup", onMouseUp);
@@ -1073,7 +774,6 @@
 
     // 选择/反选 一行、一列或者整个表格
     var selectionExtend = function(command, toggle) {
-<<<<<<< HEAD
         var tds = [], sel = bounds(selection.anchor);
 
         each("TD TH", selection.table, function(td) {
@@ -1094,40 +794,6 @@
             tds.forEach(function(td) { removeClass(td, clsSelected) });
         else
             tds.forEach(function(td) { addClass(td, clsSelected) });
-=======
-        var tds = [],
-        sel = bounds(selection.anchor);
-
-        each("TD TH", selection.table,
-        function(td) {
-            var b = bounds(td),
-            ok = false;
-            switch (command) {
-            case "selectRow":
-                ok = sel[1] == b[1];
-                break;
-            case "selectColumn":
-                ok = sel[0] == b[0];
-                break;
-            case "selectTable":
-                ok = true;
-                break;
-            }
-            if (ok) tds.push(td);
-        });
-
-        // toggle = true 允许反选, 默认不允许
-        var isSelected = tds.every(function(td) {
-            return hasClass(td, clsSelected)
-        });
-
-        if (toggle && isSelected) tds.forEach(function(td) {
-            removeClass(td, clsSelected)
-        });
-        else tds.forEach(function(td) {
-            addClass(td, clsSelected)
-        });
->>>>>>> customize
 
         selectFinished();
     };
@@ -1144,7 +810,6 @@
             return isSelected(td);
         });
         // 如果有任何被选中，则all=false,则选择选中区域
-<<<<<<< HEAD
         switch(command) {
             case "copyRich":
             case "copyStyled":
@@ -1163,48 +828,19 @@
                         return '"' + cell.replace(/"/g, '""') + '"';
                     }).join(",");
                 }).join("\n");
-=======
-        switch (command) {
-        case "copyRich":
-        case "copyStyled":
-            return selectedHTML(selection.table, true, !anySelected);
-        case "copyHTML":
-            return selectedHTML(selection.table, false, !anySelected);
-        case "copyText":
-            var m = selectedTextMatrix(selection.table, !anySelected);
-            return m.map(function(row) {
-                return rstrip(row.join("\t")); // 列连接符
-            }).join("\n"); // 行连接符
-        case "copyCSV":
-            var m = selectedTextMatrix(selection.table, !anySelected);
-            return m.map(function(row) {
-                return row.map(function(cell) {
-                    return '"' + cell.replace(/"/g, '""') + '"';
-                }).join(",");
-            }).join("\n");
->>>>>>> customize
         }
         return "";
     };
 
     // 向background发送拷贝命令，将内容拷贝至剪贴板
     var doCopy = function(command) {
-<<<<<<< HEAD
         if(!selection)
             return;
         chrome.runtime.sendMessage({command:command, content:contentForCopy(command)});
-=======
-        if (!selection) return;
-        chrome.runtime.sendMessage({
-            command: command,
-            content: contentForCopy(command)
-        });
->>>>>>> customize
     };
 
     // 表格定位，选中一个表格
     var selectTable = function(table) {
-<<<<<<< HEAD
         if(!table)
             return;
         var tds = $$("TD TH", table);   // 没有单元格的表格 忽略
@@ -1212,12 +848,6 @@
             return;
         if(!selectionInit(tds[0]))
             return;
-=======
-        if (!table) return;
-        var tds = $$("TD TH", table); // 没有单元格的表格 忽略
-        if (!tds) return;
-        if (!selectionInit(tds[0])) return;
->>>>>>> customize
         selectionExtend("selectTable");
 
         var xy = offset(table);
@@ -1230,14 +860,8 @@
 
     // 获得菜单状态
     var menuState = function() {
-<<<<<<< HEAD
         var n = document.body.getElementsByTagName("TABLE").length, // 当前页面的表格数量
             sel = lastEvent && canSelect(lastEvent.target); // 右键所在的单元格
-=======
-        var n = document.body.getElementsByTagName("TABLE").length,
-        // 当前页面的表格数量
-        sel = lastEvent && canSelect(lastEvent.target); // 右键所在的单元格
->>>>>>> customize
         // console.log(lastEvent.target);
         return {
             hasSelection: !!selection,
@@ -1261,7 +885,6 @@
 
     // 监听处理来自后台background的事件
     chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-<<<<<<< HEAD
         switch(message.command) {
             case "anySelection":
                 if(selection)
@@ -1347,90 +970,6 @@
             case "activate":  // 当前tab页面被激活，更新右键菜单
                 menuUpdate();
                 break;
-=======
-        switch (message.command) {
-        case "anySelection":
-            if (selection) selectFinished(); // 向后台发送有选区
-            break;
-        case "openPopup":
-            console.log("打开PopUp页面");
-            updateOptions(function() {
-                processLang();
-                processSkin();
-            });
-            break;
-        case "selectRow":
-        case "selectColumn":
-        case "selectTable":
-            if (lastEvent && selectionInit(lastEvent.target)) selectionExtend(message.command, true); // 支持反选
-            else selectionReset();
-            break;
-        case "findPrevTable":
-        case "findNextTable":
-            var tables = $$("TABLE"),
-            index = 0;
-            if (selection) {
-                index = tables.indexOf(selection.table);
-                if (message.command == "findPrevTable") index = index == 0 ? tables.length - 1 : index - 1; // 循环切换
-                else index = index == tables.length - 1 ? 0 : index + 1;
-            }
-            selectTable(tables[index]);
-            break;
-        case "copyRich":
-        case "copyText":
-        case "copyHTML":
-        case "copyStyled":
-        case "copyCSV":
-            if (selection) doCopy(message.command);
-            else if (lastEvent && selectionInit(lastEvent.target)) { // 没有选区，默认选取整个表格
-                selectionExtend("selectTable", false); // 直接正选
-                doCopy(message.command);
-                selectionReset();
-            } else selectionReset();
-            break;
-        case "setModKey0":
-            setOption("modKey", 0); // 设置热键
-            break;
-        case "setModKey1":
-            setOption("modKey", 1);
-            break;
-
-        case "setLang0":
-            // 设置语言
-            // alert("设置语言为英语");
-            setOption("modLang", 0);
-            break;
-        case "setLang1":
-            // alert("设置语言为中文");
-            setOption("modLang", 1);
-            break;
-
-        case "setSkin0":
-            // 设置皮肤
-            setOption("modSkin", 0);
-            break;
-        case "setSkin1":
-            setOption("modSkin", 1);
-            break;
-        case "setSkin2":
-            setOption("modSkin", 2);
-            break;
-        case "setSkin3":
-            setOption("modSkin", 3);
-            break;
-        case "setSkin4":
-            setOption("modSkin", 4);
-            break;
-
-        case "updateOptions":
-            // 获取选项信息
-            updateOptions();
-            break;
-        case "activate":
-            // 当前tab页面被激活，更新右键菜单
-            menuUpdate();
-            break;
->>>>>>> customize
 
         }
         sendResponse(menuState());   // 返回当前菜单状态
@@ -1443,17 +982,10 @@
     // @2 同时按着热键
     // @3 事件对象可以被选择
     var isValidClick = function(e) {
-<<<<<<< HEAD
         if(e.which != 1)    // 是不是鼠标左键
             return false;
         if(!e[modKeys[options.modKey]]) {   // 有没有同时按着热键
             selectionReset();   // 重置选区
-=======
-        if (e.which != 1) // 是不是鼠标左键
-        return false;
-        if (!e[modKeys[options.modKey]]) { // 有没有同时按着热键
-            selectionReset(); // 重置选区
->>>>>>> customize
             return false;
         }
         if(!canSelect(e.target)) {  // 能不能选择
@@ -1466,13 +998,8 @@
     // '鼠标按下' - 初始化选区
     var onMouseDown = function(e) {
         lastEvent = e;
-<<<<<<< HEAD
         if(!isValidClick(e))    // 不合法的点击
             return;
-=======
-        if (!isValidClick(e)) // 不合法的点击
-        return;
->>>>>>> customize
 
         menuUpdate();       // 更新菜单状态
         selectionInit(e.target, e.shiftKey);    // 按住shift 实现扩展选择
@@ -1506,13 +1033,8 @@
 
     // '鼠标松开' - 停止选区选择
     var onMouseUp = function(e) {
-<<<<<<< HEAD
         scrollUnwatch();    //停止滚动
         if(selection) {         // 拖拽类升级为选中类
-=======
-        scrollUnwatch(); //停止滚动
-        if (selection) { // 拖拽类升级为选中类
->>>>>>> customize
             $C(clsDragover, selection.table).forEach(function(td) {
                 removeClass(td, clsDragover);
                 addClass(td, clsSelected);
@@ -1526,48 +1048,27 @@
 
     // '鼠标双击' - 选择一行或者一列
     var onDblClick = function(e) {
-<<<<<<< HEAD
         if(!isValidClick(e))
             return;
         selectionInit(e.target, 0);
         var secondaryKey = e[modKeys[1 - options.modKey]];  // 判断有没有同时按着两个功能键   互补
         selectionExtend(secondaryKey ? "selectRow" : "selectColumn", true); // 同时按着alt+ctrl选择一行，否则只选择一列
-=======
-        if (!isValidClick(e)) return;
-        selectionInit(e.target, 0);
-        var secondaryKey = e[modKeys[1 - options.modKey]]; // 判断有没有同时按着两个功能键   互补
-        selectionExtend(secondaryKey ? "selectRow": "selectColumn", true); // 同时按着alt+ctrl选择一行，否则只选择一列
->>>>>>> customize
         e.preventDefault();
         e.stopPropagation();
     };
 
     // '复制' - 默认复制为富文本
-<<<<<<< HEAD
     var onCopy = function(e) {
         if(!selection)
             return;
-=======
-    
-    var onCopy = function(e) {
-    	
-        if (!selection) return;
->>>>>>> customize
         doCopy("copyRich"); // 默认富文本，可黏贴到word中
-        
         e.preventDefault();
-        
         e.stopPropagation();
     };
-    
-    
-    
-    
 
     // '上下文菜单' - 注册上一次事件，即选区建立后，更新菜单信息
     var onContextMenu = function(e) {
         lastEvent = e;
-        
         menuUpdate();
     }
 
