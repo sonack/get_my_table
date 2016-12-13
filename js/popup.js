@@ -687,7 +687,127 @@ var cloud_save_buttons = `
                             changeTo(home_div);
                             // 云端表格选择按钮组 隐藏
                             // $("#cloud_select").slideUp();
-                            // $("#cloud_select").fadeOut();                            
+                            // $("#cloud_select").fadeOut(); 
+                             $.ajax({type:"get", url:remoteHost+"/get_all_class", success:function(result)
+                {
+                    var res = JSON.parse(result);
+                    // alert("更新分类信息");
+                    console.log(res);
+                    // 左侧类别
+                    var prt = $("#left_sidebar");
+                    var no_item = true;
+                    prt.empty();
+                    if(res.length)
+                    {
+                        no_item = false;
+                    }
+                    else
+                    {
+                        prt.append('<a class="item" id="no_class_item">当前没有类别</a>');
+                        no_item = true;
+                    }
+                    // 添加类别
+                    $.each(res,function(idx,ele){
+                        var opt = $("<a class='item'></a>");
+                        opt.text(ele);
+                        opt.attr("class_name",ele);
+                        opt.append("<img class='remove_button' src='images/remove.png'  height='20px' style='float:right; margin-right:10px;'/>")
+                        prt.append(opt);
+                        console.log("添加了类别" + ele);
+                    });
+
+
+                    $("#left_sidebar a .remove_button").click(function(e){
+                        var class_name = $(this.parentNode).attr("class_name");
+                        
+                        var con = confirm("您确定要删除分类 [ " + class_name + " ] 吗？（注意！该分类下的所有表格都将被删除）");
+                        if(con)
+                        {
+                            $.ajax({type:"post",data: '{"class_name":"' + class_name + '"}', url: remoteHost+"/delete_class_name", contentType:"application/json;charset=UTF-8", success:function(result)
+                            {
+                                var res = JSON.parse(result);
+                                console.log(res);
+                                if(res.status === 'success')
+                                {
+                                    alert("删除成功!");
+                                    $("#home_button").click();
+                                }
+                                else
+                                {
+                                    alert("删除失败!");
+                                }
+                            }
+                            });
+                        }
+                        e.stopPropagation();
+                        
+                    });
+
+                    if(!no_item)
+                    // 添加超链接事件
+                    $("#left_sidebar a").click(function()
+                    {
+                        var class_name = $(this).attr("class_name");
+                        // 获取该类别所有的表格
+                        $.ajax({type:"get", url: remoteHost+"/get_all_table?class_name=" + class_name ,success:function(result)
+                        {
+                            var tbls = JSON.parse(result);
+                            var prt = $("#right_sidebar");
+                            prt.empty();
+                            // 每个表格都有一个table_id
+                            $.each(tbls,function(idx,ele)
+                            {
+                                var opt = $("<a class='item'></a>");
+                                opt.text(ele[0]);
+                                opt.attr("table_id",ele[1]);
+                                prt.append(opt);
+                                console.log("添加了表格" + ele);
+                            });
+
+                            $("#right_sidebar a").click(function(){
+                            	
+                                var tbl_id = $(this).attr("table_id");
+                                $.ajax({type:"post",data: '{"table_id":"' + tbl_id + '"}', url: remoteHost+"/get_table_by_id", contentType:"application/json;charset=UTF-8", success:function(result)
+                                    {
+                                        var res = JSON.parse(result);
+                                        console.log(res);
+                                        if(res.status === 'success')
+                                        {
+                                            updateTablePreview(res.content,true,tbl_id);
+                                            updateLang();
+                                            makeTableEditable();
+                                        }
+                                        else
+                                        {
+                                            console.log("获取表格信息失败...");
+                                        }
+                                    }
+                                });
+                                $("#right_sidebar").sidebar('setting', 'transition', 'overlay').sidebar('toggle');
+                            });
+                            // $("left_sidebar").sidebar('toggle');
+                            // 选择表格
+                            $("#choose_id").click();
+                        }
+                        });
+                    }
+                    );
+                    // no class item
+                    else
+                    {
+                        $("#no_class_item").unbind("click");
+                        $("#no_class_item").click(
+                            function()
+                            {
+                                $("#left_sidebar").sidebar('setting', 'transition', 'overlay').sidebar('toggle');
+                            }
+                        )
+                    }
+
+                }
+                });
+
+
                             var res = JSON.parse(result);
                             if(res.status === 'success')
                             {
