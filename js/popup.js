@@ -1593,6 +1593,7 @@ var cloud_save_buttons = `
 
                                         date.html(processTime(date_v));    
                                         prt.append(evt);
+                                        updateLang();
                                         table.click(function(){
                                             var tbl_id = $(this).attr("table_id");
                                             $.ajax({type:"post",data: '{"table_id":"' + tbl_id + '"}', url: remoteHost+"/get_table_by_id", contentType:"application/json;charset=UTF-8", success:function(result)
