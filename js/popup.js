@@ -3,16 +3,12 @@
 // ---------------------------------------------------------------------------------
 // 当前用户是否在线?
 var am_I_online = false;
-// 远程云服务器地址
 var remoteHost = "http://123.206.84.93:5000";
-// main元素
 var main = $("#main");
 
-// 当前是否为保存状态
 var save_status = false;
 var tableID;
 var cur_lang;
-// 切换页面到target_div
 
 function changeTo(target_div) {
     main.transition('fade'); // 切换特效 消失
